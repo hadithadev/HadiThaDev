@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Detailing Demo — HadiThaDev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070b12;
+  --surface: #0d1520;
+  --surface-2: #111b28;
+  --border: #1a2535;
+  --text: #e8f0ff;
+  --text-muted: #5a7a9a;
+  --blue: #4a9eff;
+  --blue-dim: #4a9eff12;
+  --radius: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--blue); color: var(--bg); }
+
+/* ---- DEMO BANNER ---- */
+.demo-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #c8ff00;
+  color: #0a0a0a;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.demo-banner a { color: #0a0a0a; text-decoration: underline; font-weight: 700; }
+
+/* ---- NAV ---- */
+nav {
+  position: fixed;
+  top: 38px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.1rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(7,11,18,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-logo span { color: var(--blue); }
+
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.nav-quote {
+  background: var(--blue) !important;
+  color: var(--bg) !important;
+  padding: 0.5rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+}
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 2.5rem 6rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--blue-dim) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--blue);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-tag .line { width: 30px; height: 1px; background: var(--blue); }
+
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 1.25rem;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+
+.hero h1 .blue { color: var(--blue); }
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  max-width: 500px;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+
+.btn-blue {
+  background: var(--blue);
+  color: var(--bg);
+  padding: 0.85rem 2rem;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-blue:hover { opacity: 0.85; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  padding: 0.85rem 2rem;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover { border-color: var(--text-muted); }
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  animation: fadeUp 0.6s ease 0.4s both;
+}
+
+.stat-num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- SECTION ---- */
+section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+
+.s-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--blue);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.s-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 0.75rem;
+}
+
+.s-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  max-width: 500px;
+  margin-bottom: 3rem;
+}
+
+/* ---- PACKAGES ---- */
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.package {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  transition: border-color 0.3s;
+  position: relative;
+}
+
+.package:hover { border-color: var(--blue); }
+
+.package.featured {
+  border-color: var(--blue);
+}
+
+.package.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: -10px;
+  left: 2rem;
+  background: var(--blue);
+  color: var(--bg);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+}
+
+.package-name {
+  font-size: 0.75rem;
+  color: var(--blue);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.package-price {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.package-price span {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+.package-desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+
+.package-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.package-list li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.package-list li .ck { color: var(--blue); font-weight: 700; }
+
+/* ---- BEFORE/AFTER ---- */
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.ba-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.ba-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ba-side {
+  aspect-ratio: 4/3;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  position: relative;
+}
+
+.ba-side::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  background: rgba(0,0,0,0.6);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: var(--text);
+  letter-spacing: 1px;
+}
+
+.ba-side:first-child { border-right: 1px solid var(--border); }
+
+.ba-info {
+  padding: 1.25rem;
+  background: var(--surface);
+}
+
+.ba-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.15rem; }
+.ba-info p { color: var(--text-muted); font-size: 0.8rem; font-weight: 300; }
+
+/* ---- REVIEWS ---- */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.review {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.review-stars { color: var(--blue); font-size: 0.9rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+
+.review-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.review-name { font-size: 0.85rem; font-weight: 600; }
+.review-vehicle { font-size: 0.75rem; color: var(--text-muted); font-weight: 300; }
+
+/* ---- CTA ---- */
+.detail-cta {
+  text-align: center;
+  padding: 6rem 2rem;
+  border-top: 1px solid var(--border);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.detail-cta h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 0.75rem;
+}
+
+.detail-cta p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.cta-contact {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 1.5rem;
+}
+
+.cta-contact span { color: var(--text); }
+
+/* ---- FOOTER ---- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links a:not(.nav-quote) { display: none; }
+  section { padding: 4rem 1.25rem; }
+  .hero { padding: 9rem 1.25rem 4rem; }
+  .hero-stats { gap: 2rem; flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner">
+  ✦ This is a demo mockup by HadiThaDev — <a href="index.html">Want a site like this for your business?</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Your<span>Detail</span>Co.</a>
+  <div class="nav-links">
+    <a href="#packages">Packages</a>
+    <a href="#work">Our Work</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#quote" class="nav-quote">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag"><span class="line"></span>Mobile Detailing — Barrie & Simcoe County</p>
+  <h1>Your car,<br><span class="blue">showroom</span><br>clean.</h1>
+  <p class="hero-sub">Professional mobile detailing brought to your driveway. Interior, exterior, ceramic coating, and paint correction — we do it all.</p>
+  <div class="hero-btns">
+    <a href="#quote" class="btn-blue">Get a Free Quote</a>
+    <a href="#packages" class="btn-ghost">See Packages</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <p class="stat-num">500+</p>
+      <p class="stat-label">Cars Detailed</p>
+    </div>
+    <div>
+      <p class="stat-num">5.0</p>
+      <p class="stat-label">Google Rating</p>
+    </div>
+    <div>
+      <p class="stat-num">100%</p>
+      <p class="stat-label">Mobile Service</p>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" style="border-top: 1px solid var(--border);">
+  <p class="s-label">Packages</p>
+  <h2 class="s-title">Pick your level of clean.</h2>
+  <p class="s-desc">Every package includes a full consultation and satisfaction guarantee.</p>
+
+  <div class="packages-grid">
+    <div class="package">
+      <p class="package-name">Essential</p>
+      <p class="package-price">$120 <span>/ starting</span></p>
+      <p class="package-desc">A thorough refresh for your daily driver.</p>
+      <ul class="package-list">
+        <li><span class="ck">✓</span> Exterior hand wash</li>
+        <li><span class="ck">✓</span> Interior vacuum & wipe</li>
+        <li><span class="ck">✓</span> Window cleaning</li>
+        <li><span class="ck">✓</span> Tire & rim dressing</li>
+      </ul>
+    </div>
+    <div class="package featured">
+      <p class="package-name">Complete</p>
+      <p class="package-price">$250 <span>/ starting</span></p>
+      <p class="package-desc">Interior and exterior deep clean. The full treatment.</p>
+      <ul class="package-list">
+        <li><span class="ck">✓</span> Everything in Essential</li>
+        <li><span class="ck">✓</span> Clay bar treatment</li>
+        <li><span class="ck">✓</span> Leather conditioning</li>
+        <li><span class="ck">✓</span> Engine bay cleaning</li>
+        <li><span class="ck">✓</span> Sealant application</li>
+      </ul>
+    </div>
+    <div class="package">
+      <p class="package-name">Signature</p>
+      <p class="package-price">$500 <span>/ starting</span></p>
+      <p class="package-desc">Full restoration and long-term protection.</p>
+      <ul class="package-list">
+        <li><span class="ck">✓</span> Everything in Complete</li>
+        <li><span class="ck">✓</span> Paint correction</li>
+        <li><span class="ck">✓</span> Ceramic coating</li>
+        <li><span class="ck">✓</span> Interior deep extraction</li>
+        <li><span class="ck">✓</span> Headlight restoration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section id="work" style="border-top: 1px solid var(--border);">
+  <p class="s-label">Our Work</p>
+  <h2 class="s-title">The transformation is real.</h2>
+  <p class="s-desc">Your before & after photos would go here — real results from real jobs.</p>
+
+  <div class="ba-grid">
+    <div class="ba-card">
+      <div class="ba-images">
+        <div class="ba-side" data-label="BEFORE">Your Photo</div>
+        <div class="ba-side" data-label="AFTER">Your Photo</div>
+      </div>
+      <div class="ba-info">
+        <h4>Interior Deep Clean</h4>
+        <p>2021 Honda Civic — Complete Package</p>
+      </div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-images">
+        <div class="ba-side" data-label="BEFORE">Your Photo</div>
+        <div class="ba-side" data-label="AFTER">Your Photo</div>
+      </div>
+      <div class="ba-info">
+        <h4>Paint Correction + Ceramic</h4>
+        <p>2019 BMW 3 Series — Signature Package</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" style="border-top: 1px solid var(--border);">
+  <p class="s-label">Reviews</p>
+  <h2 class="s-title">What customers say.</h2>
+  <p class="s-desc">Your Google reviews would be showcased right here.</p>
+
+  <div class="reviews-grid">
+    <div class="review">
+      <p class="review-stars">★ ★ ★ ★ ★</p>
+      <p class="review-text">"Your real customer reviews would appear here. Genuine testimonials build trust and drive new bookings."</p>
+      <p class="review-name">Customer Name</p>
+      <p class="review-vehicle">2022 Toyota RAV4</p>
+    </div>
+    <div class="review">
+      <p class="review-stars">★ ★ ★ ★ ★</p>
+      <p class="review-text">"Another satisfied customer's words. Social proof is the most powerful tool for a service-based business."</p>
+      <p class="review-name">Customer Name</p>
+      <p class="review-vehicle">2020 Ford F-150</p>
+    </div>
+    <div class="review">
+      <p class="review-stars">★ ★ ★ ★ ★</p>
+      <p class="review-text">"A third review to complete the set. Three strong testimonials is all it takes to build confidence."</p>
+      <p class="review-name">Customer Name</p>
+      <p class="review-vehicle">2023 Hyundai Tucson</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="detail-cta" id="quote">
+  <h2>Ready for <span style="color:var(--blue);">showroom clean?</span></h2>
+  <p>Send a message with your vehicle details and we'll get back to you within an hour with a custom quote.</p>
+  <a href="#" class="btn-blue">Get Your Free Quote</a>
+  <p class="cta-contact">or call <span>(705) 555-0123</span></p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Your Detail Co. — Barrie, ON · Demo by <a href="index.html" style="color:var(--blue);text-decoration:none;">HadiThaDev</a></p>
+</footer>
+
+</body>
+</html>

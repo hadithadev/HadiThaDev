@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HadiThaDev — Web Developer</title>
+<meta name="description" content="Clean, modern websites for local businesses. Built fast, priced fair, designed to convert.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface-2: #1a1a1a;
+  --border: #222222;
+  --text: #f0f0f0;
+  --text-muted: #888888;
+  --accent: #c8ff00;
+  --accent-dim: #c8ff0020;
+  --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ---- NAV ---- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10,10,10,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.nav-cta {
+  background: var(--accent) !important;
+  color: var(--bg) !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  transition: opacity 0.2s !important;
+}
+
+.nav-cta:hover { opacity: 0.85; }
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 2rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  width: fit-content;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-badge .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+
+.hero h1 .accent { color: var(--accent); }
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  max-width: 550px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.85rem 2rem;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  padding: 0.85rem 2rem;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { border-color: var(--text-muted); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- SECTION COMMON ---- */
+section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 550px;
+  font-weight: 300;
+  margin-bottom: 3rem;
+}
+
+/* ---- WHAT YOU GET ---- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: border-color 0.3s;
+}
+
+.service-card:hover { border-color: var(--accent); }
+
+.service-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-dim);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+}
+
+.service-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.service-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ---- MOCKUPS / DEMOS ---- */
+.demos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.demo-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.demo-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.demo-preview {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: var(--surface-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.demo-browser-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: rgba(10,10,10,0.9);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 6px;
+}
+
+.browser-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.browser-dot:nth-child(1) { background: #ff5f57; }
+.browser-dot:nth-child(2) { background: #ffbd2e; }
+.browser-dot:nth-child(3) { background: #28c840; }
+
+.browser-url {
+  margin-left: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  padding: 2px 10px;
+  border-radius: 4px;
+}
+
+.demo-info { padding: 1.5rem; }
+
+.demo-category {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+}
+
+.demo-info h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.demo-info p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+/* ---- CLIENT ---- */
+.client-section {
+  border-top: 1px solid var(--border);
+}
+
+.client-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 700px;
+}
+
+.client-logo {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  background: var(--accent-dim);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.client-details h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.client-details p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.client-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  text-decoration: none;
+}
+
+.client-link:hover { text-decoration: underline; }
+
+/* ---- PRICING ---- */
+.pricing-note {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 700px;
+}
+
+.pricing-note h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.pricing-note p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.pricing-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.pricing-item .check {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---- CONTACT / CTA ---- */
+.cta-section {
+  text-align: center;
+  padding: 8rem 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.cta-section h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-email {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent);
+  padding-bottom: 2px;
+}
+
+.cta-email:hover { opacity: 0.8; }
+
+.cta-or {
+  color: var(--text-muted);
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+}
+
+.cta-socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.cta-socials a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.cta-socials a:hover { color: var(--text); }
+
+/* ---- FOOTER ---- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+footer span { color: var(--accent); }
+
+/* ---- GRAIN OVERLAY ---- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  section { padding: 4rem 1.25rem; }
+  .hero { padding: 7rem 1.25rem 3rem; }
+  .demos-grid { grid-template-columns: 1fr; }
+  .client-card { flex-direction: column; text-align: center; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">HadiThaDev_</a>
+  <div class="nav-links">
+    <a href="#demos">Demos</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Available for new projects
+  </div>
+  <h1>Your business<br>deserves a site<br>that <span class="accent">works.</span></h1>
+  <p class="hero-sub">I build clean, fast, modern websites for local businesses. No templates. No page builders. Custom-built to make you look as good online as you are in person.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Let's Talk</a>
+    <a href="#demos" class="btn-secondary">See Examples ↓</a>
+  </div>
+</section>
+
+<!-- DEMOS -->
+<section id="demos">
+  <p class="section-label">// Demos</p>
+  <h2 class="section-title">See what your site could look like.</h2>
+  <p class="section-desc">Click through fully designed mockups built for businesses like yours. No filler — these are real, functional previews.</p>
+
+  <div class="demos-grid">
+
+    <a href="demo-barbershop.html" class="demo-card">
+      <div class="demo-preview" style="background: linear-gradient(135deg, #1a1208, #2a1f10);">
+        <div class="demo-browser-bar">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-url">yourbarbershop.ca</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;padding-top:32px;">
+          <div style="text-align:center;padding:2rem;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#c8a45e;letter-spacing:3px;margin-bottom:0.5rem;">EST. 2024</div>
+            <div style="font-size:1.8rem;font-weight:700;letter-spacing:-1px;color:#f5f0e8;">YOUR BARBERSHOP</div>
+            <div style="font-size:0.75rem;color:#8a7d6b;margin-top:0.35rem;">Premium Cuts • Classic Shaves • Walk-ins Welcome</div>
+            <div style="margin-top:1rem;display:inline-block;padding:0.4rem 1.2rem;border:1px solid #c8a45e;border-radius:100px;font-size:0.7rem;color:#c8a45e;">BOOK NOW</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-info">
+        <p class="demo-category">Barbershop</p>
+        <h3>Premium Barbershop Template</h3>
+        <p>Online booking, barber profiles, gallery & more</p>
+      </div>
+    </a>
+
+    <a href="demo-detailing.html" class="demo-card">
+      <div class="demo-preview" style="background: linear-gradient(135deg, #0a0f1a, #0d1520);">
+        <div class="demo-browser-bar">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-url">yourdetailing.ca</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;padding-top:32px;">
+          <div style="text-align:center;padding:2rem;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#4a9eff;letter-spacing:3px;margin-bottom:0.5rem;">MOBILE DETAILING</div>
+            <div style="font-size:1.8rem;font-weight:700;letter-spacing:-1px;color:#e8f0ff;">YOUR DETAIL CO.</div>
+            <div style="font-size:0.75rem;color:#5a7a9a;margin-top:0.35rem;">Interior • Exterior • Ceramic Coating • PPF</div>
+            <div style="margin-top:1rem;display:inline-block;padding:0.4rem 1.2rem;background:#4a9eff;border-radius:100px;font-size:0.7rem;color:#0a0f1a;font-weight:600;">GET A QUOTE</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-info">
+        <p class="demo-category">Auto Detailing</p>
+        <h3>Detailing Business Template</h3>
+        <p>Service packages, before/after gallery, booking</p>
+      </div>
+    </a>
+
+    <a href="demo-restaurant.html" class="demo-card">
+      <div class="demo-preview" style="background: linear-gradient(135deg, #1a0a0a, #201210);">
+        <div class="demo-browser-bar">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-url">yourrestaurant.ca</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;padding-top:32px;">
+          <div style="text-align:center;padding:2rem;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#e85d3a;letter-spacing:3px;margin-bottom:0.5rem;">AUTHENTIC FLAVOURS</div>
+            <div style="font-size:1.8rem;font-weight:700;letter-spacing:-1px;color:#fff5f0;">YOUR RESTAURANT</div>
+            <div style="font-size:0.75rem;color:#9a6a5a;margin-top:0.35rem;">Dine-in • Takeout • Catering</div>
+            <div style="margin-top:1rem;display:inline-block;padding:0.4rem 1.2rem;border:1px solid #e85d3a;border-radius:100px;font-size:0.7rem;color:#e85d3a;">VIEW MENU</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-info">
+        <p class="demo-category">Restaurant</p>
+        <h3>Restaurant Template</h3>
+        <p>Digital menu, hours, location map, online orders</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="border-top: 1px solid var(--border);">
+  <p class="section-label">// What You Get</p>
+  <h2 class="section-title">Everything your business needs online.</h2>
+  <p class="section-desc">No bloat. No subscriptions to manage. Just a fast, clean site that brings in customers.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Custom Design & Build</h3>
+      <p>No templates, no drag-and-drop. Your site is designed and coded from scratch to match your brand and your business.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Mobile-First</h3>
+      <p>Most of your customers are finding you on their phone. Your site will look and work perfectly on every screen size.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <h3>Google-Ready</h3>
+      <p>Built with SEO best practices so your business actually shows up when people search for what you do.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚀</div>
+      <h3>Fast Load Times</h3>
+      <p>No bloated plugins or slow page loads. Your site runs on modern infrastructure that loads in under 2 seconds.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📅</div>
+      <h3>Booking & Contact</h3>
+      <p>Online booking integrations, contact forms, click-to-call — making it easy for customers to reach you.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛠️</div>
+      <h3>Ongoing Maintenance</h3>
+      <p>Optional monthly plan to keep everything running smooth — updates, small changes, uptime monitoring. You focus on your business.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT -->
+<section class="client-section" id="clients">
+  <p class="section-label">// Clients</p>
+  <h2 class="section-title">Built & launched.</h2>
+  <p class="section-desc">Real projects, real businesses.</p>
+
+  <div class="client-card">
+    <div class="client-logo">4OREVER</div>
+    <div class="client-details">
+      <h3>4OREVER Magazine</h3>
+      <p>Full-stack editorial platform with custom CMS, automated publishing, email infrastructure, and a content management system built from the ground up.</p>
+      <a href="https://4orever.world" target="_blank" class="client-link">4orever.world →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="border-top: 1px solid var(--border);">
+  <p class="section-label">// Pricing</p>
+  <h2 class="section-title">Simple, honest pricing.</h2>
+  <p class="section-desc">No hidden fees. No hourly billing. One flat price for your project.</p>
+
+  <div class="pricing-note">
+    <h3>What's included in every build</h3>
+    <p>Every project is scoped individually, but here's what comes standard:</p>
+    <div class="pricing-items">
+      <div class="pricing-item"><span class="check">✓</span> Custom design & development</div>
+      <div class="pricing-item"><span class="check">✓</span> Mobile responsive</div>
+      <div class="pricing-item"><span class="check">✓</span> SEO foundations</div>
+      <div class="pricing-item"><span class="check">✓</span> Domain setup assistance</div>
+      <div class="pricing-item"><span class="check">✓</span> Hosting setup (no monthly hosting fee in most cases)</div>
+      <div class="pricing-item"><span class="check">✓</span> Contact form or booking integration</div>
+      <div class="pricing-item"><span class="check">✓</span> Google Maps & business info</div>
+      <div class="pricing-item"><span class="check">✓</span> 2 rounds of revisions</div>
+    </div>
+    <p style="font-size:0.85rem;">Maintenance plans available from <strong style="color:var(--accent);">$50/month</strong> for updates, changes, and monitoring.</p>
+    <a href="#contact" class="btn-primary" style="display:inline-block;margin-top:1rem;text-decoration:none;">Get a Free Quote →</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Let's build<br>something <span style="color:var(--accent);">real.</span></h2>
+  <p>Send me a message and I'll get back to you within 24 hours. No pressure, no sales pitch — just a conversation about what you need.</p>
+  <a href="mailto:hadi@hadithadev.ca" class="cta-email">hadi@hadithadev.ca</a>
+  <p class="cta-or">or find me on</p>
+  <div class="cta-socials">
+    <a href="https://instagram.com/hadithadev" target="_blank">Instagram →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>HadiThaDev</span></p>
+</footer>
+
+</body>
+</html>
