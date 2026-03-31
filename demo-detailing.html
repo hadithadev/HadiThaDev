@@ -7,609 +7,181 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #070b12;
-  --surface: #0d1520;
-  --surface-2: #111b28;
-  --border: #1a2535;
-  --text: #e8f0ff;
-  --text-muted: #5a7a9a;
-  --blue: #4a9eff;
-  --blue-dim: #4a9eff12;
-  --radius: 10px;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-::selection { background: var(--blue); color: var(--bg); }
-
-/* ---- DEMO BANNER ---- */
-.demo-banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 200;
-  background: #c8ff00;
-  color: #0a0a0a;
-  text-align: center;
-  padding: 0.6rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.demo-banner a { color: #0a0a0a; text-decoration: underline; font-weight: 700; }
-
-/* ---- NAV ---- */
-nav {
-  position: fixed;
-  top: 38px;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 1.1rem 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(7,11,18,0.9);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-logo {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--text);
-  text-decoration: none;
-  letter-spacing: -0.5px;
-}
-
-.nav-logo span { color: var(--blue); }
-
-.nav-links { display: flex; gap: 2rem; align-items: center; }
-
-.nav-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 400;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover { color: var(--text); }
-
-.nav-quote {
-  background: var(--blue) !important;
-  color: var(--bg) !important;
-  padding: 0.5rem 1.5rem;
-  border-radius: 100px;
-  font-weight: 600 !important;
-  font-size: 0.8rem !important;
-}
-
-/* ---- HERO ---- */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10rem 2.5rem 6rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 20%;
-  right: -10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, var(--blue-dim) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--blue);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  animation: fadeUp 0.6s ease both;
-}
-
-.hero-tag .line { width: 30px; height: 1px; background: var(--blue); }
-
-.hero h1 {
-  font-size: clamp(2.8rem, 7vw, 5rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -2px;
-  margin-bottom: 1.25rem;
-  animation: fadeUp 0.6s ease 0.1s both;
-}
-
-.hero h1 .blue { color: var(--blue); }
-
-.hero-sub {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  font-weight: 300;
-  max-width: 500px;
-  margin-bottom: 2.5rem;
-  animation: fadeUp 0.6s ease 0.2s both;
-}
-
-.hero-btns {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  animation: fadeUp 0.6s ease 0.3s both;
-}
-
-.btn-blue {
-  background: var(--blue);
-  color: var(--bg);
-  padding: 0.85rem 2rem;
-  border-radius: 100px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.2s;
-}
-
-.btn-blue:hover { opacity: 0.85; }
-
-.btn-ghost {
-  background: transparent;
-  color: var(--text);
-  padding: 0.85rem 2rem;
-  border-radius: 100px;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-}
-
-.btn-ghost:hover { border-color: var(--text-muted); }
-
-.hero-stats {
-  display: flex;
-  gap: 3rem;
-  margin-top: 4rem;
-  animation: fadeUp 0.6s ease 0.4s both;
-}
-
-.stat-num {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--blue);
-}
-
-.stat-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  font-weight: 300;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ---- SECTION ---- */
-section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
-
-.s-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--blue);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-}
-
-.s-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 700;
-  letter-spacing: -1px;
-  margin-bottom: 0.75rem;
-}
-
-.s-desc {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  font-weight: 300;
-  max-width: 500px;
-  margin-bottom: 3rem;
-}
-
-/* ---- PACKAGES ---- */
-.packages-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.25rem;
-}
-
-.package {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.5rem 2rem;
-  transition: border-color 0.3s;
-  position: relative;
-}
-
-.package:hover { border-color: var(--blue); }
-
-.package.featured {
-  border-color: var(--blue);
-}
-
-.package.featured::before {
-  content: 'MOST POPULAR';
-  position: absolute;
-  top: -10px;
-  left: 2rem;
-  background: var(--blue);
-  color: var(--bg);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
-}
-
-.package-name {
-  font-size: 0.75rem;
-  color: var(--blue);
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.package-price {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-.package-price span {
-  font-size: 0.9rem;
-  font-weight: 300;
-  color: var(--text-muted);
-}
-
-.package-desc {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  font-weight: 300;
-  margin-bottom: 1.5rem;
-}
-
-.package-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.package-list li {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.package-list li .ck { color: var(--blue); font-weight: 700; }
-
-/* ---- BEFORE/AFTER ---- */
-.ba-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.25rem;
-}
-
-.ba-card {
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-
-.ba-images {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.ba-side {
-  aspect-ratio: 4/3;
-  background: var(--surface-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-weight: 300;
-  position: relative;
-}
-
-.ba-side::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  background: rgba(0,0,0,0.6);
-  padding: 2px 8px;
-  border-radius: 4px;
-  color: var(--text);
-  letter-spacing: 1px;
-}
-
-.ba-side:first-child { border-right: 1px solid var(--border); }
-
-.ba-info {
-  padding: 1.25rem;
-  background: var(--surface);
-}
-
-.ba-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.15rem; }
-.ba-info p { color: var(--text-muted); font-size: 0.8rem; font-weight: 300; }
-
-/* ---- REVIEWS ---- */
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-}
-
-.review {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2rem;
-}
-
-.review-stars { color: var(--blue); font-size: 0.9rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
-
-.review-text {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  font-weight: 300;
-  font-style: italic;
-  margin-bottom: 1rem;
-  line-height: 1.7;
-}
-
-.review-name { font-size: 0.85rem; font-weight: 600; }
-.review-vehicle { font-size: 0.75rem; color: var(--text-muted); font-weight: 300; }
-
-/* ---- CTA ---- */
-.detail-cta {
-  text-align: center;
-  padding: 6rem 2rem;
-  border-top: 1px solid var(--border);
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.detail-cta h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -1px;
-  margin-bottom: 0.75rem;
-}
-
-.detail-cta p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  font-weight: 300;
-  margin-bottom: 2rem;
-}
-
-.cta-contact {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-top: 1.5rem;
-}
-
-.cta-contact span { color: var(--text); }
-
-/* ---- FOOTER ---- */
-footer {
-  text-align: center;
-  padding: 2rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-@media (max-width: 768px) {
-  nav { padding: 1rem 1.25rem; }
-  .nav-links a:not(.nav-quote) { display: none; }
-  section { padding: 4rem 1.25rem; }
-  .hero { padding: 9rem 1.25rem 4rem; }
-  .hero-stats { gap: 2rem; flex-wrap: wrap; }
-}
+:root{--bg:#060a10;--surface:#0c1219;--surface-2:#101822;--border:#1a2535;--text:#e4ecf8;--text-muted:#5a7a9a;--blue:#3d8bfd;--blue-bright:#5da0ff;--blue-dim:#3d8bfd10;--cyan:#00d4ff;--radius:8px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}::selection{background:var(--blue);color:#fff}.demo-banner{position:fixed;top:0;left:0;right:0;z-index:200;background:#c8ff00;color:#0a0a0a;text-align:center;padding:.55rem 1rem;font-size:.78rem;font-weight:600}.demo-banner a{color:#0a0a0a;text-decoration:underline;font-weight:700}nav{position:fixed;top:36px;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(6,10,16,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}.nav-logo{font-weight:700;font-size:1.25rem;color:var(--text);text-decoration:none;letter-spacing:-.5px}.nav-logo span{color:var(--blue)}.nav-center{display:flex;gap:2.5rem}.nav-center a{color:var(--text-muted);text-decoration:none;font-size:.8rem;font-weight:400;letter-spacing:.5px;transition:color .2s}.nav-center a:hover{color:var(--text)}.nav-cta{background:var(--blue);color:#fff;padding:.55rem 1.75rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:.5px;transition:all .2s}.nav-cta:hover{background:var(--blue-bright)}.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 6rem;position:relative;overflow:hidden}.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#060a10 0%,#0a1225 40%,#060a10 100%)}.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(61,139,253,.08) 0%,transparent 60%),radial-gradient(ellipse at 30% 70%,rgba(0,212,255,.04) 0%,transparent 50%)}.hero-content{position:relative;z-index:1;max-width:650px}.hero-trust{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;animation:fadeUp .7s ease both}.trust-badge{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border);padding:.4rem 1rem;border-radius:100px}.trust-badge .stars{color:var(--blue);font-size:.7rem}.trust-badge span{font-size:.72rem;color:var(--text-muted)}.hero h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1;letter-spacing:-2px;margin-bottom:1.25rem;animation:fadeUp .7s ease .1s both}.hero h1 .blue{color:var(--blue)}.hero h1 .cyan{color:var(--cyan)}.hero-sub{font-size:1.05rem;color:var(--text-muted);font-weight:300;max-width:480px;margin-bottom:2.5rem;animation:fadeUp .7s ease .2s both}.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s ease .3s both}.btn-blue{background:var(--blue);color:#fff;padding:.9rem 2.5rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.85rem;transition:all .2s}.btn-blue:hover{background:var(--blue-bright);transform:translateY(-1px)}.btn-outline{background:transparent;color:var(--text);padding:.9rem 2.5rem;border-radius:100px;text-decoration:none;font-weight:500;font-size:.85rem;border:1px solid var(--border);transition:all .2s}.btn-outline:hover{border-color:var(--text-muted)}.hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);animation:fadeUp .7s ease .4s both}.stat .stat-num{font-size:2rem;font-weight:700;color:var(--blue)}.stat .stat-label{font-size:.75rem;color:var(--text-muted);font-weight:300;letter-spacing:.5px}@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}section{padding:6rem 3rem;max-width:1200px;margin:0 auto}.s-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--blue);letter-spacing:4px;text-transform:uppercase;margin-bottom:.75rem}.s-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-1px;margin-bottom:.75rem}.s-desc{color:var(--text-muted);font-size:.95rem;font-weight:300;max-width:500px;margin-bottom:3rem}.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}.process-step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;transition:border-color .3s;position:relative}.process-step:hover{border-color:var(--blue)}.step-num{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--blue);font-weight:500;letter-spacing:2px;margin-bottom:1rem}.step-icon{font-size:1.5rem;margin-bottom:.75rem}.process-step h4{font-size:.95rem;font-weight:600;margin-bottom:.25rem}.process-step p{font-size:.8rem;color:var(--text-muted);font-weight:300}.packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}.package{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 2rem;transition:all .3s;position:relative}.package:hover{border-color:var(--blue);transform:translateY(-4px)}.package.featured{border-color:var(--blue);background:linear-gradient(180deg,rgba(61,139,253,.06) 0%,var(--surface) 100%)}.package.featured::before{content:'MOST POPULAR';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:2px;padding:.3rem 1rem;border-radius:100px}.pkg-name{font-size:.72rem;color:var(--blue);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.75rem}.pkg-price{font-size:2.5rem;font-weight:700;margin-bottom:.15rem}.pkg-price span{font-size:.85rem;font-weight:300;color:var(--text-muted)}.pkg-desc{color:var(--text-muted);font-size:.85rem;font-weight:300;margin-bottom:1.5rem;line-height:1.6}.pkg-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}.pkg-list li{font-size:.83rem;color:var(--text-muted);display:flex;align-items:center;gap:.6rem}.pkg-list li .ck{color:var(--blue);font-weight:700;font-size:.9rem}.pkg-btn{display:block;text-align:center;padding:.75rem;border-radius:100px;font-size:.8rem;font-weight:600;text-decoration:none;transition:all .2s}.package .pkg-btn{background:transparent;color:var(--blue);border:1px solid var(--border)}.package .pkg-btn:hover{border-color:var(--blue)}.package.featured .pkg-btn{background:var(--blue);color:#fff;border:1px solid var(--blue)}.package.featured .pkg-btn:hover{background:var(--blue-bright)}.ba-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:6rem 3rem}.ba-inner{max-width:1200px;margin:0 auto}.ba-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.25rem}.ba-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--bg)}.ba-images{display:grid;grid-template-columns:1fr 1fr;position:relative}.ba-side{aspect-ratio:4/3;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--text-muted);font-weight:300;position:relative}.ba-side::after{content:attr(data-label);position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:.55rem;background:rgba(0,0,0,.7);padding:.2rem .6rem;border-radius:4px;color:var(--text);letter-spacing:1.5px;font-weight:500}.ba-divider{position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--blue);z-index:1}.ba-divider::after{content:'⟷';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--blue);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem}.ba-info{padding:1.25rem}.ba-info h4{font-size:.95rem;font-weight:600;margin-bottom:.15rem}.ba-info p{color:var(--text-muted);font-size:.8rem;font-weight:300}.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}.review{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:border-color .3s}.review:hover{border-color:rgba(61,139,253,.3)}.review-stars{color:var(--blue);font-size:.8rem;letter-spacing:3px;margin-bottom:1rem}.review-text{font-size:.95rem;font-weight:400;font-style:italic;line-height:1.7;margin-bottom:1.25rem;color:var(--text)}.review-author{font-size:.82rem;font-weight:600}.review-vehicle{font-size:.72rem;color:var(--text-muted);font-weight:300}.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}.area-map{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);min-height:350px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.9rem}.area-info h3{font-size:1.5rem;font-weight:700;margin-bottom:.75rem}.area-info p{color:var(--text-muted);font-size:.9rem;font-weight:300;line-height:1.7;margin-bottom:1.5rem}.area-towns{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}.area-tag{background:var(--surface);border:1px solid var(--border);padding:.35rem .9rem;border-radius:100px;font-size:.75rem;color:var(--text-muted)}.final-cta{text-align:center;padding:8rem 2rem;position:relative;max-width:1200px;margin:0 auto}.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--blue-dim) 0%,transparent 60%);pointer-events:none}.final-cta h2{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;letter-spacing:-1px;margin-bottom:.75rem;position:relative}.final-cta p{color:var(--text-muted);font-size:.95rem;font-weight:300;margin-bottom:2.5rem;position:relative}.final-cta .btn-blue{position:relative}.cta-phone{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--text-muted);margin-top:1.5rem;position:relative}.cta-phone span{color:var(--text);font-weight:500}footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.footer-left{font-weight:700;font-size:1rem;color:var(--text)}.footer-left span{color:var(--blue)}.footer-right{font-size:.75rem;color:var(--text-muted)}.footer-right a{color:var(--blue);text-decoration:none}@media(max-width:900px){nav{padding:1rem 1.5rem}.nav-center{display:none}section{padding:4rem 1.5rem}.hero{padding:7rem 1.5rem 4rem}.hero-stats{gap:2rem;flex-wrap:wrap}.process-grid{grid-template-columns:1fr 1fr}.packages-grid,.ba-grid{grid-template-columns:1fr}.area-grid{grid-template-columns:1fr}footer{flex-direction:column;gap:.75rem;text-align:center}}
 </style>
 </head>
 <body>
-
-<!-- DEMO BANNER -->
-<div class="demo-banner">
-  ✦ This is a demo mockup by HadiThaDev — <a href="index.html">Want a site like this for your business?</a>
-</div>
-
-<!-- NAV -->
+<div class="demo-banner">✦ This is a demo mockup by HadiThaDev — <a href="index.html">Want a site like this for your business?</a></div>
 <nav>
   <a href="#" class="nav-logo">Your<span>Detail</span>Co.</a>
-  <div class="nav-links">
+  <div class="nav-center">
+    <a href="#process">How It Works</a>
     <a href="#packages">Packages</a>
     <a href="#work">Our Work</a>
     <a href="#reviews">Reviews</a>
-    <a href="#quote" class="nav-quote">Get a Quote</a>
+    <a href="#area">Service Area</a>
   </div>
+  <a href="#quote" class="nav-cta">Get a Quote</a>
 </nav>
-
-<!-- HERO -->
 <section class="hero">
-  <p class="hero-tag"><span class="line"></span>Mobile Detailing — Barrie & Simcoe County</p>
-  <h1>Your car,<br><span class="blue">showroom</span><br>clean.</h1>
-  <p class="hero-sub">Professional mobile detailing brought to your driveway. Interior, exterior, ceramic coating, and paint correction — we do it all.</p>
-  <div class="hero-btns">
-    <a href="#quote" class="btn-blue">Get a Free Quote</a>
-    <a href="#packages" class="btn-ghost">See Packages</a>
-  </div>
-  <div class="hero-stats">
-    <div>
-      <p class="stat-num">500+</p>
-      <p class="stat-label">Cars Detailed</p>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-trust">
+      <div class="trust-badge"><span class="stars">★★★★★</span><span>5.0 on Google</span></div>
+      <div class="trust-badge"><span style="font-size:.72rem;color:var(--text-muted)">100% Mobile</span></div>
     </div>
-    <div>
-      <p class="stat-num">5.0</p>
-      <p class="stat-label">Google Rating</p>
+    <h1>Your car,<br><span class="blue">showroom</span><br>clean.</h1>
+    <p class="hero-sub">Professional mobile detailing brought to your driveway. Interior, exterior, ceramic coating, and paint correction — we come to you.</p>
+    <div class="hero-ctas">
+      <a href="#quote" class="btn-blue">Get a Free Quote</a>
+      <a href="#packages" class="btn-outline">View Packages</a>
     </div>
-    <div>
-      <p class="stat-num">100%</p>
-      <p class="stat-label">Mobile Service</p>
+    <div class="hero-stats">
+      <div class="stat"><p class="stat-num">500+</p><p class="stat-label">Cars Detailed</p></div>
+      <div class="stat"><p class="stat-num">5.0</p><p class="stat-label">Google Rating</p></div>
+      <div class="stat"><p class="stat-num">100%</p><p class="stat-label">Satisfaction</p></div>
     </div>
   </div>
 </section>
 
-<!-- PACKAGES -->
-<section id="packages" style="border-top: 1px solid var(--border);">
-  <p class="s-label">Packages</p>
-  <h2 class="s-title">Pick your level of clean.</h2>
-  <p class="s-desc">Every package includes a full consultation and satisfaction guarantee.</p>
+<section id="process" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">How It Works</p>
+  <h2 class="s-title">Simple as 1-2-3-4.</h2>
+  <p class="s-desc">We come to you. No drop-offs, no waiting rooms.</p>
+  <div class="process-grid">
+    <div class="process-step"><p class="step-num">01</p><div class="step-icon">📋</div><h4>Get a Quote</h4><p>Tell us your vehicle and what you need. Free, no obligation.</p></div>
+    <div class="process-step"><p class="step-num">02</p><div class="step-icon">📅</div><h4>Book a Time</h4><p>Pick a date and time that works for you. We're flexible.</p></div>
+    <div class="process-step"><p class="step-num">03</p><div class="step-icon">✨</div><h4>We Detail</h4><p>Our team arrives fully equipped and transforms your vehicle.</p></div>
+    <div class="process-step"><p class="step-num">04</p><div class="step-icon">✅</div><h4>You Inspect</h4><p>Walk around, check every inch. Payment only after you're satisfied.</p></div>
+  </div>
+</section>
 
+<section id="packages" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Packages</p>
+  <h2 class="s-title">Pick your level of clean.</h2>
+  <p class="s-desc">Every package includes a consultation and 100% satisfaction guarantee. Pricing varies by vehicle size.</p>
   <div class="packages-grid">
     <div class="package">
-      <p class="package-name">Essential</p>
-      <p class="package-price">$120 <span>/ starting</span></p>
-      <p class="package-desc">A thorough refresh for your daily driver.</p>
-      <ul class="package-list">
-        <li><span class="ck">✓</span> Exterior hand wash</li>
-        <li><span class="ck">✓</span> Interior vacuum & wipe</li>
-        <li><span class="ck">✓</span> Window cleaning</li>
+      <p class="pkg-name">Essential</p>
+      <p class="pkg-price">$120 <span>/ starting</span></p>
+      <p class="pkg-desc">A thorough refresh for your daily driver. Perfect for regular maintenance.</p>
+      <ul class="pkg-list">
+        <li><span class="ck">✓</span> Exterior hand wash & dry</li>
+        <li><span class="ck">✓</span> Interior vacuum & wipe down</li>
+        <li><span class="ck">✓</span> Window cleaning (in & out)</li>
         <li><span class="ck">✓</span> Tire & rim dressing</li>
+        <li><span class="ck">✓</span> Air freshener</li>
       </ul>
+      <a href="#quote" class="pkg-btn">Get a Quote</a>
     </div>
     <div class="package featured">
-      <p class="package-name">Complete</p>
-      <p class="package-price">$250 <span>/ starting</span></p>
-      <p class="package-desc">Interior and exterior deep clean. The full treatment.</p>
-      <ul class="package-list">
+      <p class="pkg-name">Complete</p>
+      <p class="pkg-price">$250 <span>/ starting</span></p>
+      <p class="pkg-desc">The full treatment. Interior and exterior deep clean with protection.</p>
+      <ul class="pkg-list">
         <li><span class="ck">✓</span> Everything in Essential</li>
-        <li><span class="ck">✓</span> Clay bar treatment</li>
-        <li><span class="ck">✓</span> Leather conditioning</li>
+        <li><span class="ck">✓</span> Clay bar decontamination</li>
+        <li><span class="ck">✓</span> Leather cleaning & conditioning</li>
         <li><span class="ck">✓</span> Engine bay cleaning</li>
-        <li><span class="ck">✓</span> Sealant application</li>
+        <li><span class="ck">✓</span> Paint sealant application</li>
+        <li><span class="ck">✓</span> Door jamb detailing</li>
       </ul>
+      <a href="#quote" class="pkg-btn">Get a Quote</a>
     </div>
     <div class="package">
-      <p class="package-name">Signature</p>
-      <p class="package-price">$500 <span>/ starting</span></p>
-      <p class="package-desc">Full restoration and long-term protection.</p>
-      <ul class="package-list">
+      <p class="pkg-name">Signature</p>
+      <p class="pkg-price">$500 <span>/ starting</span></p>
+      <p class="pkg-desc">Full restoration and long-term protection. The showroom experience.</p>
+      <ul class="pkg-list">
         <li><span class="ck">✓</span> Everything in Complete</li>
-        <li><span class="ck">✓</span> Paint correction</li>
-        <li><span class="ck">✓</span> Ceramic coating</li>
+        <li><span class="ck">✓</span> 1-stage paint correction</li>
+        <li><span class="ck">✓</span> Ceramic coating (1 year)</li>
         <li><span class="ck">✓</span> Interior deep extraction</li>
         <li><span class="ck">✓</span> Headlight restoration</li>
+        <li><span class="ck">✓</span> Trim & plastics restored</li>
       </ul>
+      <a href="#quote" class="pkg-btn">Get a Quote</a>
     </div>
   </div>
 </section>
 
-<!-- BEFORE / AFTER -->
-<section id="work" style="border-top: 1px solid var(--border);">
-  <p class="s-label">Our Work</p>
-  <h2 class="s-title">The transformation is real.</h2>
-  <p class="s-desc">Your before & after photos would go here — real results from real jobs.</p>
-
-  <div class="ba-grid">
-    <div class="ba-card">
-      <div class="ba-images">
-        <div class="ba-side" data-label="BEFORE">Your Photo</div>
-        <div class="ba-side" data-label="AFTER">Your Photo</div>
+<div class="ba-section" id="work">
+  <div class="ba-inner">
+    <p class="s-eyebrow">Before & After</p>
+    <h2 class="s-title">See the difference.</h2>
+    <p class="s-desc">Your real before & after photos would go here — the most powerful proof you can show.</p>
+    <div class="ba-grid">
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-side" data-label="BEFORE">Your Photo</div>
+          <div class="ba-divider"></div>
+          <div class="ba-side" data-label="AFTER">Your Photo</div>
+        </div>
+        <div class="ba-info"><h4>Interior Deep Clean</h4><p>2021 Honda Civic — Complete Package</p></div>
       </div>
-      <div class="ba-info">
-        <h4>Interior Deep Clean</h4>
-        <p>2021 Honda Civic — Complete Package</p>
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-side" data-label="BEFORE">Your Photo</div>
+          <div class="ba-divider"></div>
+          <div class="ba-side" data-label="AFTER">Your Photo</div>
+        </div>
+        <div class="ba-info"><h4>Paint Correction + Ceramic</h4><p>2019 BMW 3 Series — Signature Package</p></div>
       </div>
-    </div>
-    <div class="ba-card">
-      <div class="ba-images">
-        <div class="ba-side" data-label="BEFORE">Your Photo</div>
-        <div class="ba-side" data-label="AFTER">Your Photo</div>
-      </div>
-      <div class="ba-info">
-        <h4>Paint Correction + Ceramic</h4>
-        <p>2019 BMW 3 Series — Signature Package</p>
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-side" data-label="BEFORE">Your Photo</div>
+          <div class="ba-divider"></div>
+          <div class="ba-side" data-label="AFTER">Your Photo</div>
+        </div>
+        <div class="ba-info"><h4>Full Exterior Restoration</h4><p>2017 Ford F-150 — Signature Package</p></div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- REVIEWS -->
-<section id="reviews" style="border-top: 1px solid var(--border);">
-  <p class="s-label">Reviews</p>
-  <h2 class="s-title">What customers say.</h2>
-  <p class="s-desc">Your Google reviews would be showcased right here.</p>
-
-  <div class="reviews-grid">
-    <div class="review">
-      <p class="review-stars">★ ★ ★ ★ ★</p>
-      <p class="review-text">"Your real customer reviews would appear here. Genuine testimonials build trust and drive new bookings."</p>
-      <p class="review-name">Customer Name</p>
-      <p class="review-vehicle">2022 Toyota RAV4</p>
-    </div>
-    <div class="review">
-      <p class="review-stars">★ ★ ★ ★ ★</p>
-      <p class="review-text">"Another satisfied customer's words. Social proof is the most powerful tool for a service-based business."</p>
-      <p class="review-name">Customer Name</p>
-      <p class="review-vehicle">2020 Ford F-150</p>
-    </div>
-    <div class="review">
-      <p class="review-stars">★ ★ ★ ★ ★</p>
-      <p class="review-text">"A third review to complete the set. Three strong testimonials is all it takes to build confidence."</p>
-      <p class="review-name">Customer Name</p>
-      <p class="review-vehicle">2023 Hyundai Tucson</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="detail-cta" id="quote">
-  <h2>Ready for <span style="color:var(--blue);">showroom clean?</span></h2>
-  <p>Send a message with your vehicle details and we'll get back to you within an hour with a custom quote.</p>
-  <a href="#" class="btn-blue">Get Your Free Quote</a>
-  <p class="cta-contact">or call <span>(705) 555-0123</span></p>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 Your Detail Co. — Barrie, ON · Demo by <a href="index.html" style="color:var(--blue);text-decoration:none;">HadiThaDev</a></p>
-</footer>
+<section id="reviews" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Reviews</p>
+  <h2 class="s-title">Don't take our word for it.</h2>
+  <p class="s-desc">Your real Google reviews — the most powerful marketing you have.</p>
+  <div class="reviews-grid">
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"Your real customer review goes here. Authentic words from someone who trusted you with their vehicle."</p><p class="review-author">Customer Name</p><p class="review-vehicle">2022 Toyota RAV4 · Complete Package</p></div>
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"Another genuine testimonial. Before and after photos plus reviews are what close the deal for detailing."</p><p class="review-author">Customer Name</p><p class="review-vehicle">2020 Ford F-150 · Signature Package</p></div>
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"A third review. Three strong testimonials with the vehicle type and package builds massive trust."</p><p class="review-author">Customer Name</p><p class="review-vehicle">2023 Tesla Model 3 · Complete Package</p></div>
+  </div>
+</section>
 
+<section id="area" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Service Area</p>
+  <h2 class="s-title">We come to you.</h2>
+  <p class="s-desc">Mobile detailing across the region. No travel fees within our coverage area.</p>
+  <div class="area-grid">
+    <div class="area-map">Google Maps Embed — Your Coverage Area</div>
+    <div class="area-info">
+      <h3>Serving your area & beyond.</h3>
+      <p>We bring our full mobile setup to your driveway, office parking lot, or wherever your vehicle is. No drop-off needed.</p>
+      <div class="area-towns">
+        <span class="area-tag">Your City</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">& Surrounding Areas</span>
+      </div>
+      <a href="#quote" class="btn-blue">Get Your Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<div class="final-cta" id="quote">
+  <h2>Ready for <span style="color:var(--blue)">showroom clean?</span></h2>
+  <p>Send us your vehicle details and we'll get back to you within an hour with a custom quote.</p>
+  <a href="#" class="btn-blue">Get Your Free Quote</a>
+  <p class="cta-phone">or call <span>(705) 555-0123</span></p>
+</div>
+
+<footer>
+  <span class="footer-left">Your<span>Detail</span>Co.</span>
+  <span class="footer-right">© 2026 Your Detail Co. · Demo by <a href="index.html">HadiThaDev</a></span>
+</footer>
 </body>
 </html>
