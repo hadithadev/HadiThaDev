@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moving Company Demo — HadiThaDev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070808;--surface:#0f1010;--surface-2:#171919;--border:#222424;--text:#f0f2f0;--text-muted:#6a7a6a;--green:#3ddc84;--green-bright:#5ae89c;--green-dim:#3ddc8410;--orange:#ff8c42;--radius:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--green);color:var(--bg)}
+
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:200;background:#c8ff00;color:#0a0a0a;text-align:center;padding:.55rem 1rem;font-size:.78rem;font-weight:600}
+.demo-banner a{color:#0a0a0a;text-decoration:underline;font-weight:700}
+
+nav{position:fixed;top:36px;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(7,8,8,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-weight:700;font-size:1.25rem;color:var(--text);text-decoration:none;letter-spacing:-.5px}
+.nav-logo span{color:var(--green)}
+.nav-center{display:flex;gap:2.5rem}
+.nav-center a{color:var(--text-muted);text-decoration:none;font-size:.8rem;font-weight:400;letter-spacing:.5px;transition:color .2s}
+.nav-center a:hover{color:var(--text)}
+.nav-cta{background:var(--green);color:var(--bg);padding:.55rem 1.75rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.78rem;transition:all .2s}
+.nav-cta:hover{background:var(--green-bright)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 6rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.15}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 45%,transparent 100%)}
+.hero-content{position:relative;z-index:1;max-width:600px}
+.hero-trust{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;animation:fadeUp .7s ease both}
+.trust-pill{display:flex;align-items:center;gap:.4rem;background:var(--surface);border:1px solid var(--border);padding:.35rem .9rem;border-radius:100px;font-size:.7rem;color:var(--text-muted)}
+.trust-pill .stars{color:var(--green)}
+.trust-pill strong{color:var(--text);font-weight:600}
+.hero h1{font-size:clamp(2.8rem,7vw,5rem);font-weight:800;line-height:1;letter-spacing:-2px;margin-bottom:1.25rem;animation:fadeUp .7s ease .1s both}
+.hero h1 .green{color:var(--green)}
+.hero-sub{font-size:1.05rem;color:var(--text-muted);font-weight:300;max-width:450px;margin-bottom:2.5rem;animation:fadeUp .7s ease .2s both}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s ease .3s both}
+.btn-green{background:var(--green);color:var(--bg);padding:.9rem 2.5rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.88rem;transition:all .2s}
+.btn-green:hover{background:var(--green-bright);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);padding:.9rem 2.5rem;border-radius:100px;text-decoration:none;font-weight:500;font-size:.88rem;border:1px solid var(--border);transition:all .2s}
+.btn-outline:hover{border-color:var(--text-muted)}
+.hero-stats{display:flex;gap:3rem;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--border);animation:fadeUp .7s ease .4s both}
+.stat .stat-num{font-size:2rem;font-weight:700;color:var(--green)}
+.stat .stat-label{font-size:.75rem;color:var(--text-muted);font-weight:300}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
+.s-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--green);letter-spacing:4px;text-transform:uppercase;margin-bottom:.75rem}
+.s-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-1px;margin-bottom:.75rem}
+.s-desc{color:var(--text-muted);font-size:.95rem;font-weight:300;max-width:500px;margin-bottom:3rem}
+
+/* PROCESS */
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.process-step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;transition:border-color .3s}
+.process-step:hover{border-color:var(--green)}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--green);font-weight:500;letter-spacing:2px;margin-bottom:1rem}
+.step-icon{font-size:1.5rem;margin-bottom:.75rem}
+.process-step h4{font-size:.95rem;font-weight:600;margin-bottom:.25rem}
+.process-step p{font-size:.8rem;color:var(--text-muted);font-weight:300}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .3s}
+.service-card:hover{border-color:var(--green);transform:translateY(-3px)}
+.service-img{height:180px;overflow:hidden}
+.service-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.service-card:hover .service-img img{transform:scale(1.05)}
+.service-info{padding:1.5rem}
+.service-info h3{font-size:1.1rem;font-weight:600;margin-bottom:.3rem}
+.service-info p{font-size:.82rem;color:var(--text-muted);font-weight:300;line-height:1.6}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+.why-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:border-color .3s}
+.why-card:hover{border-color:var(--green)}
+.why-icon{font-size:1.3rem;margin-bottom:.75rem}
+.why-card h4{font-size:.95rem;font-weight:600;margin-bottom:.25rem}
+.why-card p{font-size:.82rem;color:var(--text-muted);font-weight:300}
+
+/* REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.review{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:border-color .3s}
+.review:hover{border-color:rgba(61,220,132,.3)}
+.review-stars{color:var(--green);font-size:.8rem;letter-spacing:3px;margin-bottom:1rem}
+.review-text{font-size:.95rem;font-weight:400;font-style:italic;line-height:1.7;margin-bottom:1.25rem}
+.review-author{font-size:.82rem;font-weight:600}
+.review-detail{font-size:.72rem;color:var(--text-muted);font-weight:300}
+
+/* AREA */
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.area-map{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);min-height:350px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.9rem;overflow:hidden}
+.area-map img{width:100%;height:100%;object-fit:cover;opacity:.5}
+.area-info h3{font-size:1.5rem;font-weight:700;margin-bottom:.75rem}
+.area-info p{color:var(--text-muted);font-size:.9rem;font-weight:300;line-height:1.7;margin-bottom:1.5rem}
+.area-towns{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.area-tag{background:var(--surface);border:1px solid var(--border);padding:.35rem .9rem;border-radius:100px;font-size:.75rem;color:var(--text-muted)}
+
+/* CTA */
+.final-cta{text-align:center;padding:6rem 2rem;position:relative;max-width:1200px;margin:0 auto;border-top:1px solid var(--border)}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--green-dim) 0%,transparent 60%);pointer-events:none}
+.final-cta h2{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;letter-spacing:-1px;margin-bottom:.75rem;position:relative}
+.final-cta p{color:var(--text-muted);font-size:.95rem;font-weight:300;margin-bottom:2.5rem;position:relative}
+.cta-phone{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--text-muted);margin-top:1.5rem;position:relative}
+.cta-phone span{color:var(--text);font-weight:500}
+
+footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+.footer-left{font-weight:700;font-size:1rem;color:var(--text)}.footer-left span{color:var(--green)}
+.footer-right{font-size:.75rem;color:var(--text-muted)}.footer-right a{color:var(--green);text-decoration:none}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}.nav-center{display:none}
+  section{padding:4rem 1.5rem}.hero{padding:7rem 1.5rem 4rem}
+  .hero-stats{gap:2rem;flex-wrap:wrap}.process-grid{grid-template-columns:1fr 1fr}
+  .area-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:.75rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="demo-banner">✦ This is a demo mockup by HadiThaDev — <a href="index.html">Want a site like this for your business?</a></div>
+
+<nav>
+  <a href="#" class="nav-logo">Your<span>Movers</span></a>
+  <div class="nav-center">
+    <a href="#process">How It Works</a>
+    <a href="#services">Services</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#area">Service Area</a>
+  </div>
+  <a href="#quote" class="nav-cta">Get a Free Quote</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=1600&q=80" alt="Moving truck">
+    <div></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-trust">
+      <div class="trust-pill"><span class="stars">★★★★★</span><span>5.0 on Google</span></div>
+      <div class="trust-pill"><strong>Licensed</strong> & <strong>Insured</strong></div>
+    </div>
+    <h1>Moving made<br><span class="green">stress-free.</span></h1>
+    <p class="hero-sub">Local and long-distance moving services you can trust. Professional crew, careful handling, transparent pricing — no hidden fees, no surprises.</p>
+    <div class="hero-ctas">
+      <a href="#quote" class="btn-green">Get a Free Quote</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><p class="stat-num">2,500+</p><p class="stat-label">Moves Completed</p></div>
+      <div class="stat"><p class="stat-num">5.0</p><p class="stat-label">Google Rating</p></div>
+      <div class="stat"><p class="stat-num">10+</p><p class="stat-label">Years Experience</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="process" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">How It Works</p>
+  <h2 class="s-title">Four simple steps.</h2>
+  <p class="s-desc">From quote to settled — we handle everything so you don't have to.</p>
+  <div class="process-grid">
+    <div class="process-step"><p class="step-num">01</p><div class="step-icon">📋</div><h4>Get a Quote</h4><p>Tell us where you're moving, when, and what you need. Free, no obligation.</p></div>
+    <div class="process-step"><p class="step-num">02</p><div class="step-icon">📦</div><h4>We Pack</h4><p>Our crew arrives with all materials. We wrap, box, and protect everything.</p></div>
+    <div class="process-step"><p class="step-num">03</p><div class="step-icon">🚛</div><h4>We Move</h4><p>Careful loading, safe transport, and on-time delivery to your new place.</p></div>
+    <div class="process-step"><p class="step-num">04</p><div class="step-icon">🏠</div><h4>You Settle</h4><p>We unload, place furniture where you want it, and clean up. You're home.</p></div>
+  </div>
+</section>
+
+<section id="services" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Services</p>
+  <h2 class="s-title">Everything you need for your move.</h2>
+  <p class="s-desc">From a studio apartment to a full office — we've got the crew, the trucks, and the care.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80" alt="Local moving"></div>
+      <div class="service-info"><h3>Local Moving</h3><p>Same-city moves with a professional crew. Apartments, condos, houses — any size, any floor.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=800&q=80" alt="Long distance moving"></div>
+      <div class="service-info"><h3>Long Distance</h3><p>Cross-province and cross-country moves with tracking, insurance, and guaranteed delivery dates.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&q=80" alt="Packing services"></div>
+      <div class="service-info"><h3>Packing & Unpacking</h3><p>Full packing service with professional materials. We handle fragile items, electronics, and artwork.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Office moving"></div>
+      <div class="service-info"><h3>Commercial / Office</h3><p>Minimize downtime with efficient office relocations. Furniture, equipment, files — all handled.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=80" alt="Storage"></div>
+      <div class="service-info"><h3>Storage Solutions</h3><p>Short-term and long-term storage in secure, climate-controlled facilities.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="service-img"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80" alt="Specialty items"></div>
+      <div class="service-info"><h3>Specialty Items</h3><p>Piano, pool table, antiques, safes — we have the equipment and experience for delicate moves.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Why Choose Us</p>
+  <h2 class="s-title">What sets us apart.</h2>
+  <p class="s-desc">Dozens of movers in the area. Here's why people pick us.</p>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon">🛡️</div><h4>Fully Licensed & Insured</h4><p>Your belongings are protected from pickup to delivery. Full liability coverage on every move.</p></div>
+    <div class="why-card"><div class="why-icon">💰</div><h4>No Hidden Fees</h4><p>The quote you get is the price you pay. No surprise charges, no fuel surcharges, no stair fees.</p></div>
+    <div class="why-card"><div class="why-icon">⏰</div><h4>On-Time, Every Time</h4><p>We show up when we say we will. Your schedule matters and we respect it.</p></div>
+    <div class="why-card"><div class="why-icon">👨‍👩‍👦</div><h4>Family Owned</h4><p>Not a franchise. We're local, we're invested, and we treat your home like it's ours.</p></div>
+  </div>
+</section>
+
+<section id="reviews" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Reviews</p>
+  <h2 class="s-title">Don't take our word for it.</h2>
+  <p class="s-desc">Real Google reviews from real customers.</p>
+  <div class="reviews-grid">
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"Your real customer review goes here. Authentic words from someone who trusted you with their move."</p><p class="review-author">Customer Name</p><p class="review-detail">Local move · 3 bedroom house</p></div>
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"Another genuine testimonial. Moving reviews that mention specific details build massive trust."</p><p class="review-author">Customer Name</p><p class="review-detail">Long distance · Condo</p></div>
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"A third review. Three strong testimonials with move type details is the sweet spot."</p><p class="review-author">Customer Name</p><p class="review-detail">Office move · 2,000 sq ft</p></div>
+  </div>
+</section>
+
+<section id="area" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Service Area</p>
+  <h2 class="s-title">Where we operate.</h2>
+  <p class="s-desc">Local moves and long-distance relocations across the region.</p>
+  <div class="area-grid">
+    <div class="area-map"><img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80" alt="Map area"></div>
+    <div class="area-info">
+      <h3>Serving your community & beyond.</h3>
+      <p>Whether you're moving across the street or across the province, we've got the crew, the trucks, and the experience to get it done right.</p>
+      <div class="area-towns">
+        <span class="area-tag">Your City</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">& Beyond</span>
+      </div>
+      <a href="#quote" class="btn-green">Get Your Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<div class="final-cta" id="quote">
+  <h2>Ready to <span style="color:var(--green)">move?</span></h2>
+  <p>Get a free, no-obligation quote in minutes. We'll get back to you within the hour.</p>
+  <a href="#" class="btn-green">Get Your Free Quote</a>
+  <p class="cta-phone">or call <span>(705) 555-0123</span></p>
+</div>
+
+<footer>
+  <span class="footer-left">Your<span>Movers</span></span>
+  <span class="footer-right">© 2026 Your Movers · Demo by <a href="index.html">HadiThaDev</a></span>
+</footer>
+</body>
+</html>
