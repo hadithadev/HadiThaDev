@@ -1,0 +1,407 @@
+HADITHADEV — MOVING COMPANY PROSPECT AUDIT
+=============================================
+Generated: April 2, 2026
+Total prospects: 26 companies
+Method: EMAIL if email found, CALL if no email listed
+
+
+=================================================================
+1. ELITE MOVING CREW INC
+=================================================================
+Website: No real website — just a Jotform quote form
+Status: NO WEBSITE
+Priority: HOT
+Method: CALL (no email visible)
+Phone: Check Google listing
+Notes: Their entire online presence is a single Jotform embed. No branding, no services page, no about section, no reviews. This is the easiest pitch on the list.
+
+EMAIL/DM SCRIPT:
+Hey Elite Moving — I tried to look you guys up online and the only thing I could find was a quote form with no website behind it. No services page, no photos of your team or trucks, nothing for customers to see before they decide to call.
+
+I build websites for local businesses — a proper site with your services, photos, reviews, and a quote form built in would make a huge difference in how many calls you get. Want to see what I do? hadithadev.ca
+
+— Hadi
+
+
+=================================================================
+2. SUPERIOR MOVER
+=================================================================
+Website: superiormover.ca/barrie
+Status: Has a site — corporate/franchise feel, SEO-heavy
+Priority: COLD
+Method: SKIP
+Notes: This is a large multi-city operation with a professionally built site. Not your target. Move on.
+
+
+=================================================================
+3. ZEUS MOVING
+=================================================================
+Website: zeusmoving.ca
+Status: Has a decent site — multiple service pages, gallery, contact
+Priority: COLD
+Method: SKIP
+Notes: Well-structured site with commercial subdomain, multiple service pages. They've invested in web already. Not a strong lead.
+
+
+=================================================================
+4. MOVING ASAP BARRIE
+=================================================================
+Website: No website found
+Status: NO WEBSITE
+Priority: HOT
+Method: CALL (no email visible)
+Phone: Check Google listing
+Notes: Couldn't find any web presence. If they're on Google Maps with no site, that's a direct pitch.
+
+EMAIL/DM SCRIPT:
+Hey Moving ASAP — I was looking you guys up online and couldn't find a website at all. Just your Google listing. When people search "movers Barrie" and click on your name, there's nothing for them to see.
+
+A clean site with your services, pricing, reviews, and a quote form would help you stand out from the 20+ other movers in Barrie. I build websites for local businesses — check out hadithadev.ca to see what I do.
+
+— Hadi
+
+
+=================================================================
+5. MAKE IT MOVE PLUS
+=================================================================
+Website: makeitmoveplus.ca
+Status: Has a site — WordPress, decent structure, gallery, testimonials
+Priority: WARM
+Method: EMAIL
+Email: Check contact page
+Phone: (705) 717-7675
+Notes: Site exists and functions but design is template-heavy. Has gallery, testimonials, blog, FAQ — they've invested effort. Could pitch a design refresh but not the strongest lead.
+
+EMAIL SCRIPT:
+Subject: Quick thought about Make It Move Plus's website
+
+Hey there — I came across Make It Move Plus while looking up movers in Barrie. Your reviews are solid and you clearly run a good operation. One thing I noticed: your website doesn't quite match the quality of your service. The design feels a bit template-ish and the layout could do a better job converting visitors into quote requests.
+
+I build modern, custom websites for local businesses. A cleaner design with better mobile experience and a prominent quote flow could help you stand out in a crowded market. Happy to chat if you're interested — hadithadev.ca
+
+— Hadi
+
+
+=================================================================
+6. ROCKBRUNE BROS MOVING
+=================================================================
+Website: rockbrune.com/barrie-moving-company
+Status: Has a site — multi-location, corporate feel
+Priority: COLD
+Method: SKIP
+Notes: Established company with a proper site. Not your target.
+
+
+=================================================================
+7. GET MOVERS
+=================================================================
+Website: getmovers.ca/barrie-local-moving-company
+Status: Has a site — franchise/network site
+Priority: COLD
+Method: SKIP
+Notes: Multi-city directory model. Not a local independent you'd pitch to.
+
+
+=================================================================
+8. BARRIE MOVING
+=================================================================
+Website: barriemoving.ca
+Status: Site returned 403 error — may be down or broken
+Priority: HOT
+Method: CALL (site broken, likely no email accessible)
+Phone: Check Google listing
+Notes: Their site is throwing a 403 Forbidden error. That means it's either down, misconfigured, or abandoned. Great pitch angle.
+
+EMAIL/DM SCRIPT:
+Hey Barrie Moving — I was checking out your website and it looks like barriemoving.ca is down right now. It's throwing an error when anyone tries to visit. Not sure if you're aware, but anyone looking you up online is hitting a dead page.
+
+I build websites for local businesses — I could get you back online with a clean, modern site fast. Happy to chat. hadithadev.ca
+
+— Hadi
+
+
+=================================================================
+9. URBAN MOVERS
+=================================================================
+Website: urbanmoving.ca
+Status: Has a site — professional
+Priority: COLD
+Method: SKIP
+Notes: Clean, professional site. Multi-city. Not your target.
+
+
+=================================================================
+10. ECOWAY MOVERS
+=================================================================
+Website: ecowaymovers.com/moving-company-barrie-on
+Status: Has a site — large multi-city operation
+Priority: COLD
+Method: SKIP
+Notes: Corporate site with locations across Ontario. Skip.
+
+
+=================================================================
+11. SMART BARRIE MOVERS
+=================================================================
+Website: smartmoverscanada.com
+Status: Has a site — functional but dated design
+Priority: WARM
+Method: EMAIL
+Email: Check contact page
+Phone: 647-995-7177
+Notes: Multi-city operation but the site design is outdated. Not the strongest lead — they have a web presence already.
+
+
+=================================================================
+12. MOVERS AND SHAKERS
+=================================================================
+Website: moversandshakers.ca
+Status: Need to verify
+Priority: WARM
+Method: CHECK SITE THEN DECIDE
+Notes: Great business name. Verify site quality and decide.
+
+
+=================================================================
+13. TRUCK AMIGOS
+=================================================================
+Website: truckamigos.com
+Status: Just an online quote form
+Priority: HOT
+Method: CALL
+Phone: Check Google listing
+Notes: Their "website" is just a quote form page. No branding, no services, no about page. Similar to Elite Moving Crew.
+
+EMAIL/DM SCRIPT:
+Hey Truck Amigos — I checked out your website and it's basically just a quote form with no real site behind it. No info about your team, your services, your trucks — nothing to build trust with someone who's comparing movers.
+
+A proper website with your services, pricing info, reviews, and photos would set you apart from every other mover running on just a form. I build websites for local businesses — hadithadev.ca
+
+— Hadi
+
+
+=================================================================
+14. VITAL MOVERS
+=================================================================
+Website: vitalmovers.com
+Status: Need to verify
+Priority: WARM
+Method: CHECK SITE THEN DECIDE
+Notes: Verify site quality.
+
+
+=================================================================
+15. MAX MOVING
+=================================================================
+Website: maxmoving.ca/barrie
+Status: Need to verify
+Priority: WARM
+Method: CHECK SITE THEN DECIDE
+Notes: Verify site quality. Multi-city may mean corporate.
+
+
+=================================================================
+16. PRIME MOVERS
+=================================================================
+Website: askprimemovers.ca — DEAD LINK
+Status: DEAD SITE
+Priority: HOT
+Method: CALL (site is dead, no email accessible)
+Phone: Check Google listing
+Notes: You flagged this yourself — dead link. They're paying for a domain that goes nowhere. Strong pitch.
+
+EMAIL/DM SCRIPT:
+Hey Prime Movers — I was looking you up online and your website (askprimemovers.ca) isn't working. The link is completely dead. That means anyone searching for movers in Barrie who clicks on your name gets nothing.
+
+I can get you a clean, modern site up and running fast. Services, quote form, reviews, the works. Check out what I build at hadithadev.ca — happy to chat.
+
+— Hadi
+
+
+=================================================================
+17. VICTORY MOVERS
+=================================================================
+Website: victorymovers.ca — DOMAIN HIJACKED / PARKED
+Status: DEAD/PARKED SITE
+Priority: HOT
+Method: CALL
+Phone: Check Google listing
+Notes: The domain redirects to a spam/parked page. They either lost their domain or it expired. Urgent pitch — they need help NOW.
+
+EMAIL/DM SCRIPT:
+Hey Victory Movers — heads up, your website domain (victorymovers.ca) looks like it's been taken over by a spam page. It's redirecting to some random site. Not sure if you're aware but anyone looking you up is landing on something that has nothing to do with your business.
+
+I build websites for local businesses and can get you set up on a new domain with a proper site fast. hadithadev.ca — let's chat.
+
+— Hadi
+
+
+=================================================================
+18. LONG DISTANCE MOVERS BARRIE
+=================================================================
+Website: longdistancemoversbarrie.ca
+Status: Need to verify
+Priority: WARM
+Method: CHECK SITE THEN DECIDE
+Notes: Verify quality.
+
+
+=================================================================
+19. DWINNELL'S MOVING
+=================================================================
+Website: dwinnellmovers.ca
+Status: Old Wix site — very dated design, low-res images
+Priority: HOT
+Method: EMAIL
+Email: Check contact page
+Phone: 705-325-5983
+Notes: Wix free-tier energy. Blurry images, basic layout, no reviews, outdated feel. Based in Orillia but serves Barrie. They've been around a while — the site doesn't reflect that.
+
+EMAIL SCRIPT:
+Subject: Your website vs your reputation — quick thought
+
+Hey Dwinnell's — I came across your business and you've clearly been around for a long time, which says a lot. But I'll be honest — your website doesn't reflect the experience and trust you've built. The design looks dated, the images are low resolution, and there's no reviews or real content to help new customers feel confident.
+
+A modern rebuild with sharp visuals, your story, customer testimonials, and a clean quote form would make a big difference. I build websites for local businesses — check out hadithadev.ca to see what I do.
+
+— Hadi
+
+
+=================================================================
+20. WINDIA MOVERS
+=================================================================
+Website: windiamovers.com
+Status: Need to verify
+Priority: WARM
+Method: CHECK SITE THEN DECIDE
+Notes: Verify quality.
+
+
+=================================================================
+21. AUDETTES MOVING
+=================================================================
+Website: audettesmoving.com — site wouldn't load
+Status: POSSIBLY BROKEN
+Priority: HOT
+Method: CALL
+Phone: Check Google listing
+Notes: Site returned an error when I tried to fetch it. May be down or extremely slow. Verify manually — if broken, strong pitch angle.
+
+
+=================================================================
+22. NP MOVERS
+=================================================================
+Website: npmovers.com — barely loads (you confirmed)
+Status: BROKEN/SLOW
+Priority: HOT
+Method: CALL
+Phone: Check Google listing
+Notes: You already said the site barely loads. That's worse than having no site — it makes them look unprofessional.
+
+EMAIL/DM SCRIPT:
+Hey NP Movers — I tried loading your website (npmovers.com) and it took forever. I'm not sure if it's a hosting issue or something else, but most people aren't going to wait — they'll just click on the next mover.
+
+I build fast, modern websites for local businesses. A site that loads instantly and looks clean will keep those visitors from bouncing. Happy to chat — hadithadev.ca
+
+— Hadi
+
+
+=================================================================
+23. SIMCOE MOVING
+=================================================================
+Website: simcoemoving.ca
+Status: Very outdated — old Divi theme, basic contact page, no real content
+Priority: HOT
+Method: EMAIL
+Email: Check contact form on site
+Phone: Check Google listing
+Notes: The site is essentially a logo, a contact form, and a banner image. No services page, no about, no reviews. For a company that partners with Air Miles, the site is embarrassingly bare.
+
+EMAIL SCRIPT:
+Subject: Simcoe Moving deserves a better website
+
+Hey Simcoe Moving — I checked out your website and for a company that's been around long enough to partner with Air Miles, the site really doesn't do you justice. It's basically just a contact form and a logo — no services breakdown, no reviews, no photos, nothing to help someone choose you over the competition.
+
+I build modern websites for local businesses. A proper site with your services, team, testimonials, and a quote system would help you convert way more of the people who find you online. Check out hadithadev.ca — happy to chat.
+
+— Hadi
+
+
+=================================================================
+24. FRANK HUNT MOVING
+=================================================================
+Website: frankhuntmoving.com — HACKED
+Status: HACKED / COMPROMISED
+Priority: HOT — URGENT
+Method: CALL IMMEDIATELY
+Phone: Check Google listing
+Notes: Their entire website has been hijacked and is now showing Chinese gambling content. This is a security emergency for them. They probably don't even know. This is your strongest pitch on the entire list — you're not selling, you're warning them.
+
+CALL SCRIPT:
+"Hey, is this Frank Hunt Moving? My name's Hadi, I'm a local web developer. I'm actually calling because I noticed something urgent — your website, frankhuntmoving.com, has been hacked. It's showing Chinese gambling content right now instead of your business. I'm not sure if you're aware, but anyone looking you up online is seeing that instead of your moving company. I can help you get a clean, secure site back up if you need it. Can I send you some info?"
+
+EMAIL/DM SCRIPT:
+Hey Frank Hunt Moving — this is urgent. Your website (frankhuntmoving.com) has been hacked. Right now it's displaying Chinese gambling content instead of your business. Anyone searching for your company online is seeing that.
+
+I'm a local web developer — I can help you get a clean, secure site back up fast. Call or email me anytime. hadithadev.ca
+
+— Hadi
+
+
+=================================================================
+25. MOUNTAIN MOVING
+=================================================================
+Website: mountainmoving.ca
+Status: Need to verify
+Priority: WARM
+Method: CHECK SITE THEN DECIDE
+Notes: Verify quality.
+
+
+=================================================================
+26. TOP RATED MOVERS
+=================================================================
+Website: moverstoprated.com
+Status: Need to verify
+Priority: WARM
+Method: CHECK SITE THEN DECIDE
+Notes: Verify quality.
+
+
+=================================================================
+SUMMARY — ACTION LIST
+=================================================================
+
+HOT — CALL FIRST (no email / broken sites):
+1. Elite Moving Crew — no website, just a form
+2. Moving ASAP Barrie — no website at all
+3. Barrie Moving — site throwing 403 error
+4. Truck Amigos — just a quote form, no real site
+5. Prime Movers — dead link
+6. Victory Movers — domain hijacked/parked
+7. Audettes Moving — site won't load
+8. NP Movers — barely loads
+9. Frank Hunt Moving — HACKED (call first, most urgent)
+
+HOT — EMAIL:
+10. Dwinnell's Moving — old Wix site, dated design
+11. Simcoe Moving — almost no content, just a form
+
+WARM — VERIFY THEN DECIDE:
+12. Make It Move Plus — has a site, could pitch refresh
+13. Smart Barrie Movers — dated but functional
+14. Movers and Shakers — verify
+15. Vital Movers — verify
+16. Max Moving — verify
+17. Long Distance Movers Barrie — verify
+18. Windia Movers — verify
+19. Mountain Moving — verify
+20. Top Rated Movers — verify
+
+SKIP (corporate/franchise/good sites):
+21. Superior Mover — corporate
+22. Zeus Moving — well-built site
+23. Rockbrune Bros — established with proper site
+24. Get Movers — franchise network
+25. Urban Movers — professional
+26. Ecoway Movers — corporate multi-city
