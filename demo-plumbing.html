@@ -76,8 +76,21 @@ section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
 .why-card p{font-size:.78rem;color:var(--text-muted);font-weight:300}
 
 /* WATER CURSOR RIPPLE */
-.water-ripple{position:fixed;width:200px;height:200px;border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:left .08s,top .08s;background:radial-gradient(circle,rgba(43,125,233,.08) 0%,rgba(43,125,233,.03) 30%,transparent 60%);mix-blend-mode:screen}
-.water-ring{position:fixed;width:40px;height:40px;border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:left .05s,top .05s;border:1px solid rgba(43,125,233,.15);box-shadow:0 0 15px rgba(43,125,233,.05)}
+.water-trail{position:fixed;border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%)}
+@keyframes waterRipple{
+  0%{width:0;height:0;opacity:.4;border-width:2px}
+  50%{opacity:.2;border-width:1.5px}
+  100%{width:150px;height:150px;opacity:0;border-width:.5px}
+}
+@keyframes waterRippleSm{
+  0%{width:0;height:0;opacity:.5;border-width:1.5px}
+  100%{width:80px;height:80px;opacity:0;border-width:.5px}
+}
+@keyframes waterDrop{
+  0%{transform:translate(-50%,-50%) scale(0);opacity:.6}
+  40%{transform:translate(-50%,-50%) scale(1.2);opacity:.3}
+  100%{transform:translate(-50%,-50%) scale(0);opacity:0}
+}
 
 /* BEFORE/AFTER CARDS */
 .ba-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.25rem}
@@ -134,8 +147,6 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
 </style>
 </head>
 <body>
-<div class="water-ripple" id="waterGlow"></div>
-<div class="water-ring" id="waterRing"></div>
 <div class="demo-banner">✦ This is a demo mockup by HadiThaDev — <a href="index.html">Want a site like this for your business?</a></div>
 
 <!-- EMERGENCY BAR -->
@@ -294,27 +305,53 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
 </footer>
 
 <script>
-// Water cursor effect
-const wg=document.getElementById('waterGlow'),wr=document.getElementById('waterRing');
-document.addEventListener('mousemove',e=>{
-  wg.style.left=e.clientX+'px';wg.style.top=e.clientY+'px';
-  wr.style.left=e.clientX+'px';wr.style.top=e.clientY+'px';
-});
+// Water ripple cursor — spawns expanding ring ripples as you move
+let lastX=0,lastY=0,lastSpawn=0;
+const throttle=60; // ms between ripples
 
-// Water droplet ripples on click
-document.addEventListener('click',e=>{
-  for(let i=0;i<3;i++){
-    const r=document.createElement('div');
-    r.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:10px;height:10px;border-radius:50%;border:1px solid rgba(43,125,233,.3);pointer-events:none;z-index:999;transform:translate(-50%,-50%);animation:rippleOut ${.6+i*.2}s ease-out ${i*.1}s forwards`;
-    document.body.appendChild(r);
-    setTimeout(()=>r.remove(),1000);
+document.addEventListener('mousemove',e=>{
+  const now=Date.now();
+  const dx=e.clientX-lastX,dy=e.clientY-lastY;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+
+  // Only spawn if moved enough distance and enough time passed
+  if(dist>15 && now-lastSpawn>throttle){
+    spawnRipple(e.clientX,e.clientY,false);
+    lastSpawn=now;lastX=e.clientX;lastY=e.clientY;
   }
 });
 
-// Add ripple animation dynamically
-const style=document.createElement('style');
-style.textContent=`@keyframes rippleOut{0%{width:10px;height:10px;opacity:.6}100%{width:120px;height:120px;opacity:0}}`;
-document.head.appendChild(style);
+// Bigger ripples on click
+document.addEventListener('click',e=>{
+  spawnRipple(e.clientX,e.clientY,true);
+  // Spawn 2 extra delayed rings
+  setTimeout(()=>spawnRipple(e.clientX,e.clientY,false),80);
+  setTimeout(()=>spawnRipple(e.clientX,e.clientY,false),180);
+});
+
+function spawnRipple(x,y,big){
+  const r=document.createElement('div');
+  r.className='water-trail';
+  r.style.left=x+'px';
+  r.style.top=y+'px';
+  r.style.border=big?'2px solid rgba(43,125,233,.35)':'1.5px solid rgba(43,125,233,.2)';
+  r.style.boxShadow=big?'0 0 8px rgba(43,125,233,.15),inset 0 0 8px rgba(43,125,233,.05)':'0 0 4px rgba(43,125,233,.08)';
+  r.style.animation=big?'waterRipple .9s ease-out forwards':'waterRippleSm .7s ease-out forwards';
+  document.body.appendChild(r);
+  setTimeout(()=>r.remove(),big?900:700);
+
+  // Small dot at center
+  if(big){
+    const d=document.createElement('div');
+    d.className='water-trail';
+    d.style.left=x+'px';d.style.top=y+'px';
+    d.style.width='6px';d.style.height='6px';
+    d.style.background='rgba(43,125,233,.4)';
+    d.style.animation='waterDrop .5s ease-out forwards';
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove(),500);
+  }
+}
 </script>
 </body>
 </html>
