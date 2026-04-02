@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plumbing Demo — HadiThaDev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080b10;--surface:#0f1318;--surface-2:#161b22;--border:#1e2530;--text:#eaf0f8;--text-muted:#6888a8;--blue:#2b7de9;--blue-bright:#4a95f0;--blue-dim:#2b7de908;--red:#e84040;--radius:10px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--blue);color:#fff}
+
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:200;background:#c8ff00;color:#0a0a0a;text-align:center;padding:.55rem 1rem;font-size:.78rem;font-weight:600}
+.demo-banner a{color:#0a0a0a;text-decoration:underline;font-weight:700}
+
+/* NAV */
+nav{position:fixed;top:36px;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 3rem;height:60px;background:rgba(8,11,16,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-left{display:flex;align-items:center;gap:2.5rem}
+.nav-logo{font-weight:700;font-size:1.2rem;color:var(--text);text-decoration:none}.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.8rem;transition:color .2s}.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-phone{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--text);font-weight:600;text-decoration:none;transition:color .2s}.nav-phone:hover{color:var(--blue)}
+.nav-cta{background:var(--blue);color:#fff;padding:.5rem 1.5rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.78rem;transition:all .2s}.nav-cta:hover{background:var(--blue-bright)}
+
+/* EMERGENCY BAR */
+.emergency-bar{background:var(--red);color:#fff;text-align:center;padding:.5rem 1rem;font-size:.78rem;font-weight:600;letter-spacing:.5px}
+.emergency-bar span{animation:flash 2s infinite}
+@keyframes flash{0%,100%{opacity:1}50%{opacity:.6}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:10rem 3rem 6rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.12}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 50%,transparent 100%)}
+.hero-content{position:relative;z-index:1;max-width:620px}
+.hero-badges{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem;animation:fadeUp .7s ease both}
+.badge{display:flex;align-items:center;gap:.4rem;background:var(--surface);border:1px solid var(--border);padding:.35rem .9rem;border-radius:100px;font-size:.7rem;color:var(--text-muted)}
+.badge .stars{color:var(--blue)}.badge strong{color:var(--text)}
+.badge-emergency{background:rgba(232,64,64,.12);border-color:rgba(232,64,64,.3);color:var(--red)}
+.badge-emergency strong{color:var(--red)}
+.hero h1{font-size:clamp(2.8rem,7vw,4.8rem);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:1.25rem;animation:fadeUp .7s ease .1s both}
+.hero h1 .blue{color:var(--blue)}
+.hero-sub{font-size:1.05rem;color:var(--text-muted);font-weight:300;max-width:480px;margin-bottom:2rem;animation:fadeUp .7s ease .2s both}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;animation:fadeUp .7s ease .3s both}
+.btn-blue{background:var(--blue);color:#fff;padding:.9rem 2.5rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.88rem;transition:all .2s}
+.btn-blue:hover{background:var(--blue-bright);transform:translateY(-1px)}
+.btn-phone{background:transparent;color:var(--text);padding:.9rem 2rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.88rem;border:1px solid var(--border);display:flex;align-items:center;gap:.5rem;transition:all .2s}
+.btn-phone:hover{border-color:var(--blue);background:var(--surface)}
+.hero-trust{display:flex;gap:2rem;flex-wrap:wrap;animation:fadeUp .7s ease .4s both}
+.trust-item{font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.4rem}
+.trust-item strong{color:var(--text)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
+.s-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--blue);letter-spacing:4px;text-transform:uppercase;margin-bottom:.75rem}
+.s-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-1px;margin-bottom:.75rem}
+.s-desc{color:var(--text-muted);font-size:.95rem;font-weight:300;max-width:500px;margin-bottom:3rem}
+
+/* SERVICES ICONS GRID */
+.services-icons{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.svc-icon-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem 1.25rem;text-align:center;transition:all .3s;cursor:default}
+.svc-icon-card:hover{border-color:var(--blue);transform:translateY(-3px);background:var(--surface-2)}
+.svc-emoji{font-size:1.8rem;margin-bottom:.6rem}
+.svc-icon-card h4{font-size:.9rem;font-weight:600;margin-bottom:.2rem}
+.svc-icon-card p{font-size:.72rem;color:var(--text-muted);font-weight:300}
+
+/* WHY US */
+.why-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.why-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;transition:border-color .3s}
+.why-card:hover{border-color:var(--blue)}
+.why-num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;color:var(--blue);margin-bottom:.5rem}
+.why-card h4{font-size:.9rem;font-weight:600;margin-bottom:.2rem}
+.why-card p{font-size:.78rem;color:var(--text-muted);font-weight:300}
+
+/* WORK GALLERY */
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.work-item{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;position:relative;transition:border-color .3s}
+.work-item:hover{border-color:var(--blue)}
+.work-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.work-item:hover img{transform:scale(1.05)}
+.work-item .work-label{position:absolute;bottom:0;left:0;right:0;padding:.75rem;background:linear-gradient(transparent,rgba(8,11,16,.9));opacity:0;transition:opacity .3s}
+.work-item:hover .work-label{opacity:1}
+.work-label span{font-size:.7rem;color:var(--blue);letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
+
+/* REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.review{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:border-color .3s}
+.review:hover{border-color:rgba(43,125,233,.3)}
+.review-stars{color:var(--blue);font-size:.8rem;letter-spacing:3px;margin-bottom:1rem}
+.review-text{font-size:.95rem;font-weight:400;font-style:italic;line-height:1.7;margin-bottom:1.25rem}
+.review-author{font-size:.82rem;font-weight:600}
+.review-detail{font-size:.72rem;color:var(--text-muted);font-weight:300}
+
+/* AREA */
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.area-map{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);min-height:350px;overflow:hidden}
+.area-map img{width:100%;height:100%;object-fit:cover;opacity:.5}
+.area-info h3{font-size:1.5rem;font-weight:700;margin-bottom:.75rem}
+.area-info p{color:var(--text-muted);font-size:.9rem;font-weight:300;line-height:1.7;margin-bottom:1.5rem}
+.area-towns{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.area-tag{background:var(--surface);border:1px solid var(--border);padding:.35rem .9rem;border-radius:100px;font-size:.75rem;color:var(--text-muted)}
+
+/* CTA */
+.final-cta{text-align:center;padding:6rem 2rem;border-top:1px solid var(--border);max-width:1200px;margin:0 auto;position:relative}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--blue-dim) 0%,transparent 60%);pointer-events:none}
+.final-cta h2{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;letter-spacing:-1px;margin-bottom:.75rem;position:relative}
+.final-cta p{color:var(--text-muted);font-size:.95rem;font-weight:300;margin-bottom:2rem;position:relative}
+.cta-phone-big{font-family:'JetBrains Mono',monospace;font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;color:var(--blue);text-decoration:none;display:block;margin-bottom:1.5rem;position:relative;transition:opacity .2s}
+.cta-phone-big:hover{opacity:.8}
+.cta-or{color:var(--text-muted);font-size:.8rem;margin-bottom:1rem;position:relative}
+
+footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+.footer-left{font-weight:700;font-size:1rem}.footer-left span{color:var(--blue)}
+.footer-right{font-size:.75rem;color:var(--text-muted)}.footer-right a{color:var(--blue);text-decoration:none}
+
+@media(max-width:900px){
+  nav{padding:0 1.5rem}.nav-links{display:none}.nav-phone{display:none}
+  section{padding:4rem 1.5rem}.hero{padding:9rem 1.5rem 4rem}
+  .why-row{grid-template-columns:1fr 1fr}.work-grid{grid-template-columns:1fr 1fr}
+  .area-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:.75rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="demo-banner">✦ This is a demo mockup by HadiThaDev — <a href="index.html">Want a site like this for your business?</a></div>
+
+<!-- EMERGENCY BAR -->
+<div class="emergency-bar" style="margin-top:36px">
+  <span>🚨 24/7 EMERGENCY SERVICE AVAILABLE — CALL NOW</span>
+</div>
+
+<nav>
+  <div class="nav-left">
+    <a href="#" class="nav-logo">Your<span>Plumbing</span></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#area">Service Area</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <a href="tel:7055550123" class="nav-phone">📞 (705) 555-0123</a>
+    <a href="#quote" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<section class="hero" style="margin-top:32px">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=1600&q=80" alt="Plumber at work">
+  </div>
+  <div class="hero-content">
+    <div class="hero-badges">
+      <div class="badge"><span class="stars">★★★★★</span> <span>5.0 on Google</span></div>
+      <div class="badge"><strong>Licensed</strong> & <strong>Insured</strong></div>
+      <div class="badge badge-emergency"><strong>24/7 Emergency</strong></div>
+    </div>
+    <h1>Your local<br><span class="blue">plumber.</span></h1>
+    <p class="hero-sub">Residential and commercial plumbing you can count on. Fast response, honest pricing, quality work — guaranteed. Serving the community for over 15 years.</p>
+    <div class="hero-ctas">
+      <a href="#quote" class="btn-blue">Get a Free Quote</a>
+      <a href="tel:7055550123" class="btn-phone">📞 (705) 555-0123</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">✓ <strong>15+ Years</strong> Experience</div>
+      <div class="trust-item">✓ <strong>Same Day</strong> Service</div>
+      <div class="trust-item">✓ <strong>No Hidden</strong> Fees</div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Services</p>
+  <h2 class="s-title">We handle it all.</h2>
+  <p class="s-desc">From a leaky faucet to a full bathroom renovation — no job too big, no job too small.</p>
+  <div class="services-icons">
+    <div class="svc-icon-card"><div class="svc-emoji">🚿</div><h4>Drain Cleaning</h4><p>Clogged drains cleared fast</p></div>
+    <div class="svc-icon-card"><div class="svc-emoji">🔥</div><h4>Water Heaters</h4><p>Install, repair, replacement</p></div>
+    <div class="svc-icon-card"><div class="svc-emoji">💧</div><h4>Leak Repair</h4><p>Find and fix leaks fast</p></div>
+    <div class="svc-icon-card"><div class="svc-emoji">🚽</div><h4>Toilet Repair</h4><p>Running, clogged, or broken</p></div>
+    <div class="svc-icon-card"><div class="svc-emoji">🔧</div><h4>Pipe Repair</h4><p>Burst, frozen, or corroded pipes</p></div>
+    <div class="svc-icon-card"><div class="svc-emoji">🏗️</div><h4>Renovations</h4><p>Kitchen & bathroom plumbing</p></div>
+    <div class="svc-icon-card"><div class="svc-emoji">🏢</div><h4>Commercial</h4><p>Offices, restaurants, retail</p></div>
+    <div class="svc-icon-card"><div class="svc-emoji">🚨</div><h4>Emergency 24/7</h4><p>We're always available</p></div>
+  </div>
+</section>
+
+<section style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Why Choose Us</p>
+  <h2 class="s-title">Numbers don't lie.</h2>
+  <p class="s-desc">Here's why homeowners and businesses trust us.</p>
+  <div class="why-row">
+    <div class="why-card"><div class="why-num">15+</div><h4>Years Experience</h4><p>Serving the community since day one</p></div>
+    <div class="why-card"><div class="why-num">5,000+</div><h4>Jobs Completed</h4><p>Residential and commercial</p></div>
+    <div class="why-card"><div class="why-num">5.0</div><h4>Google Rating</h4><p>Consistently 5-star reviews</p></div>
+    <div class="why-card"><div class="why-num">1hr</div><h4>Response Time</h4><p>Average for emergency calls</p></div>
+  </div>
+</section>
+
+<section id="work" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Our Work</p>
+  <h2 class="s-title">See the quality firsthand.</h2>
+  <p class="s-desc">Real photos from real jobs. Your work portfolio goes here.</p>
+  <div class="work-grid">
+    <div class="work-item"><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&q=80" alt="Plumbing work"><div class="work-label"><span>Water Heater Install</span></div></div>
+    <div class="work-item"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80" alt="Bathroom renovation"><div class="work-label"><span>Bathroom Renovation</span></div></div>
+    <div class="work-item"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80" alt="Kitchen plumbing"><div class="work-label"><span>Kitchen Plumbing</span></div></div>
+    <div class="work-item"><img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80" alt="Pipe repair"><div class="work-label"><span>Pipe Repair</span></div></div>
+    <div class="work-item"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Modern bathroom"><div class="work-label"><span>Custom Bath Install</span></div></div>
+    <div class="work-item"><img src="https://images.unsplash.com/photo-1564540586988-aa4e53ab3394?w=600&q=80" alt="Commercial plumbing"><div class="work-label"><span>Commercial Project</span></div></div>
+  </div>
+</section>
+
+<section id="reviews" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Reviews</p>
+  <h2 class="s-title">What homeowners say.</h2>
+  <p class="s-desc">Real Google reviews from real customers.</p>
+  <div class="reviews-grid">
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"Your real customer review goes here. Emergency plumbing reviews that mention fast response times build massive trust."</p><p class="review-author">Customer Name</p><p class="review-detail">Emergency call · Burst pipe</p></div>
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"Another genuine testimonial. Homeowners want to know you showed up on time, fixed it right, and didn't overcharge."</p><p class="review-author">Customer Name</p><p class="review-detail">Scheduled · Water heater replacement</p></div>
+    <div class="review"><p class="review-stars">★★★★★</p><p class="review-text">"A third review. Three strong testimonials with specific job details is all it takes to build confidence."</p><p class="review-author">Customer Name</p><p class="review-detail">Renovation · Bathroom plumbing</p></div>
+  </div>
+</section>
+
+<section id="area" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Service Area</p>
+  <h2 class="s-title">Where we work.</h2>
+  <p class="s-desc">Serving homeowners and businesses across the region.</p>
+  <div class="area-grid">
+    <div class="area-map"><img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80" alt="Service area map"></div>
+    <div class="area-info">
+      <h3>Your community, covered.</h3>
+      <p>From emergency calls to scheduled maintenance and full renovations — we serve residential and commercial customers across the region.</p>
+      <div class="area-towns">
+        <span class="area-tag">Your City</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">Nearby Town</span>
+        <span class="area-tag">& Surrounding</span>
+      </div>
+      <a href="#quote" class="btn-blue">Get Your Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<div class="final-cta" id="quote">
+  <h2>Need a <span style="color:var(--blue)">plumber?</span></h2>
+  <p>Call now for immediate service or request a free quote online.</p>
+  <a href="tel:7055550123" class="cta-phone-big">(705) 555-0123</a>
+  <p class="cta-or">or</p>
+  <a href="#" class="btn-blue" style="position:relative">Request a Free Quote</a>
+</div>
+
+<footer>
+  <span class="footer-left">Your<span>Plumbing</span></span>
+  <span class="footer-right">© 2026 Your Plumbing Co. · Demo by <a href="index.html">HadiThaDev</a></span>
+</footer>
+</body>
+</html>

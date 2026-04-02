@@ -1,0 +1,447 @@
+HADITHADEV — PLUMBING COMPANY PROSPECT AUDIT
+===============================================
+Generated: April 2, 2026
+Total prospects: 37 companies
+Method: EMAIL if email found, CALL if no email/dead site
+
+
+=================================================================
+1. WILKIN PLUMBING
+=================================================================
+Website: GoDaddy free builder site
+Status: TEMPLATE — godaddysites.com subdomain
+Priority: HOT
+Method: CALL + DM
+Notes: They're on a free GoDaddy subdomain (wilkinplumbing.godaddysites.com). That screams "I built this myself in 20 minutes." No custom domain, basic template, generic layout. Easy pitch — they clearly want a site but didn't invest in one.
+
+SCRIPT: Hey Wilkin Plumbing — I noticed your website is on a free GoDaddy subdomain. That means anyone looking you up sees "godaddysites.com" in the URL instead of your own domain. A proper site on wilkinplumbing.ca with your services, reviews, and a quote form would look way more professional and help you show up on Google. I build websites for local trades — hadithadev.ca
+
+
+=================================================================
+2. DOMONIC CHOOCOMOLIN PLUMBING
+=================================================================
+Website: Facebook page only
+Status: NO WEBSITE
+Priority: HOT
+Method: CALL
+Notes: Facebook-only. No site at all. Classic trade business that relies on word of mouth.
+
+SCRIPT: Hey Domonic — I tried to find your plumbing business online and the only thing that comes up is your Facebook page. When someone searches "plumber Barrie" you're invisible compared to guys with actual websites. A clean site with your services, contact info, and reviews would change that. I build websites for local trades — hadithadev.ca
+
+
+=================================================================
+3. A5 PLUMBING INC
+=================================================================
+Website: DEAD
+Status: DEAD SITE
+Priority: HOT
+Method: CALL
+Notes: Site is completely down. Domain exists but nothing loads.
+
+SCRIPT: Hey A5 Plumbing — your website a5plumbinginc.com is completely down right now. Anyone clicking your Google listing hits a dead page. I can get you back online with a clean, modern site fast. hadithadev.ca
+
+
+=================================================================
+4. CUSTOM PLUMBING
+=================================================================
+Website: DEAD
+Status: DEAD SITE
+Priority: HOT
+Method: CALL
+Notes: customplumbing.ca is dead. Same pitch as above.
+
+SCRIPT: Hey Custom Plumbing — heads up, your website customplumbing.ca isn't loading. Anyone searching for you online hits a dead page. I build websites for local trades and can get you back up quick. hadithadev.ca
+
+
+=================================================================
+5. ROUSE'S PLUMBING 24HR EMERGENCY SERVICE
+=================================================================
+Website: NONE
+Status: NO WEBSITE
+Priority: HOT
+Method: CALL
+Notes: A 24-hour emergency plumber with no website. That's a massive missed opportunity — people searching "emergency plumber Barrie" at 2am need to find you instantly.
+
+SCRIPT: Hey Rouse's — you offer 24-hour emergency plumbing but you don't have a website. That means when someone's basement is flooding at 2am and they Google "emergency plumber Barrie," they can't find you. A site with your number front and center, your services, and a way to call you instantly would change everything. hadithadev.ca
+
+
+=================================================================
+6. PLUMBERMAN LTD
+=================================================================
+Website: NONE
+Priority: HOT
+Method: CALL
+SCRIPT: Hey Plumberman — couldn't find a website for your business anywhere online. Just a Google listing. A proper site would help you show up in search results and give customers confidence before they call. hadithadev.ca
+
+
+=================================================================
+7. CARTERS PLUMBING
+=================================================================
+Website: cartersplumbing.ca
+Status: Has a site — needs verification on quality
+Priority: WARM
+Method: VERIFY THEN DECIDE
+Notes: Check site quality. If it's decent, skip.
+
+
+=================================================================
+8. MORE HOSE PLUMBING SERVICES
+=================================================================
+Website: NONE
+Priority: HOT
+Method: CALL
+SCRIPT: Hey More Hose Plumbing — I was trying to look you up online and there's no website. Just your Google listing. A clean site with your services and a call button would help new customers find and trust you. hadithadev.ca
+
+
+=================================================================
+9. BEANEY PLUMBING
+=================================================================
+Website: beaneyplumbing.ca
+Status: Has a site — based in Carbonear, Newfoundland
+Priority: SKIP
+Notes: Not a Barrie business. Based in Newfoundland. Wrong market.
+
+
+=================================================================
+10. CANADIAN CLEANWATER MECHANICAL
+=================================================================
+Website: ccwmech.com
+Status: Has a site — needs verification
+Priority: WARM
+Method: VERIFY THEN DECIDE
+
+
+=================================================================
+11. BARRIE GOOD PLUMBING LTD
+=================================================================
+Website: NONE
+Priority: HOT
+Method: CALL
+Notes: Great business name. No site.
+
+SCRIPT: Hey Barrie Good Plumbing — love the name but I couldn't find a website for you. When people search "plumber Barrie" you should be showing up with a proper site. I build websites for local trades — quick, clean, affordable. hadithadev.ca
+
+
+=================================================================
+12. PLUMBS UP
+=================================================================
+Website: plumbsup.ca — goes straight to a scheduling page
+Status: BASIC — just a booking form, no real site
+Priority: HOT
+Method: EMAIL/CALL
+Notes: Their "website" is literally just a scheduling page. No services, no about, no reviews, no trust signals. They have the booking part down but nothing else.
+
+SCRIPT: Hey Plumbs Up — I checked out your site and it goes straight to a scheduling page with no info about your business. No services listed, no reviews, no about section — nothing to help someone decide to book with you before they click. A proper site with all that plus your booking system built in would convert way more visitors. hadithadev.ca
+
+
+=================================================================
+13. PLUMBEX LTD
+=================================================================
+Website: DEAD
+Status: DEAD SITE
+Priority: HOT
+Method: CALL
+
+SCRIPT: Hey Plumbex — your website plumbex.ca isn't working. Dead page. I can get you a clean, modern site up fast. hadithadev.ca
+
+
+=================================================================
+14. LEADING EDGE PLUMBING INC
+=================================================================
+Website: leadingedgeplumbing.ca
+Status: Has a site — needs verification
+Priority: WARM
+Method: VERIFY THEN DECIDE
+
+
+=================================================================
+15. YORKWEST PLUMBING SUPPLY
+=================================================================
+Website: yorkwestplumbingsupply.com — broken navigation
+Status: BROKEN — products and services don't work
+Priority: HOT
+Method: EMAIL
+Notes: You flagged it yourself — can't click products and services. That's a plumbing supply company where customers literally can't browse what they sell. Huge problem.
+
+SCRIPT: Subject: Your website's navigation is broken
+
+Hey Yorkwest — I was checking out your site and noticed the Products and Services links don't work. Customers can't actually browse what you sell. That's a big deal for a supply company. I build modern websites for local businesses and can get that fixed with a full rebuild. hadithadev.ca
+
+
+=================================================================
+16. JT PLUMBING
+=================================================================
+Website: DEAD
+Status: DEAD LINK
+Priority: HOT
+Method: CALL
+
+SCRIPT: Hey JT Plumbing — your website jt-plumbing.ca is dead. Anyone finding you on Google clicks through to nothing. I can get you a proper site up quick. hadithadev.ca
+
+
+=================================================================
+17. DYNAMECH
+=================================================================
+Website: dynamech.ca
+Status: Has a site — needs verification
+Priority: WARM
+Method: VERIFY THEN DECIDE
+
+
+=================================================================
+18. CONCEPTS PLUMBING
+=================================================================
+Website: Voolt builder with a massive tracking URL
+Status: TEMPLATE — free website builder
+Priority: HOT
+Method: CALL + DM
+Notes: They're on Voolt, a free website builder. The URL alone is a disaster — it's got tracking parameters a mile long. No custom domain. Screams unprofessional.
+
+SCRIPT: Hey Concepts Plumbing — I noticed your website is on a free builder with no custom domain. The URL is super long and looks unprofessional when customers try to find you. A proper site on conceptsplumbing.ca with your services and reviews would make a huge difference. hadithadev.ca
+
+
+=================================================================
+19. PLUMBING BY DON
+=================================================================
+Website: plumbingbydon.com
+Status: Has a site — needs verification
+Priority: WARM
+Method: VERIFY THEN DECIDE
+
+
+=================================================================
+20. BARRIE HP / WET BASEMENT WATERPROOFING
+=================================================================
+Website: wetbasementwaterproofing.ca — barely functional
+Status: TERRIBLE — can't tell if business is active
+Priority: HOT
+Method: CALL
+Notes: You said it yourself — so bad you can't tell if they're in business. That's the pitch.
+
+SCRIPT: Hey Barrie HP — I'll be honest, I checked out your website and I genuinely couldn't tell if you're still in business. The site looks abandoned. If you are still operating, a modern site would make a massive difference. hadithadev.ca
+
+
+=================================================================
+21. JOHNSTONE PLUMBING
+=================================================================
+Website: johnstoneplumbing.ca
+Status: Has a site — needs verification
+Priority: WARM
+Method: VERIFY THEN DECIDE
+
+
+=================================================================
+22. TCS PLUMBING
+=================================================================
+Website: NONE
+Priority: HOT
+Method: CALL
+SCRIPT: Hey TCS Plumbing — no website at all. A proper site with your services and contact info would help you compete with every other plumber who does have one. hadithadev.ca
+
+
+=================================================================
+23. HARDING PLUMBING INC
+=================================================================
+Website: HIJACKED — domain redirects to random article
+Status: HIJACKED / EXPIRED
+Priority: HOT — URGENT
+Method: CALL IMMEDIATELY
+Notes: Same situation as Frank Hunt Moving. Their domain hardingplumbing.ca has been taken over and redirects to a spam article. They probably don't know.
+
+SCRIPT: "Hey, is this Harding Plumbing? My name's Hadi, I'm a local web developer. I'm calling because your website domain hardingplumbing.ca has been taken over — it's redirecting to a random spam article right now instead of your business. Anyone looking you up online is seeing that. I can help you get a clean, secure site back up if you need it."
+
+
+=================================================================
+24. DE SOUSA PLUMBING
+=================================================================
+Website: desousaplumbing.ca — GoDaddy builder
+Status: TEMPLATE — free GoDaddy builder
+Priority: HOT
+Method: CALL + DM
+Notes: Another GoDaddy builder site. Generic template, repetitive content. Has a "Book Now" button at least but the rest is cookie-cutter.
+
+SCRIPT: Hey De Sousa Plumbing — your site looks like a GoDaddy template and doesn't really stand out from every other plumber's page. Your services and professionalism deserve a site that matches. I build custom websites for trades — hadithadev.ca
+
+
+=================================================================
+25. MB&K PLUMBING INC
+=================================================================
+Website: mbandkplumbing.com
+Status: Has a site — needs verification
+Priority: WARM
+Method: VERIFY THEN DECIDE
+
+
+=================================================================
+26. U-SAVE PLUMBING
+=================================================================
+Website: u-saveplumbing.ca — hash routing, single page app feel
+Status: BASIC
+Priority: WARM
+Method: VERIFY THEN DECIDE
+Notes: Has a site but the hash routing (#/home) suggests it might be a basic builder.
+
+
+=================================================================
+27. MAPLEGROVE PLUMBING
+=================================================================
+Website: NONE
+Priority: HOT
+Method: CALL
+SCRIPT: Hey Maplegrove Plumbing — no website at all. A proper site would help new customers find and trust you. hadithadev.ca
+
+
+=================================================================
+28. TOP SHELF PLUMBING
+=================================================================
+Website: topshelfplumbing.ca — WordPress, decent structure
+Status: DECENT — has pages, contact, services
+Priority: COLD
+Method: SKIP
+Notes: Has a proper WordPress site with pages, logo, call button. Not perfect but they've invested already.
+
+
+=================================================================
+29. ATLANTIS BATH CENTER
+=================================================================
+Website: Kohler dealer page only
+Status: NO REAL WEBSITE — just a Kohler listing
+Priority: HOT
+Method: CALL
+Notes: Their online presence is just a Kohler dealer locator page. No standalone site.
+
+SCRIPT: Hey Atlantis Bath Center — your only web presence is a Kohler dealer page. A proper site showcasing your showroom, products, and services would bring in way more foot traffic. hadithadev.ca
+
+
+=================================================================
+30. DOUBLE R MECHANICAL (BARRIE) LTD
+=================================================================
+Website: NONE
+Priority: HOT
+Method: CALL
+SCRIPT: Hey Double R Mechanical — no website. A clean site with your services and contact info would help new customers find you. hadithadev.ca
+
+
+=================================================================
+31. W&B PLUMBING
+=================================================================
+Website: wbplumbing.ca
+Status: Has a site — needs verification
+Priority: WARM
+Method: VERIFY THEN DECIDE
+
+
+=================================================================
+32. EMBERLEYS PLUMBING
+=================================================================
+Website: emberleysplumbing.ca — single page GoDaddy builder
+Status: TEMPLATE — bare minimum single page
+Priority: HOT
+Method: CALL + DM
+Notes: You called it — "single page site, lowk ass." GoDaddy builder, just a heading and contact email (remberley@hotmail.com — a Hotmail address). Been in business since 1992 but the site doesn't reflect 30+ years of experience.
+
+SCRIPT: Hey Emberley's — you've been in business since 1992, that's incredible. But your website is a single page with just a heading and a Hotmail email. After 30+ years in the game, you deserve a site that shows that experience. I build websites for local trades — hadithadev.ca
+
+
+=================================================================
+33. PRECISION PLUMBING
+=================================================================
+Website: barrieplumber.ca
+Status: Has a site — needs verification
+Priority: WARM
+Method: VERIFY THEN DECIDE
+Notes: Great domain name (barrieplumber.ca). Check quality.
+
+
+=================================================================
+34. R SIMPSON PLUMBING
+=================================================================
+Website: NONE
+Priority: HOT
+Method: CALL
+SCRIPT: Hey R Simpson Plumbing — no website. A proper site would help you show up when people search for plumbers in Barrie. hadithadev.ca
+
+
+=================================================================
+35. LEFROY PLUMBING
+=================================================================
+Website: NONE
+Priority: HOT
+Method: CALL
+SCRIPT: Hey Lefroy Plumbing — no website at all. A site with your services and a way to contact you would help new customers find you. hadithadev.ca
+
+
+=================================================================
+36. PIPES DOWN PLUMBING AND HEATING
+=================================================================
+Website: pipesdownplumbing.com — GoDaddy builder
+Status: TEMPLATE — basic GoDaddy builder
+Priority: HOT
+Method: CALL + DM
+Notes: Another GoDaddy builder. Has owner name (Alex Peticca) and phone number visible. Gallery and reviews pages exist but the design is generic.
+
+SCRIPT: Hey Alex — I checked out Pipes Down's website and it's solid on content but the design is holding you back. A custom site that matches the quality of your work would help you stand out from every other plumber running a template. hadithadev.ca
+
+
+=================================================================
+37. M.A.C STEWART PLUMBING
+=================================================================
+Website: macstewartplumbing.ca — old school HTML site
+Status: VERY OUTDATED — looks like 2010 era
+Priority: HOT
+Method: EMAIL
+Notes: Old PHP/HTML site with dated design. Has service pages, which shows they care about their web presence — they just haven't updated it in over a decade. Multiple services including commercial, renovations, property management.
+
+SCRIPT: Subject: Your website doesn't match your reputation
+
+Hey M.A.C Stewart Plumbing — I checked out your site and you clearly offer a ton of services — commercial, residential, renovations, property management. But the website looks like it hasn't been updated in years. A modern rebuild with the same great content but a clean, mobile-friendly design would help you convert way more of the people who find you. hadithadev.ca
+
+
+=================================================================
+SUMMARY — ACTION LIST
+=================================================================
+
+HOT — CALL FIRST (19 companies):
+1. Domonic Choocomolin Plumbing — Facebook only
+2. A5 Plumbing Inc — dead site
+3. Custom Plumbing — dead site
+4. Rouse's Plumbing 24Hr — no site, emergency plumber
+5. Plumberman Ltd — no site
+6. More Hose Plumbing — no site
+7. Barrie Good Plumbing — no site
+8. Plumbex LTD — dead site
+9. JT Plumbing — dead link
+10. TCS Plumbing — no site
+11. Harding Plumbing — HIJACKED DOMAIN (call first)
+12. Maplegrove Plumbing — no site
+13. Atlantis Bath Center — Kohler page only
+14. Double R Mechanical — no site
+15. R Simpson Plumbing — no site
+16. Lefroy Plumbing — no site
+
+HOT — CALL + DM (template/terrible sites):
+17. Wilkin Plumbing — GoDaddy free subdomain
+18. Plumbs Up — just a scheduling page
+19. Yorkwest Plumbing Supply — broken navigation
+20. Concepts Plumbing — Voolt free builder
+21. Barrie HP — site so bad can't tell if active
+22. De Sousa Plumbing — GoDaddy template
+23. Emberley's Plumbing — single page GoDaddy
+24. Pipes Down Plumbing — GoDaddy template
+25. M.A.C Stewart Plumbing — very outdated HTML
+
+WARM — VERIFY THEN DECIDE (8 companies):
+26. Carters Plumbing
+27. Canadian Cleanwater Mechanical
+28. Leading Edge Plumbing
+29. Dynamech
+30. Plumbing by Don
+31. MB&K Plumbing
+32. W&B Plumbing
+33. Precision Plumbing (barrieplumber.ca)
+
+SKIP (3 companies):
+34. Beaney Plumbing — Newfoundland, wrong market
+35. Top Shelf Plumbing — decent WordPress site
+36. U-Save Plumbing — has a functional site
+37. Johnstone Plumbing — verify but likely decent
