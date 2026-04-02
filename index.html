@@ -8,10 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#060606;--surface:#0e0e0e;--surface-2:#161616;--border:#1e1e1e;
-  --text:#f0f0f0;--text-muted:#666;--radius:10px;
-}
+:root{--bg:#060606;--surface:#0e0e0e;--surface-2:#161616;--border:#1e1e1e;--text:#f0f0f0;--text-muted:#666;--radius:10px}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -22,11 +19,10 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line
 /* ---- NAV ---- */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;height:56px;display:flex;justify-content:space-between;align-items:center;background:rgba(6,6,6,0.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:.95rem;color:#fff;text-decoration:none;letter-spacing:-.5px}
-.nav-mid{display:flex;align-items:center;position:relative;height:100%}
-.nav-mid a{color:var(--text-muted);text-decoration:none;font-size:.82rem;font-weight:400;padding:.5rem 1.1rem;transition:color .25s;position:relative;z-index:2}
-.nav-mid a:hover{color:#fff}
-/* Liquid pill */
-.nav-pill{position:absolute;background:rgba(255,255,255,0.08);border-radius:8px;pointer-events:none;z-index:1;height:34px;top:50%;transform:translateY(-50%);opacity:0;left:0;width:60px;transition:left .3s cubic-bezier(.25,.1,.25,1),width .3s cubic-bezier(.25,.1,.25,1),opacity .15s ease}
+.nav-mid{display:flex;align-items:center;position:relative;gap:0}
+.nav-mid a[data-n]{color:var(--text-muted);text-decoration:none;font-size:.82rem;font-weight:400;padding:.5rem 1.1rem;transition:color .25s;position:relative;z-index:2}
+.nav-mid a[data-n]:hover,.nav-mid a[data-n].active{color:#fff}
+.nav-pill{position:absolute;background:rgba(255,255,255,0.08);border-radius:8px;pointer-events:none;z-index:1;height:34px;top:50%;margin-top:-17px;left:0;width:60px;opacity:0;transition:left .3s cubic-bezier(.25,.1,.25,1),width .3s cubic-bezier(.25,.1,.25,1),opacity .2s}
 .nav-right a{background:#fff;color:#000;padding:.45rem 1.3rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.78rem;transition:all .2s}
 .nav-right a:hover{opacity:.85;transform:scale(1.02)}
 
@@ -47,47 +43,41 @@ section{padding:6rem 2.5rem;max-width:1100px;margin:0 auto}
 .sl{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:3px;margin-bottom:.75rem}
 .st{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-1.5px;margin-bottom:2.5rem}
 
-/* ---- FULL-WIDTH TICKER ---- */
+/* ---- TICKER ---- */
 .ticker-wrap{width:100vw;margin-left:calc(-50vw + 50%);overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);margin-bottom:3rem}
 .ticker-track{display:flex;animation:tickScroll 30s linear infinite}
 .ticker-cell{padding:.85rem 2rem;border-right:1px solid var(--border);font-size:.8rem;color:var(--text-muted);white-space:nowrap;letter-spacing:.5px;flex-shrink:0;transition:color .2s}
 .ticker-cell:hover{color:#fff}
 @keyframes tickScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* ---- DEMO BUTTONS — HOVER EXPAND OVERLAY ---- */
-.demos-row{display:flex;gap:.75rem;position:relative;min-height:60px}
+/* ---- DEMO SECTION: BUTTONS + SHARED PREVIEW AREA ---- */
+.demo-btns{display:flex;gap:.75rem;margin-bottom:1.25rem}
 .demo-btn{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:1rem 1.75rem;font-size:1rem;font-weight:600;color:var(--text);
-  cursor:pointer;transition:all .35s;position:relative;overflow:visible;
-  text-decoration:none;display:flex;flex-direction:column;flex:1;min-width:200px;
-  z-index:1;
+  flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.1rem 1.75rem;font-size:1.05rem;font-weight:600;color:var(--text-muted);
+  cursor:pointer;transition:all .3s;text-align:left;
 }
-.demo-btn:hover{border-color:#444;background:var(--surface-2);z-index:10}
+.demo-btn:hover,.demo-btn.active{background:var(--surface-2);border-color:#444;color:#fff}
+.demo-btn.active{border-bottom-color:var(--surface-2);border-radius:var(--radius) var(--radius) 0 0}
 
-.demo-btn .demo-expand{
-  position:absolute;top:100%;left:0;right:0;
-  display:flex;flex-direction:column;padding:1rem 1.75rem 1.75rem;
-  background:var(--surface-2);border:1px solid #333;border-top:none;
-  border-radius:0 0 var(--radius) var(--radius);
-  opacity:0;visibility:hidden;
-  transform:translateY(-8px);
-  transition:all .35s cubic-bezier(.4,0,.2,1);
-  pointer-events:none;
+/* Shared preview area below buttons */
+.demo-preview-area{
+  background:var(--surface-2);border:1px solid #333;border-radius:0 0 var(--radius) var(--radius);
+  padding:1.5rem;display:none;animation:previewIn .3s ease;
 }
-.demo-btn:hover .demo-expand{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
-.demo-btn:hover{border-radius:var(--radius) var(--radius) 0 0}
+.demo-preview-area.show{display:block}
+@keyframes previewIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 
-.demo-tags{display:flex;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap}
-.demo-tag{font-size:.6rem;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:.15rem .55rem;border-radius:100px}
-.demo-pbox{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;height:240px;position:relative}
-.dbbar{position:absolute;top:0;left:0;right:0;height:26px;background:rgba(6,6,6,0.95);display:flex;align-items:center;padding:0 10px;gap:5px;z-index:3}
-.dd{width:6px;height:6px;border-radius:50%;background:#333}
+.demo-pa-tags{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+.demo-tag{font-size:.62rem;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:.18rem .6rem;border-radius:100px}
+.demo-pbox{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;height:280px;position:relative}
+.dbbar{position:absolute;top:0;left:0;right:0;height:28px;background:rgba(6,6,6,0.95);display:flex;align-items:center;padding:0 10px;gap:5px;z-index:3}
+.dd{width:7px;height:7px;border-radius:50%;background:#333}
 .dd:nth-child(1){background:#ff5f57}.dd:nth-child(2){background:#ffbd2e}.dd:nth-child(3){background:#28c840}
-.durl{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:.55rem;color:#444;background:var(--surface-2);padding:2px 8px;border-radius:4px}
-.dpc{height:100%;padding-top:26px;display:flex;align-items:center;justify-content:center}
-.demo-link{display:inline-block;margin-top:.75rem;font-size:.75rem;color:#fff;text-decoration:none;font-weight:500;opacity:.7;transition:opacity .2s}
-.demo-link:hover{opacity:1}
+.durl{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#444;background:var(--surface);padding:2px 8px;border-radius:4px}
+.dpc{height:100%;padding-top:28px;display:flex;align-items:center;justify-content:center}
+.demo-view{display:inline-block;margin-top:1rem;font-size:.78rem;color:#fff;text-decoration:none;font-weight:500;transition:opacity .2s}
+.demo-view:hover{opacity:.7}
 
 /* ---- SERVICES ---- */
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
@@ -104,37 +94,25 @@ section{padding:6rem 2.5rem;max-width:1100px;margin:0 auto}
 .svc-ico{position:absolute;top:2rem;right:2rem;font-size:1.5rem;opacity:0;transform:translateY(10px);transition:all .4s}
 .svc:hover .svc-ico{opacity:1;transform:translateY(0)}
 
-/* ---- CLIENTS — LOGO BUTTON, HOVER EXPAND DOWN ---- */
-.clients-row{display:flex;gap:.75rem;flex-wrap:wrap}
-.client-btn{
+/* ---- CLIENTS — SIMPLE LOGO BUTTON WITH GLOW/ZOOM ---- */
+.clients-row{display:flex;gap:1rem;flex-wrap:wrap}
+.client-logo-btn{
   background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:1.25rem 2.5rem;cursor:pointer;transition:all .35s;position:relative;overflow:visible;
-  text-decoration:none;color:#fff;display:inline-block;
-  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;letter-spacing:1.5px;
-  z-index:1;
+  padding:1.5rem 3rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:2px;
+  transition:all .35s;position:relative;overflow:hidden;
 }
-.client-btn::before{
-  content:'';position:absolute;inset:0;border-radius:var(--radius);
-  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.06) 0%,transparent 70%);
-  opacity:0;transition:opacity .4s;
+.client-logo-btn::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.08) 0%,transparent 70%);
+  opacity:0;transition:opacity .35s;
 }
-.client-btn:hover::before{opacity:1}
-.client-btn:hover{border-color:#444;z-index:10;border-radius:var(--radius) var(--radius) 0 0;box-shadow:0 8px 30px rgba(255,255,255,0.04)}
-
-.client-btn .cl-expand{
-  position:absolute;top:100%;left:-1px;right:-1px;
-  padding:1.25rem 2.5rem 1.5rem;
-  background:var(--surface-2);border:1px solid #333;border-top:none;
-  border-radius:0 0 var(--radius) var(--radius);
-  opacity:0;visibility:hidden;
-  transform:translateY(-8px);
-  transition:all .35s cubic-bezier(.4,0,.2,1);
-  pointer-events:none;
+.client-logo-btn:hover{
+  border-color:#555;transform:scale(1.04);
+  box-shadow:0 0 40px rgba(255,255,255,0.06),0 0 80px rgba(255,255,255,0.02);
 }
-.client-btn:hover .cl-expand{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
-.cl-expand p{font-size:.82rem;color:var(--text-muted);font-weight:300;line-height:1.6;margin-bottom:.5rem;white-space:normal}
-.cl-expand a{font-size:.75rem;color:#fff;font-weight:500;text-decoration:none;transition:opacity .2s}
-.cl-expand a:hover{opacity:.7}
+.client-logo-btn:hover::before{opacity:1}
+.client-logo-btn:hover{color:#fff;text-shadow:0 0 20px rgba(255,255,255,0.25)}
 
 /* ---- PRICING ---- */
 .pricing-note{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;max-width:700px;transition:border-color .3s}
@@ -177,7 +155,7 @@ footer span{color:#fff}
   nav{padding:0 1.25rem}.nav-mid{display:none}
   section{padding:4rem 1.25rem}.hero{padding:6rem 1.25rem 3rem}
   .services-grid{grid-template-columns:1fr}
-  .demos-row{flex-direction:column}
+  .demo-btns{flex-direction:column}
   .form-row{grid-template-columns:1fr}
 }
 </style>
@@ -190,10 +168,10 @@ footer span{color:#fff}
   <a href="#" class="nav-logo">HadiThaDev_</a>
   <div class="nav-mid" id="navMid">
     <div class="nav-pill" id="pill"></div>
-    <a href="#demos" data-n>Work</a>
-    <a href="#services" data-n>Services</a>
-    <a href="#clients" data-n>Clients</a>
-    <a href="#pricing" data-n>Pricing</a>
+    <a href="#demos" data-n data-section="demos">Work</a>
+    <a href="#services" data-n data-section="services">Services</a>
+    <a href="#clients" data-n data-section="clients">Clients</a>
+    <a href="#pricing" data-n data-section="pricing">Pricing</a>
   </div>
   <div class="nav-right"><a href="#contact">Get in Touch</a></div>
 </nav>
@@ -207,12 +185,10 @@ footer span{color:#fff}
   </div>
 </section>
 
-<!-- WORK -->
 <section id="demos" style="border-top:1px solid var(--border)">
   <p class="sl">// Work</p>
   <h2 class="st">Sites built for businesses like yours.</h2>
 
-  <!-- FULL WIDTH TICKER -->
   <div class="ticker-wrap">
     <div class="ticker-track">
       <div class="ticker-cell">Barbershop</div><div class="ticker-cell">Auto Detailing</div><div class="ticker-cell">Restaurant</div><div class="ticker-cell">Moving Company</div><div class="ticker-cell">Musician</div><div class="ticker-cell">Personal Trainer</div><div class="ticker-cell">Tattoo Shop</div><div class="ticker-cell">Nail Salon</div><div class="ticker-cell">Landscaping</div><div class="ticker-cell">Cleaning Company</div><div class="ticker-cell">Real Estate</div><div class="ticker-cell">Photography</div><div class="ticker-cell">Food Truck</div><div class="ticker-cell">Trades</div><div class="ticker-cell">Driving School</div><div class="ticker-cell">Yoga Studio</div>
@@ -220,78 +196,40 @@ footer span{color:#fff}
     </div>
   </div>
 
-  <!-- DEMO BUTTONS — HOVER TO EXPAND -->
-  <div class="demos-row">
+  <!-- DEMO BUTTONS -->
+  <div class="demo-btns">
+    <div class="demo-btn active" data-demo="barber">Barbershop</div>
+    <div class="demo-btn" data-demo="detail">Auto Detailing</div>
+    <div class="demo-btn" data-demo="resto">Restaurant</div>
+  </div>
 
-    <a href="demo-barbershop.html" class="demo-btn">
-      <span>Barbershop</span>
-      <div class="demo-expand">
-        <div class="demo-tags" style="margin-top:.75rem"><span class="demo-tag">Gallery</span><span class="demo-tag">Booking</span><span class="demo-tag">Team</span><span class="demo-tag">Reviews</span><span class="demo-tag">Instagram</span></div>
-        <div class="demo-pbox" style="background:linear-gradient(135deg,#0a0908,#1a1814)">
-          <div class="dbbar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="durl">yourbarbershop.ca</span></div>
-          <div class="dpc"><div style="text-align:center"><div style="display:inline-flex;align-items:center;gap:.4rem;border:1px solid rgba(201,169,110,.25);padding:.2rem .7rem;border-radius:100px;margin-bottom:.6rem"><span style="color:#c9a96e;font-size:.5rem">★★★★★</span><span style="font-size:.5rem;color:#7a7062">4.9</span></div><div style="font-size:1.8rem;font-weight:700;color:#f5f0e8;line-height:.95;letter-spacing:-1px">Your<br>Barbershop</div><div style="width:25px;height:1px;background:#c9a96e;margin:.5rem auto"></div><div style="font-size:.55rem;color:#7a7062;letter-spacing:2px;text-transform:uppercase">Premium Cuts · Classic Shaves</div></div></div>
-        </div>
-        <span class="demo-link">View full demo →</span>
-      </div>
-    </a>
-
-    <a href="demo-detailing.html" class="demo-btn">
-      <span>Auto Detailing</span>
-      <div class="demo-expand">
-        <div class="demo-tags" style="margin-top:.75rem"><span class="demo-tag">Packages</span><span class="demo-tag">Before/After</span><span class="demo-tag">Process</span><span class="demo-tag">Reviews</span><span class="demo-tag">Area</span></div>
-        <div class="demo-pbox" style="background:linear-gradient(135deg,#060a10,#0c1219)">
-          <div class="dbbar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="durl">yourdetailing.ca</span></div>
-          <div class="dpc"><div style="text-align:center"><div style="display:inline-flex;gap:.3rem;margin-bottom:.6rem"><span style="background:#0c1219;border:1px solid #1a2535;padding:.15rem .5rem;border-radius:100px;font-size:.45rem;color:#5a7a9a">★★★★★ 5.0</span><span style="background:#0c1219;border:1px solid #1a2535;padding:.15rem .5rem;border-radius:100px;font-size:.45rem;color:#5a7a9a">Mobile</span></div><div style="font-size:1.8rem;font-weight:800;color:#e4ecf8;line-height:1;letter-spacing:-1px">Your car,<br><span style='color:#3d8bfd'>showroom</span> clean.</div></div></div>
-        </div>
-        <span class="demo-link">View full demo →</span>
-      </div>
-    </a>
-
-    <a href="demo-restaurant.html" class="demo-btn">
-      <span>Restaurant</span>
-      <div class="demo-expand">
-        <div class="demo-tags" style="margin-top:.75rem"><span class="demo-tag">Menu</span><span class="demo-tag">Story</span><span class="demo-tag">Gallery</span><span class="demo-tag">Order</span><span class="demo-tag">Reserve</span></div>
-        <div class="demo-pbox" style="background:linear-gradient(135deg,#0c0806,#1c1510)">
-          <div class="dbbar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="durl">yourrestaurant.ca</span></div>
-          <div class="dpc"><div style="text-align:center"><div style="display:inline-flex;align-items:center;gap:.3rem;background:rgba(232,148,58,.1);border:1px solid rgba(232,148,58,.2);padding:.15rem .6rem;border-radius:100px;margin-bottom:.6rem"><span style="width:4px;height:4px;background:#4ade80;border-radius:50%;display:inline-block"></span><span style="font-size:.45rem;color:#e8943a">Open Now</span></div><div style="font-size:1.8rem;font-weight:700;color:#faf4ee;line-height:.95;letter-spacing:-1px">Your<br>Restaurant</div><div style="width:20px;height:1px;background:#e8943a;margin:.4rem auto"></div><div style="font-size:.55rem;color:#8a7262;letter-spacing:2px">Dine-in · Takeout</div></div></div>
-        </div>
-        <span class="demo-link">View full demo →</span>
-      </div>
-    </a>
-
+  <!-- SHARED PREVIEW AREA -->
+  <div class="demo-preview-area show" id="demoPreview">
+    <!-- Content injected by JS -->
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services" style="border-top:1px solid var(--border)">
   <p class="sl">// What You Get</p>
   <h2 class="st">Everything your business needs online.</h2>
   <div class="services-grid">
     <div class="svc"><span class="svc-n">001</span><span class="svc-ico">⚡</span><h3>Custom Design & Build</h3><p>Designed and coded from scratch to match your brand. No templates.</p></div>
-    <div class="svc"><span class="svc-n">002</span><span class="svc-ico">📱</span><h3>Mobile-First</h3><p>Looks and works perfectly on every screen size. Most customers find you on their phone.</p></div>
-    <div class="svc"><span class="svc-n">003</span><span class="svc-ico">🔍</span><h3>Google-Ready</h3><p>SEO best practices so your business actually shows up when people search.</p></div>
-    <div class="svc"><span class="svc-n">004</span><span class="svc-ico">🚀</span><h3>Fast Load Times</h3><p>Modern infrastructure. No bloated plugins. Loads in under 2 seconds.</p></div>
-    <div class="svc"><span class="svc-n">005</span><span class="svc-ico">📅</span><h3>Booking & Contact</h3><p>Online booking, contact forms, click-to-call — easy for customers to reach you.</p></div>
+    <div class="svc"><span class="svc-n">002</span><span class="svc-ico">📱</span><h3>Mobile-First</h3><p>Looks and works perfectly on every screen. Most customers find you on their phone.</p></div>
+    <div class="svc"><span class="svc-n">003</span><span class="svc-ico">🔍</span><h3>Google-Ready</h3><p>SEO best practices so your business shows up when people search.</p></div>
+    <div class="svc"><span class="svc-n">004</span><span class="svc-ico">🚀</span><h3>Fast Load Times</h3><p>Modern infrastructure. No bloated plugins. Under 2 seconds.</p></div>
+    <div class="svc"><span class="svc-n">005</span><span class="svc-ico">📅</span><h3>Booking & Contact</h3><p>Online booking, contact forms, click-to-call — easy for customers.</p></div>
     <div class="svc"><span class="svc-n">006</span><span class="svc-ico">🛠️</span><h3>Ongoing Maintenance</h3><p>Optional monthly plan for updates, changes, and monitoring.</p></div>
   </div>
 </section>
 
-<!-- CLIENTS — LOGO BUTTONS -->
 <section id="clients" style="border-top:1px solid var(--border)">
   <p class="sl">// Clients</p>
   <h2 class="st">Built & launched.</h2>
   <div class="clients-row">
-    <div class="client-btn">
-      4OREVER
-      <div class="cl-expand">
-        <p>Full-stack editorial platform with custom CMS, automated publishing, and email infrastructure built from the ground up.</p>
-        <a href="https://4orever.world" target="_blank">4orever.world →</a>
-      </div>
-    </div>
+    <a href="https://4orever.world" target="_blank" class="client-logo-btn">4OREVER</a>
   </div>
 </section>
 
-<!-- PRICING -->
 <section id="pricing" style="border-top:1px solid var(--border)">
   <p class="sl">// Pricing</p>
   <h2 class="st">Simple, honest pricing.</h2>
@@ -313,7 +251,6 @@ footer span{color:#fff}
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="cta-section" id="contact">
   <h2>Let's build<br>something <span style="color:#fff">real.</span></h2>
   <p>Fill out the form and I'll get back within 24 hours. No pressure, no sales pitch.</p>
@@ -352,16 +289,94 @@ footer span{color:#fff}
 // Cursor glow
 document.addEventListener('mousemove',e=>{const g=document.getElementById('glow');g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
 
-// Liquid nav pill
+// ---- NAV PILL: follows hover + highlights active section on scroll ----
 const pill=document.getElementById('pill');
-document.querySelectorAll('#navMid a[data-n]').forEach(a=>{
-  a.addEventListener('mouseenter',function(){
-    pill.style.left=this.offsetLeft+'px';
-    pill.style.width=this.offsetWidth+'px';
-    pill.style.opacity='1';
+const navLinks=document.querySelectorAll('#navMid a[data-n]');
+const sections=document.querySelectorAll('section[id]');
+
+function movePill(el){
+  pill.style.left=el.offsetLeft+'px';
+  pill.style.width=el.offsetWidth+'px';
+  pill.style.opacity='1';
+}
+
+// Hover behavior
+navLinks.forEach(a=>{
+  a.addEventListener('mouseenter',()=>movePill(a));
+});
+document.getElementById('navMid').addEventListener('mouseleave',()=>{
+  // On mouse leave, snap back to active section
+  const active=document.querySelector('#navMid a[data-n].active');
+  if(active) movePill(active);
+  else pill.style.opacity='0';
+});
+
+// Scroll tracking — highlight current section
+function updateActiveNav(){
+  let current='';
+  sections.forEach(s=>{
+    const top=s.offsetTop-200;
+    if(window.scrollY>=top) current=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.remove('active');
+    if(a.dataset.section===current){
+      a.classList.add('active');
+      movePill(a);
+    }
+  });
+}
+window.addEventListener('scroll',updateActiveNav);
+window.addEventListener('load',updateActiveNav);
+
+// ---- DEMO TABS: click to switch preview ----
+const demos={
+  barber:{
+    tags:['Gallery','Booking','Team','Reviews','Instagram'],
+    url:'demo-barbershop.html',
+    urlLabel:'yourbarbershop.ca',
+    bg:'linear-gradient(135deg,#0a0908,#1a1814)',
+    content:`<div style="text-align:center"><div style="display:inline-flex;align-items:center;gap:.4rem;border:1px solid rgba(201,169,110,.25);padding:.2rem .7rem;border-radius:100px;margin-bottom:.6rem"><span style="color:#c9a96e;font-size:.5rem">★★★★★</span><span style="font-size:.5rem;color:#7a7062">4.9</span></div><div style="font-size:2.2rem;font-weight:700;color:#f5f0e8;line-height:.95;letter-spacing:-1px">Your<br>Barbershop</div><div style="width:30px;height:1px;background:#c9a96e;margin:.5rem auto"></div><div style="font-size:.6rem;color:#7a7062;letter-spacing:2px;text-transform:uppercase">Premium Cuts · Classic Shaves</div></div>`
+  },
+  detail:{
+    tags:['Packages','Before/After','Process','Reviews','Service Area'],
+    url:'demo-detailing.html',
+    urlLabel:'yourdetailing.ca',
+    bg:'linear-gradient(135deg,#060a10,#0c1219)',
+    content:`<div style="text-align:center"><div style="display:inline-flex;gap:.3rem;margin-bottom:.6rem"><span style="background:#0c1219;border:1px solid #1a2535;padding:.15rem .5rem;border-radius:100px;font-size:.45rem;color:#5a7a9a">★★★★★ 5.0</span><span style="background:#0c1219;border:1px solid #1a2535;padding:.15rem .5rem;border-radius:100px;font-size:.45rem;color:#5a7a9a">Mobile</span></div><div style="font-size:2.2rem;font-weight:800;color:#e4ecf8;line-height:1;letter-spacing:-1px">Your car,<br><span style="color:#3d8bfd">showroom</span> clean.</div><div style="font-size:.6rem;color:#5a7a9a;margin-top:.4rem;letter-spacing:1px">Interior · Exterior · Ceramic</div></div>`
+  },
+  resto:{
+    tags:['Menu','Story','Gallery','Order Online','Reserve'],
+    url:'demo-restaurant.html',
+    urlLabel:'yourrestaurant.ca',
+    bg:'linear-gradient(135deg,#0c0806,#1c1510)',
+    content:`<div style="text-align:center"><div style="display:inline-flex;align-items:center;gap:.3rem;background:rgba(232,148,58,.1);border:1px solid rgba(232,148,58,.2);padding:.15rem .6rem;border-radius:100px;margin-bottom:.6rem"><span style="width:4px;height:4px;background:#4ade80;border-radius:50%;display:inline-block"></span><span style="font-size:.45rem;color:#e8943a">Open Now</span></div><div style="font-size:2.2rem;font-weight:700;color:#faf4ee;line-height:.95;letter-spacing:-1px">Your<br>Restaurant</div><div style="width:20px;height:1px;background:#e8943a;margin:.4rem auto"></div><div style="font-size:.6rem;color:#8a7262;letter-spacing:2px">Dine-in · Takeout</div></div>`
+  }
+};
+
+function renderDemo(key){
+  const d=demos[key],area=document.getElementById('demoPreview');
+  area.className='demo-preview-area show';
+  area.innerHTML=`
+    <div class="demo-pa-tags">${d.tags.map(t=>`<span class="demo-tag">${t}</span>`).join('')}</div>
+    <div class="demo-pbox" style="background:${d.bg}">
+      <div class="dbbar"><span class="dd"></span><span class="dd"></span><span class="dd"></span><span class="durl">${d.urlLabel}</span></div>
+      <div class="dpc">${d.content}</div>
+    </div>
+    <a href="${d.url}" class="demo-view">View full demo →</a>
+  `;
+}
+
+document.querySelectorAll('.demo-btn').forEach(btn=>{
+  btn.addEventListener('mouseenter',()=>{
+    document.querySelectorAll('.demo-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderDemo(btn.dataset.demo);
   });
 });
-document.getElementById('navMid').addEventListener('mouseleave',()=>{pill.style.opacity='0'});
+
+// Init first demo
+renderDemo('barber');
 
 // Form
 document.getElementById('quoteForm').addEventListener('submit',async function(e){
