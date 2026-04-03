@@ -103,25 +103,33 @@ section{padding:6rem 2.5rem;max-width:1100px;margin:0 auto}
 .svc-ico{position:absolute;top:2rem;right:2rem;font-size:1.5rem;opacity:0;transform:translateY(10px);transition:all .4s}
 .svc:hover .svc-ico{opacity:1;transform:translateY(0)}
 
-/* ---- CLIENTS — SIMPLE LOGO BUTTON WITH GLOW/ZOOM ---- */
-.clients-row{display:flex;gap:1rem;flex-wrap:wrap}
-.client-logo-btn{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:1.5rem 3rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
-  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:2px;
-  transition:all .35s;position:relative;overflow:hidden;
+/* ---- CLIENTS — EXPANDABLE CARDS ---- */
+.clients-row{display:flex;gap:.75rem;height:200px}
+.client-card{
+  flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.5rem;display:flex;flex-direction:column;justify-content:flex-end;
+  text-decoration:none;color:inherit;position:relative;overflow:hidden;
+  transition:all .5s cubic-bezier(.4,0,.2,1);cursor:pointer;
 }
-.client-logo-btn::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.08) 0%,transparent 70%);
-  opacity:0;transition:opacity .35s;
+.client-card:hover{flex:3;border-color:#444;background:var(--surface-2)}
+.client-card .cc-name{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;color:#fff;
+  letter-spacing:2px;transition:color .3s;
 }
-.client-logo-btn:hover{
-  border-color:#555;transform:scale(1.04);
-  box-shadow:0 0 40px rgba(255,255,255,0.06),0 0 80px rgba(255,255,255,0.02);
+.client-card .cc-url{font-size:.7rem;color:var(--text-muted);margin-top:.25rem;transition:color .3s}
+.client-card:hover .cc-url{color:#aaa}
+.client-card .cc-preview{
+  position:absolute;top:1.5rem;right:1.5rem;bottom:1.5rem;width:55%;
+  opacity:0;transform:translateX(20px);
+  transition:opacity .4s .1s,transform .4s .1s;
+  display:flex;flex-direction:column;justify-content:center;gap:.6rem;
+  pointer-events:none;
 }
-.client-logo-btn:hover::before{opacity:1}
-.client-logo-btn:hover{color:#fff;text-shadow:0 0 20px rgba(255,255,255,0.25)}
+.client-card:hover .cc-preview{opacity:1;transform:translateX(0);pointer-events:auto}
+.cc-features{display:flex;flex-wrap:wrap;gap:.35rem}
+.cc-tag{font-size:.6rem;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:.15rem .55rem;border-radius:100px}
+.cc-link{font-size:.7rem;color:#fff;text-decoration:none;font-weight:500;opacity:.7;transition:opacity .2s}
+.cc-link:hover{opacity:1}
 
 /* ---- PRICING ---- */
 .pricing-note{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;max-width:700px;transition:border-color .3s}
@@ -302,8 +310,39 @@ footer span{color:#fff}
   <p class="sl">// Clients</p>
   <h2 class="st">Built & launched.</h2>
   <div class="clients-row">
-    <a href="https://4orever.world" target="_blank" class="client-logo-btn">4OREVER</a>
-    <a href="https://firehustle.net" target="_blank" class="client-logo-btn">FIREHUSTLE</a>
+
+    <a href="https://4orever.world" target="_blank" class="client-card">
+      <div class="cc-name">4OREVER</div>
+      <div class="cc-url">4orever.world</div>
+      <div class="cc-preview">
+        <div class="cc-features">
+          <span class="cc-tag">Custom CMS</span>
+          <span class="cc-tag">Automated Publishing</span>
+          <span class="cc-tag">Email Infrastructure</span>
+          <span class="cc-tag">Admin Dashboard</span>
+          <span class="cc-tag">Content Pipeline</span>
+          <span class="cc-tag">Custom Domain Email</span>
+        </div>
+        <span class="cc-link">Visit site →</span>
+      </div>
+    </a>
+
+    <a href="https://firehustle.net" target="_blank" class="client-card">
+      <div class="cc-name">FIREHUSTLE</div>
+      <div class="cc-url">firehustle.net</div>
+      <div class="cc-preview">
+        <div class="cc-features">
+          <span class="cc-tag">Content Platform</span>
+          <span class="cc-tag">Blog & News</span>
+          <span class="cc-tag">E-Commerce Shop</span>
+          <span class="cc-tag">YouTube Integration</span>
+          <span class="cc-tag">Discord Community</span>
+          <span class="cc-tag">Social Media Links</span>
+        </div>
+        <span class="cc-link">Visit site →</span>
+      </div>
+    </a>
+
   </div>
 </section>
 
