@@ -1,0 +1,218 @@
+HADITHADEV — BARBERSHOP PROSPECT AUDIT (BARRIE & SURROUNDING)
+================================================================
+Generated: April 3, 2026
+Total prospects: 57 barbershops
+Method: CALL if no site/dead/booking-only, EMAIL/DM if template site
+
+
+=================================================================
+HOT — NO WEBSITE AT ALL (18 shops)
+=================================================================
+
+1. Great Barbers & Hair Salon — NO SITE
+2. Sigma Cutz — NO SITE
+3. CG Barber Shop & Mobile Hair-Cutting — NO SITE
+4. Marks Barber Shop — NO SITE
+5. Joe's Barber Shop — NO SITE
+6. Foxy's Gentlemen's Hair Studio — NO SITE
+7. Gary's Barbershop — NO SITE
+8. Crown Barber & Ink — NO SITE
+9. Beach Barbers Salon — NO SITE
+10. Beaverton Classic Barbershop — NO SITE
+11. Portside Salon and Barbershop — NO SITE
+12. International Salon and Barber Shop — NO SITE
+13. Royal Barbershop — NO SITE
+14. Jo's Barber Shop and Irene's Beauty Salon — NO SITE
+15. Kingdom Kutz — NO SITE
+16. The Village Barber — NO SITE
+17. Xtrim Barber Shop — NO SITE
+18. Terrys Barber Shop — NO SITE
+19. Arthur BarberShop — NO SITE
+
+UNIVERSAL CALL SCRIPT (personalize with name):
+"Hey [Shop Name] — I tried looking you up online and there's nothing — no website, just a Google listing. Every barber around you has at least something online. A clean site with your services, pricing, gallery of your work, and a booking link would help new customers find you and book before they even walk in. I build websites for local businesses — check out hadithadev.ca"
+
+
+=================================================================
+HOT — DEAD / BROKEN SITES (5 shops)
+=================================================================
+
+20. Barber in a Box — Square site is dead
+SCRIPT: "Hey Barber in a Box — your Square site isn't loading anymore. Anyone clicking your link hits a dead page. I can get you a proper site up fast. hadithadev.ca"
+
+21. Halt & Hustle — broken site (haltandhustle.com)
+SCRIPT: "Hey Halt & Hustle — your website haltandhustle.com is down. Anyone finding you on Google or social hits a dead page. That's killing your first impression. hadithadev.ca"
+
+22. VinceMatt Barber Shop — broken site (vincemattbarbershop.ca)
+SCRIPT: "Hey VinceMatt — your site vincemattbarbershop.ca isn't working. Dead page. I build websites for barbers — I can get you back online quick. hadithadev.ca"
+
+23. Makeover Hair and Beauty Salon — broken site (makeoverhairsalon.ca)
+SCRIPT: "Hey Makeover — your website makeoverhairsalon.ca is broken. Customers clicking through from Google see nothing. I can rebuild it fast. hadithadev.ca"
+
+24. Elite Hair Salon — broken site (elitehairsalon.ca)
+SCRIPT: "Hey Elite Hair — your site elitehairsalon.ca is down. I build websites for salons and barbers and can get you a clean new site. hadithadev.ca"
+
+
+=================================================================
+HOT — BOOKING PAGE ONLY / NO REAL WEBSITE (11 shops)
+=================================================================
+
+25. TopNotch Barbershop — just a SalonMonster booking page
+SCRIPT: "Hey TopNotch — your online presence is just a booking page on SalonMonster. No services listed, no gallery, no about section. Customers can't see your work or learn about you before booking. A proper site would convert way more walk-ins. hadithadev.ca"
+
+26. The Canvas Barbershop — just a Squire booking page
+SCRIPT: "Hey Canvas — you're only on Squire for booking. No actual website. A custom site with your tattoo work, barber portfolio, and booking built in would be way stronger than just a scheduling page. hadithadev.ca"
+
+27. Starks Barbershop — just a Booker booking page
+SCRIPT: "Hey Starks — your only online presence is a Booker scheduling page. No website, no gallery, no services. A proper site would help new customers find you and trust you before booking. hadithadev.ca"
+
+28. SharpCut — just a Resurva booking page
+SCRIPT: "Hey SharpCut — you're running on just a Resurva booking link. No site, no portfolio, no info. A custom website with your work and a booking button built in would bring way more customers. hadithadev.ca"
+
+29. Young & Sons Barber Shop — just a Setmore booking page
+SCRIPT: "Hey Young & Sons — your online presence is just a Setmore booking link. A proper website with your services, team, and gallery would help you stand out from every other barber with just a booking link. hadithadev.ca"
+
+30. Cookstown Barber Shop — just a Vagaro page
+SCRIPT: "Hey Cookstown Barber — you're on a generic Vagaro page. No custom site, no branding. A proper website would look way more professional. hadithadev.ca"
+
+31. Bilal the Barber — just a Setmore booking page
+SCRIPT: "Hey Bilal — you're only on Setmore. No website, no portfolio. Your cuts deserve a proper site that shows your work. hadithadev.ca"
+
+32. Lined Up Barber Shop — just a Setmore booking page
+SCRIPT: "Hey Lined Up — same deal, just a Setmore link. No site. A custom website with your gallery and booking built in would convert better. hadithadev.ca"
+
+33. Early Bird Barber — just a Vagaro page
+SCRIPT: "Hey Early Bird — you're on a Vagaro page. No custom site. A proper website would help you look more established. hadithadev.ca"
+
+34. Eclipse Barber Shop — just a Vagaro page
+SCRIPT: "Hey Eclipse — you're running off a Vagaro page. A custom site with your brand would be a huge upgrade. hadithadev.ca"
+
+35. Lake Huron Fades — just a Square booking page
+SCRIPT: "Hey Lake Huron Fades — your online presence is just a Square booking link. No website, no portfolio. A proper site would help new customers see your work. hadithadev.ca"
+
+
+=================================================================
+HOT — TERRIBLE / TEMPLATE SITES (10 shops)
+=================================================================
+
+36. NexStyle Hair Studio — Square free site (nexstyle-hair-studio.square.site)
+Notes: Free Square subdomain. No custom domain. Generic template.
+SCRIPT: "Hey NexStyle — your site is on a free Square subdomain. Customers see 'square.site' in the URL instead of your own domain. A proper site on a custom domain with your branding would look way more professional. hadithadev.ca"
+
+37. Northside Barber — GoDaddy builder (northsidebarber.ca)
+Notes: Basic GoDaddy template. Has phone number prominent but generic design.
+SCRIPT: "Hey Northside — your site looks like a standard GoDaddy template. It works, but it looks like every other barbershop site out there. A custom design that actually shows your personality would help you stand out. hadithadev.ca"
+
+38. Global Barber Shop — broken Squarespace (parrotfish-cricket-w7cn.squarespace.com)
+Notes: Squarespace subdomain — not even their own domain. URL is a random Squarespace slug.
+SCRIPT: "Hey Global Barber — your site URL is parrotfish-cricket-w7cn.squarespace.com. That's not a real website — it's an unpublished Squarespace draft. Customers can't find you with that. hadithadev.ca"
+
+39. Nash Fades — Shopify product page (nashfades.ca)
+Notes: Has a custom domain but the site is basically a Shopify product listing for a haircut. Treated like an e-commerce store selling "Adult Haircut $40" as a product. Weird setup.
+SCRIPT: "Hey Nash Fades — your website is set up like an online store selling haircuts as products. It's confusing for customers. A proper barbershop site with your services, gallery, and booking would work way better. hadithadev.ca"
+
+40. Vintage Throne — GoDaddy builder (vintagethrone.ca)
+Notes: GoDaddy builder. Has a signed-in-as filler@godaddy.com showing — meaning the template isn't even properly configured.
+SCRIPT: "Hey Vintage Throne — your site still shows 'filler@godaddy.com' in the account section. The template isn't fully set up. A proper custom site would match the premium vibe of your brand. hadithadev.ca"
+
+41. Circle Pine Barber Shop — GoDaddy builder (circlepinebarbershop.ca)
+Notes: Basic GoDaddy template. Text-heavy. Generic.
+SCRIPT: "Hey Circle Pine — your site is a standard GoDaddy template. Solid info but the design doesn't stand out. A custom build would match the quality of your work. hadithadev.ca"
+
+42. Studio 1 Barbershop — GoDaddy builder (studio1barbershop.com)
+Notes: GoDaddy builder with team page and gallery. Better than most but still template.
+SCRIPT: "Hey Studio 1 — your GoDaddy site has good content but the template design is holding it back. A custom site would take your brand to the next level. hadithadev.ca"
+
+43. Glow Hair Supply — generic site (hairsalonbarrie.net)
+Notes: Domain is hairsalonbarrie.net which is decent for SEO but the site itself is generic.
+SCRIPT: "Hey Glow Hair Supply — you've got a great domain name for Barrie SEO but the site itself doesn't match. A modern redesign would help you dominate local search. hadithadev.ca"
+
+44. Luke's Men's Hairstyling — very broken (lukes-mens-hairstyling.edan.io)
+Notes: On an edan.io subdomain. Barely functional. Super broken.
+SCRIPT: "Hey Luke's — your site on edan.io is barely working. The page is broken and there's no real info. I can build you a proper site fast. hadithadev.ca"
+
+45. Bad Rock Barbershop — just a Resurva booking page (madrockbarbershop.resurva.com)
+Notes: URL says "madrock" but business is "Bad Rock" — confusing branding too.
+SCRIPT: "Hey Bad Rock — your booking page URL says 'madrock' which is confusing for customers. A custom site with consistent branding and booking built in would clean that up. hadithadev.ca"
+
+
+=================================================================
+HOT — FACEBOOK ONLY (3 shops)
+=================================================================
+
+46. Tonys Barber Shop — broken Facebook link
+SCRIPT: "Hey Tony's — your Facebook link isn't working. I can build you a proper site that actually loads when customers look you up. hadithadev.ca"
+
+47. Port McNicol Barber Shop — Facebook page only
+SCRIPT: "Hey Port McNicol Barber — you're only on Facebook. A proper website would help you show up on Google when people search for barbers in your area. hadithadev.ca"
+
+48. Dufferin Barber Shop — Facebook page only
+SCRIPT: "Hey Dufferin Barber — only a Facebook page. A proper site with your services and booking would convert more customers. hadithadev.ca"
+
+49. Hair by Natalie — Facebook page only
+SCRIPT: "Hey Natalie — you're only on Facebook right now. A custom site with your portfolio and a booking link would help new clients find you outside of social media. hadithadev.ca"
+
+
+=================================================================
+WARM — VERIFY QUALITY / DECENT BUT UPGRADEABLE (5 shops)
+=================================================================
+
+50. A Mans Zone — amanszone.ca
+Notes: Has a custom site with about, services, locations, staff. Dated design but functional. Could pitch a redesign.
+
+51. NewStyle Barbers — newstylehairdesign.com
+Notes: Has a site. Check quality and modernity.
+
+52. The Barbers Den — thebarbersden.ca
+Notes: Loads to an appointments page. Might have more content. Verify.
+
+53. Barber B — Vagaro page but branded well
+Notes: On Vagaro. Verify if they have a separate site.
+
+54. High and Tights Parlor — SimplyBook booking page
+Notes: Just a booking page but verify if separate site exists.
+
+
+=================================================================
+SKIP — DECENT SITES (4 shops)
+=================================================================
+
+55. Manifest Barber — manifestbarber.com
+Notes: Clean Squarespace site with gallery, location, booking link via Squire. Decent brand. Would be a hard sell.
+
+56. Paré Barbershop — parebarbershop.ca
+Notes: Clean Squarespace site with logo, branding. Looks professional. Skip.
+
+57. Hemingways Barber Shop — hemingwaysbarbershop.ca
+Notes: Squarespace site. Has cigars, watches, full service pages. Well done. Skip.
+
+58. Envision Studio — envisionhairstudio.com
+Notes: Has a proper site. Verify quality but likely decent.
+
+
+=================================================================
+SUMMARY
+=================================================================
+
+HOT — CALL FIRST: 19 no-website shops
+HOT — DEAD/BROKEN SITES: 5 shops
+HOT — BOOKING PAGE ONLY: 11 shops
+HOT — TERRIBLE TEMPLATES: 10 shops
+HOT — FACEBOOK ONLY: 4 shops
+---
+TOTAL HOT PROSPECTS: 49 out of 57
+
+WARM — VERIFY: 5 shops
+SKIP: 4 shops
+
+TOP 10 CALL-FIRST PRIORITIES:
+1. Crown Barber & Ink — no site, barber + tattoo = high-value client
+2. Kingdom Kutz — no site, strong brand name
+3. Halt & Hustle — broken site, cool brand name = they care about image
+4. VinceMatt Barber Shop — broken site, had one before = willing to invest
+5. The Canvas Barbershop — booking only, does tattoos too = premium business
+6. Nash Fades — has domain but site is a Shopify product page selling haircuts
+7. Vintage Throne — GoDaddy template not even configured properly
+8. Global Barber Shop — Squarespace subdomain with random slug URL
+9. TopNotch Barbershop — booking page only, strong name
+10. Foxy's Gentlemen's Hair Studio — no site, premium-sounding name
