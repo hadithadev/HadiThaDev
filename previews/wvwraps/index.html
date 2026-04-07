@@ -31,19 +31,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:70px;d
 .nav-cta{background:var(--gold);color:var(--bg);padding:.55rem 1.75rem;border-radius:2px;text-decoration:none;font-weight:700;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;transition:all .2s}
 .nav-cta:hover{background:var(--gold-bright)}
 
-/* HERO — FULL WIDTH */
-.hero{min-height:100vh;width:100%;display:flex;align-items:center;padding:6rem 3rem;position:relative;overflow:hidden}
+/* HERO — FULL WIDTH, EDGE TO EDGE */
+.hero{min-height:100vh;width:100vw;display:flex;align-items:center;padding:6rem 3rem;position:relative;overflow:hidden;margin-left:calc(-50vw + 50%)}
 .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#12100c 40%,#0a0a0a 100%)}
-.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(201,162,78,.04) 0%,transparent 50%),radial-gradient(ellipse at 20% 80%,rgba(192,57,43,.03) 0%,transparent 50%)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(201,162,78,.05) 0%,transparent 50%),radial-gradient(ellipse at 20% 80%,rgba(201,162,78,.03) 0%,transparent 50%)}
 
-/* TIRE SKID MARKS */
-.skid{position:absolute;pointer-events:none;opacity:.08}
-.skid-1{top:25%;left:5%;width:70%;height:40px;background:repeating-linear-gradient(90deg,transparent 0,transparent 8px,#333 8px,#333 10px,transparent 10px,transparent 18px);transform:rotate(-4deg) scaleY(.3);filter:blur(1px)}
-.skid-2{top:60%;left:15%;width:65%;height:40px;background:repeating-linear-gradient(90deg,transparent 0,transparent 8px,#444 8px,#444 10px,transparent 10px,transparent 18px);transform:rotate(2deg) scaleY(.25);filter:blur(1.5px)}
-.skid-3{top:78%;left:-5%;width:55%;height:30px;background:repeating-linear-gradient(90deg,transparent 0,transparent 6px,#333 6px,#333 8px,transparent 8px,transparent 14px);transform:rotate(-1.5deg) scaleY(.2);filter:blur(1px)}
-.skid-4{top:40%;right:-5%;width:50%;height:35px;background:repeating-linear-gradient(90deg,transparent 0,transparent 10px,#3a3a3a 10px,#3a3a3a 12px,transparent 12px,transparent 22px);transform:rotate(3deg) scaleY(.22);filter:blur(2px)}
+/* GOLD MARBLE VEINS */
+.vein{position:absolute;pointer-events:none;z-index:0}
+.vein svg{width:100%;height:100%;overflow:visible}
+.vein path{fill:none;stroke:url(#goldGrad);stroke-linecap:round;opacity:.12}
+.vein-1{top:10%;left:-5%;width:80%;height:200px;transform:rotate(-2deg)}
+.vein-1 path{stroke-width:1.5;animation:veinPulse 6s ease infinite}
+.vein-2{top:35%;left:20%;width:70%;height:180px;transform:rotate(1.5deg)}
+.vein-2 path{stroke-width:1;animation:veinPulse 6s ease 2s infinite}
+.vein-3{top:55%;right:-10%;width:60%;height:160px;transform:rotate(-3deg)}
+.vein-3 path{stroke-width:1.2;animation:veinPulse 6s ease 4s infinite}
+.vein-4{top:75%;left:5%;width:50%;height:120px;transform:rotate(2deg)}
+.vein-4 path{stroke-width:.8;animation:veinPulse 6s ease 1s infinite}
+.vein-5{top:20%;right:0;width:45%;height:150px;transform:rotate(-1deg)}
+.vein-5 path{stroke-width:1;animation:veinPulse 6s ease 3s infinite}
+@keyframes veinPulse{0%,100%{opacity:.08}50%{opacity:.18}}
 
-.hero-content{position:relative;z-index:1;max-width:700px}
+.hero-content{position:relative;z-index:2;max-width:700px}
 .hero-tag{display:inline-flex;align-items:center;gap:.75rem;border:1px solid rgba(201,162,78,.2);padding:.4rem 1.25rem;border-radius:2px;margin-bottom:2rem;animation:fadeUp .7s ease both}
 .hero-tag span{font-size:.68rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-weight:500}
 .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,8rem);line-height:.9;letter-spacing:2px;margin-bottom:1.25rem;animation:fadeUp .7s ease .1s both}
@@ -56,8 +65,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:70px;d
 .btn-ghost:hover{background:rgba(201,162,78,.08)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-/* SKID CURSOR TRAIL */
-.skid-trail{position:fixed;pointer-events:none;z-index:9999;width:30px;height:6px;background:repeating-linear-gradient(90deg,rgba(60,55,45,.25) 0,rgba(60,55,45,.25) 2px,transparent 2px,transparent 5px);border-radius:1px;transform:translate(-50%,-50%);opacity:0;transition:none}
+/* TIRE MARK CURSOR TRAIL — canvas based */
+#tireCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
 
 section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
 .s-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:5px;text-transform:uppercase;margin-bottom:.75rem}
@@ -156,6 +165,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
 <body>
 
 <div class="energy-line"></div>
+<canvas id="tireCanvas"></canvas>
 
 <nav>
   <a href="#" class="nav-logo-text">WV WRAPS</a>
@@ -172,10 +182,24 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
 <!-- HERO — FULL WIDTH -->
 <section class="hero">
   <div class="hero-bg">
-    <div class="skid skid-1"></div>
-    <div class="skid skid-2"></div>
-    <div class="skid skid-3"></div>
-    <div class="skid skid-4"></div>
+    <!-- SVG gradient definition -->
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:transparent"/>
+          <stop offset="20%" style="stop-color:#c9a24e"/>
+          <stop offset="50%" style="stop-color:#dbb860"/>
+          <stop offset="80%" style="stop-color:#c9a24e"/>
+          <stop offset="100%" style="stop-color:transparent"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <!-- Gold marble veins -->
+    <div class="vein vein-1"><svg viewBox="0 0 800 200"><path d="M0,100 C80,60 160,140 240,90 C320,40 400,130 480,80 C560,30 640,120 720,70 C760,50 800,90 800,90"/><path d="M50,130 C130,90 200,160 280,110 C360,60 420,150 500,100 C580,50 660,130 740,80" style="opacity:.06"/></svg></div>
+    <div class="vein vein-2"><svg viewBox="0 0 700 180"><path d="M0,90 C70,50 140,130 210,80 C280,30 350,120 420,70 C490,20 560,110 630,60 C665,40 700,80 700,80"/></svg></div>
+    <div class="vein vein-3"><svg viewBox="0 0 600 160"><path d="M0,80 C60,40 120,120 180,70 C240,20 300,100 360,50 C420,10 480,90 540,40 C570,25 600,60 600,60"/><path d="M30,110 C90,70 150,140 210,90 C270,40 330,120 390,70 C450,20 510,100 570,50" style="opacity:.05"/></svg></div>
+    <div class="vein vein-4"><svg viewBox="0 0 500 120"><path d="M0,60 C50,30 100,90 150,50 C200,10 250,80 300,40 C350,5 400,70 450,30 C475,15 500,50 500,50"/></svg></div>
+    <div class="vein vein-5"><svg viewBox="0 0 450 150"><path d="M0,75 C45,35 90,115 135,65 C180,15 225,95 270,45 C315,0 360,80 405,30 C427,15 450,55 450,55"/></svg></div>
   </div>
   <div class="hero-content">
     <div class="hero-tag"><span>Premium Installs Only — Barrie, ON</span></div>
@@ -394,29 +418,73 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
 </footer>
 
 <script>
-// ---- SKID MARK CURSOR TRAIL ----
-let lastTrailTime = 0;
+// ---- SMOOTH TIRE TRACK TRAIL (canvas) ----
+const canvas = document.getElementById('tireCanvas');
+const ctx = canvas.getContext('2d');
+let points = [];
+let mouseX = 0, mouseY = 0;
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
 document.addEventListener('mousemove', e => {
-  const now = Date.now();
-  if (now - lastTrailTime < 40) return;
-  lastTrailTime = now;
-  const t = document.createElement('div');
-  t.className = 'skid-trail';
-  t.style.left = e.clientX + 'px';
-  t.style.top = e.clientY + 'px';
-  // Random rotation for natural skid feel
-  const angle = Math.atan2(e.movementY || 0, e.movementX || 0) * (180 / Math.PI);
-  t.style.transform = `translate(-50%,-50%) rotate(${angle}deg)`;
-  t.style.opacity = '.35';
-  t.style.width = (15 + Math.random() * 20) + 'px';
-  document.body.appendChild(t);
-  // Fade out
-  requestAnimationFrame(() => {
-    t.style.transition = 'opacity .8s ease';
-    t.style.opacity = '0';
-  });
-  setTimeout(() => t.remove(), 900);
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  points.push({ x: e.clientX, y: e.clientY, age: 0 });
+  // Cap at 120 points
+  if (points.length > 120) points.shift();
 });
+
+function drawTireTrack() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  if (points.length < 3) { requestAnimationFrame(drawTireTrack); return; }
+  
+  // Age all points
+  points.forEach(p => p.age += 0.012);
+  // Remove dead points
+  points = points.filter(p => p.age < 1);
+  
+  if (points.length < 3) { requestAnimationFrame(drawTireTrack); return; }
+  
+  // Draw two parallel tracks (like two tires)
+  for (let offset of [-4, 4]) {
+    ctx.beginPath();
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    for (let i = 1; i < points.length; i++) {
+      const p = points[i];
+      const prev = points[i - 1];
+      
+      // Calculate perpendicular offset
+      const dx = p.x - prev.x;
+      const dy = p.y - prev.y;
+      const len = Math.sqrt(dx * dx + dy * dy) || 1;
+      const nx = -dy / len * offset;
+      const ny = dx / len * offset;
+      
+      const alpha = Math.max(0, (1 - p.age) * 0.3);
+      
+      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.lineWidth = 2;
+      // Dashed pattern for tire tread look
+      ctx.setLineDash([4, 6]);
+      
+      ctx.beginPath();
+      ctx.moveTo(prev.x + nx, prev.y + ny);
+      ctx.lineTo(p.x + nx, p.y + ny);
+      ctx.stroke();
+    }
+  }
+  
+  requestAnimationFrame(drawTireTrack);
+}
+drawTireTrack();
 
 // ---- CAR MAKE/MODEL DROPDOWNS ----
 const cars = {
