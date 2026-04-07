@@ -12,7 +12,7 @@
   --bg:#0a0a0a;--surface:#111;--surface-2:#181818;--border:#222;
   --text:#f0ece6;--text-muted:#7a7068;
   --gold:#c9a24e;--gold-bright:#dbb860;--gold-dim:rgba(201,162,78,.06);
-  --red:#c0392b;--red-bright:#e74c3c;
+  --red:#c0392b;
   --radius:6px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -22,6 +22,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line
 
 .energy-line{height:3px;background:linear-gradient(90deg,transparent,var(--red),var(--gold),var(--red),transparent);opacity:.7}
 
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:70px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,162,78,.08)}
 .nav-logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);letter-spacing:4px;text-decoration:none}
 .nav-center{display:flex;gap:2.5rem}
@@ -30,14 +31,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:70px;d
 .nav-cta{background:var(--gold);color:var(--bg);padding:.55rem 1.75rem;border-radius:2px;text-decoration:none;font-weight:700;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;transition:all .2s}
 .nav-cta:hover{background:var(--gold-bright)}
 
-.hero{min-height:100vh;display:flex;align-items:center;padding:6rem 3rem;position:relative;overflow:hidden}
+/* HERO — FULL WIDTH */
+.hero{min-height:100vh;width:100%;display:flex;align-items:center;padding:6rem 3rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#12100c 40%,#0a0a0a 100%)}
 .hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(201,162,78,.04) 0%,transparent 50%),radial-gradient(ellipse at 20% 80%,rgba(192,57,43,.03) 0%,transparent 50%)}
-.hero-streak{position:absolute;height:2px;background:linear-gradient(90deg,transparent,rgba(192,57,43,.4),rgba(201,162,78,.2),transparent);pointer-events:none}
-.hero-streak:nth-child(1){top:30%;left:-10%;width:60%;transform:rotate(-3deg);animation:streakPulse 4s ease infinite}
-.hero-streak:nth-child(2){top:65%;right:-10%;width:50%;transform:rotate(2deg);animation:streakPulse 4s ease 1.5s infinite}
-.hero-streak:nth-child(3){top:80%;left:20%;width:35%;transform:rotate(-1deg);animation:streakPulse 4s ease 3s infinite}
-@keyframes streakPulse{0%,100%{opacity:.3}50%{opacity:.8}}
+
+/* TIRE SKID MARKS */
+.skid{position:absolute;pointer-events:none;opacity:.08}
+.skid-1{top:25%;left:5%;width:70%;height:40px;background:repeating-linear-gradient(90deg,transparent 0,transparent 8px,#333 8px,#333 10px,transparent 10px,transparent 18px);transform:rotate(-4deg) scaleY(.3);filter:blur(1px)}
+.skid-2{top:60%;left:15%;width:65%;height:40px;background:repeating-linear-gradient(90deg,transparent 0,transparent 8px,#444 8px,#444 10px,transparent 10px,transparent 18px);transform:rotate(2deg) scaleY(.25);filter:blur(1.5px)}
+.skid-3{top:78%;left:-5%;width:55%;height:30px;background:repeating-linear-gradient(90deg,transparent 0,transparent 6px,#333 6px,#333 8px,transparent 8px,transparent 14px);transform:rotate(-1.5deg) scaleY(.2);filter:blur(1px)}
+.skid-4{top:40%;right:-5%;width:50%;height:35px;background:repeating-linear-gradient(90deg,transparent 0,transparent 10px,#3a3a3a 10px,#3a3a3a 12px,transparent 12px,transparent 22px);transform:rotate(3deg) scaleY(.22);filter:blur(2px)}
 
 .hero-content{position:relative;z-index:1;max-width:700px}
 .hero-tag{display:inline-flex;align-items:center;gap:.75rem;border:1px solid rgba(201,162,78,.2);padding:.4rem 1.25rem;border-radius:2px;margin-bottom:2rem;animation:fadeUp .7s ease both}
@@ -46,17 +50,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:70px;d
 .hero h1 .gold{color:var(--gold)}
 .hero-sub{font-size:1.05rem;color:var(--text-muted);font-weight:300;max-width:500px;margin-bottom:2.5rem;line-height:1.7;animation:fadeUp .7s ease .2s both}
 .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s ease .3s both}
-.btn-gold{background:var(--gold);color:var(--bg);padding:.9rem 2.5rem;border-radius:2px;text-decoration:none;font-weight:700;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;transition:all .2s}
+.btn-gold{background:var(--gold);color:var(--bg);padding:.9rem 2.5rem;border-radius:2px;text-decoration:none;font-weight:700;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;transition:all .2s;border:none;cursor:pointer;font-family:'Outfit',sans-serif}
 .btn-gold:hover{background:var(--gold-bright);transform:translateY(-1px)}
 .btn-ghost{background:transparent;color:var(--gold);padding:.9rem 2.5rem;border-radius:2px;text-decoration:none;font-weight:500;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(201,162,78,.3);transition:all .2s}
 .btn-ghost:hover{background:rgba(201,162,78,.08)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* SKID CURSOR TRAIL */
+.skid-trail{position:fixed;pointer-events:none;z-index:9999;width:30px;height:6px;background:repeating-linear-gradient(90deg,rgba(60,55,45,.25) 0,rgba(60,55,45,.25) 2px,transparent 2px,transparent 5px);border-radius:1px;transform:translate(-50%,-50%);opacity:0;transition:none}
 
 section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
 .s-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:5px;text-transform:uppercase;margin-bottom:.75rem}
 .s-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:2px;margin-bottom:.75rem}
 .s-desc{color:var(--text-muted);font-size:.92rem;font-weight:300;max-width:500px;margin-bottom:3rem}
 
+/* SERVICES */
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .svc{background:var(--surface);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:all .4s}
 .svc::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .4s}
@@ -67,7 +75,8 @@ section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
 .svc p{color:var(--text-muted);font-size:.82rem;font-weight:300;line-height:1.6}
 .svc-price{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--gold);margin-top:.75rem;letter-spacing:1px}
 
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+/* PRICING — SHARED CARD STYLES */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
 .price-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 2rem;transition:all .3s;position:relative}
 .price-card:hover{border-color:rgba(201,162,78,.3);transform:translateY(-3px)}
 .price-card.featured{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,162,78,.04) 0%,var(--surface) 100%)}
@@ -85,6 +94,7 @@ section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
 .price-card.featured .price-btn{background:var(--gold);color:var(--bg);border:1px solid var(--gold)}
 .price-card.featured .price-btn:hover{background:var(--gold-bright)}
 
+/* GALLERY */
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .gallery-item{aspect-ratio:1;background:var(--surface-2);border:1px solid var(--border);overflow:hidden;position:relative;cursor:pointer;transition:all .3s}
 .gallery-item:hover{border-color:var(--gold)}
@@ -94,6 +104,7 @@ section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
 .gallery-item:hover .g-label{opacity:1}
 .g-label span{font-size:.65rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:500}
 
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:center}
 .about-photo{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
 .about-photo img{width:100%;display:block}
@@ -102,6 +113,23 @@ section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
 .about-badges{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
 .about-badge{background:var(--surface);border:1px solid var(--border);padding:.4rem 1rem;border-radius:2px;font-size:.68rem;color:var(--text-muted);letter-spacing:1px}
 
+/* QUOTE FORM */
+.quote-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:6rem 3rem}
+.quote-inner{max-width:700px;margin:0 auto}
+.quote-form{display:flex;flex-direction:column;gap:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:.35rem}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:.72rem;color:var(--text-muted);font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.8rem 1rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;width:100%}
+.form-group input::placeholder,.form-group textarea::placeholder{color:#444}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
+.form-group select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a7068' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+.form-group select option{background:var(--bg);color:var(--text)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-submit{margin-top:.5rem}
+
+/* CTA */
 .final-cta{text-align:center;padding:8rem 2rem;position:relative;max-width:1200px;margin:0 auto;border-top:1px solid var(--border)}
 .final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--gold-dim) 0%,transparent 60%);pointer-events:none}
 .final-cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);letter-spacing:3px;margin-bottom:.75rem;position:relative}
@@ -119,6 +147,8 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
   section{padding:4rem 1.5rem}.hero{padding:5rem 1.5rem}
   .about-grid{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .quote-section{padding:4rem 1.5rem}
   footer{flex-direction:column;gap:.75rem;text-align:center}
 }
 </style>
@@ -131,61 +161,67 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
   <a href="#" class="nav-logo-text">WV WRAPS</a>
   <div class="nav-center">
     <a href="#services">Services</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#tint-pricing">Tint Pricing</a>
+    <a href="#wrap-pricing">Wrap Pricing</a>
     <a href="#gallery">Gallery</a>
-    <a href="#about">About</a>
+    <a href="#quote">Get a Quote</a>
   </div>
-  <a href="#contact" class="nav-cta">Get a Quote</a>
+  <a href="#quote" class="nav-cta">Get a Quote</a>
 </nav>
 
+<!-- HERO — FULL WIDTH -->
 <section class="hero">
   <div class="hero-bg">
-    <div class="hero-streak"></div>
-    <div class="hero-streak"></div>
-    <div class="hero-streak"></div>
+    <div class="skid skid-1"></div>
+    <div class="skid skid-2"></div>
+    <div class="skid skid-3"></div>
+    <div class="skid skid-4"></div>
   </div>
   <div class="hero-content">
     <div class="hero-tag"><span>Premium Installs Only — Barrie, ON</span></div>
     <h1>WRAP. TINT.<br><span class="gold">PROTECT.</span></h1>
     <p class="hero-sub">Full colour change wraps, nano ceramic tint, and paint protection film. Premium materials, precision installs, no shortcuts. Your car deserves the best.</p>
     <div class="hero-ctas">
-      <a href="#contact" class="btn-gold">Get a Quote</a>
+      <a href="#quote" class="btn-gold">Get a Quote</a>
       <a href="#gallery" class="btn-ghost">See Our Work</a>
     </div>
   </div>
 </section>
 
+<!-- SERVICES -->
 <section id="services" style="border-top:1px solid var(--border)">
   <p class="s-eyebrow">What We Do</p>
   <h2 class="s-title">SERVICES</h2>
   <p class="s-desc">From full body wraps to front window tint — precision and premium materials on every job.</p>
   <div class="services-grid">
     <div class="svc"><div class="svc-icon">🎨</div><h3>Full Colour Change Wraps</h3><p>Complete vehicle transformation. Any colour, any finish — gloss, matte, satin, chrome.</p><div class="svc-price">Starting at $2,499</div></div>
-    <div class="svc"><div class="svc-icon">🪟</div><h3>Nano Ceramic Tint</h3><p>Superior heat rejection, UV protection, and clarity. Lifetime warranty.</p><div class="svc-price">Sedans from $429 · Trucks $479</div></div>
-    <div class="svc"><div class="svc-icon">🛡️</div><h3>Paint Protection Film</h3><p>Self-healing PPF. Protect your paint from rock chips, scratches, and road debris.</p><div class="svc-price">Contact for quote</div></div>
-    <div class="svc"><div class="svc-icon">💎</div><h3>Regular Dye Tint</h3><p>Classic window tint at an affordable price. Great look, solid UV protection.</p><div class="svc-price">Sedans from $229 · 2 Front $99</div></div>
-    <div class="svc"><div class="svc-icon">🏎️</div><h3>Carbon Fibre Accents</h3><p>Hood wraps, mirror caps, roof wraps — carbon fibre finish for that aggressive look.</p><div class="svc-price">Contact for quote</div></div>
+    <div class="svc"><div class="svc-icon">🪟</div><h3>Nano Ceramic Tint</h3><p>Superior heat rejection, UV protection, and clarity. Lifetime warranty.</p><div class="svc-price">Sedans from $429</div></div>
+    <div class="svc"><div class="svc-icon">🛡️</div><h3>Paint Protection Film</h3><p>Self-healing PPF. Protect from rock chips, scratches, and road debris.</p><div class="svc-price">Contact for quote</div></div>
+    <div class="svc"><div class="svc-icon">💎</div><h3>Regular Dye Tint</h3><p>Classic window tint at an affordable price. Great look, solid UV protection.</p><div class="svc-price">Sedans from $229</div></div>
+    <div class="svc"><div class="svc-icon">🏎️</div><h3>Carbon Fibre Accents</h3><p>Hood wraps, mirror caps, roof wraps — carbon fibre for that aggressive look.</p><div class="svc-price">Contact for quote</div></div>
     <div class="svc"><div class="svc-icon">✨</div><h3>We Wrap Everything</h3><p>Not just cars. Boats, bikes, trailers, furniture, signage — if it has a surface, we wrap it.</p><div class="svc-price">Contact for quote</div></div>
   </div>
 </section>
 
-<section id="pricing" style="border-top:1px solid var(--border)">
-  <p class="s-eyebrow">Transparent Pricing</p>
+<!-- TINT PRICING -->
+<section id="tint-pricing" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Window Tinting</p>
   <h2 class="s-title">TINT PACKAGES</h2>
-  <p class="s-desc">No hidden fees. No surprises. Quality tint at honest prices.</p>
+  <p class="s-desc">Two levels of tint. Both professionally installed with precision edges and zero bubbles.</p>
   <div class="pricing-grid">
     <div class="price-card">
       <div class="price-label">Regular Dye Tint</div>
       <div class="price-amount">$229 <span>/ sedans</span></div>
-      <p class="price-desc">Classic dye tint with a clean look and solid UV protection.</p>
+      <p class="price-desc">Classic dye tint. Clean look, solid UV protection, affordable price.</p>
       <ul class="price-list">
         <li><span class="ck">✓</span> Full sedan — 5 windows</li>
         <li><span class="ck">✓</span> Trucks & SUVs — $249</li>
         <li><span class="ck">✓</span> 2 Front Windows — $99</li>
         <li><span class="ck">✓</span> UV protection</li>
         <li><span class="ck">✓</span> Glare reduction</li>
+        <li><span class="ck">✓</span> Privacy enhancement</li>
       </ul>
-      <a href="#contact" class="price-btn">Book Now</a>
+      <a href="#quote" class="price-btn">Book Now</a>
     </div>
     <div class="price-card featured">
       <div class="price-label">Nano Ceramic Tint</div>
@@ -200,25 +236,60 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
         <li><span class="ck">✓</span> No signal interference</li>
         <li><span class="ck">✓</span> Lifetime warranty</li>
       </ul>
-      <a href="#contact" class="price-btn">Book Now</a>
+      <a href="#quote" class="price-btn">Book Now</a>
     </div>
+  </div>
+</section>
+
+<!-- WRAP & PPF PRICING -->
+<section id="wrap-pricing" style="border-top:1px solid var(--border)">
+  <p class="s-eyebrow">Wraps & Protection</p>
+  <h2 class="s-title">WRAP & PPF PACKAGES</h2>
+  <p class="s-desc">Full transformations and paint protection. Every job is custom-quoted based on vehicle size and complexity.</p>
+  <div class="pricing-grid">
     <div class="price-card">
-      <div class="price-label">Full Colour Wrap</div>
+      <div class="price-label">Full Colour Change</div>
       <div class="price-amount">$2,499 <span>/ starting</span></div>
-      <p class="price-desc">Complete vehicle transformation. Premium vinyl, precision install, show-quality finish.</p>
+      <p class="price-desc">Complete vehicle wrap. Premium vinyl, precision install, show-quality finish.</p>
       <ul class="price-list">
         <li><span class="ck">✓</span> Any colour or finish</li>
         <li><span class="ck">✓</span> Gloss, matte, satin, chrome</li>
         <li><span class="ck">✓</span> Full body coverage</li>
         <li><span class="ck">✓</span> Door jambs included</li>
         <li><span class="ck">✓</span> 3-5 year durability</li>
-        <li><span class="ck">✓</span> Paint protection underneath</li>
+        <li><span class="ck">✓</span> Protects original paint</li>
       </ul>
-      <a href="#contact" class="price-btn">Get a Quote</a>
+      <a href="#quote" class="price-btn">Get a Quote</a>
+    </div>
+    <div class="price-card">
+      <div class="price-label">Carbon Fibre Accents</div>
+      <div class="price-amount">Custom <span>/ per panel</span></div>
+      <p class="price-desc">Individual panel wraps in carbon fibre finish. Hood, roof, mirrors, spoilers.</p>
+      <ul class="price-list">
+        <li><span class="ck">✓</span> Real carbon fibre look</li>
+        <li><span class="ck">✓</span> Per-panel pricing</li>
+        <li><span class="ck">✓</span> Mix with existing colour</li>
+        <li><span class="ck">✓</span> Clean, seamless edges</li>
+      </ul>
+      <a href="#quote" class="price-btn">Get a Quote</a>
+    </div>
+    <div class="price-card">
+      <div class="price-label">Paint Protection Film</div>
+      <div class="price-amount">Custom <span>/ quoted</span></div>
+      <p class="price-desc">Self-healing PPF in gloss or matte. Full front, full body, or custom coverage.</p>
+      <ul class="price-list">
+        <li><span class="ck">✓</span> Self-healing technology</li>
+        <li><span class="ck">✓</span> Gloss or matte finish</li>
+        <li><span class="ck">✓</span> Rock chip protection</li>
+        <li><span class="ck">✓</span> Scratch resistance</li>
+        <li><span class="ck">✓</span> 10-year warranty</li>
+      </ul>
+      <a href="#quote" class="price-btn">Get a Quote</a>
     </div>
   </div>
 </section>
 
+<!-- GALLERY -->
 <section id="gallery" style="border-top:1px solid var(--border)">
   <p class="s-eyebrow">Our Work</p>
   <h2 class="s-title">GALLERY</h2>
@@ -234,17 +305,16 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
   <p style="text-align:center;margin-top:2rem"><a href="https://instagram.com/wv_wraps" target="_blank" style="color:var(--gold);font-size:.82rem;text-decoration:none;letter-spacing:1px">See more on Instagram →</a></p>
 </section>
 
+<!-- ABOUT -->
 <section id="about" style="border-top:1px solid var(--border)">
   <p class="s-eyebrow">About</p>
   <h2 class="s-title">WORTH'S VINYL WRAPS</h2>
   <div class="about-grid">
-    <div class="about-photo">
-      <img src="https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=600&q=80" alt="WV Wraps">
-    </div>
+    <div class="about-photo"><img src="https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=600&q=80" alt="WV Wraps"></div>
     <div class="about-text">
       <h3>PREMIUM INSTALLS.<br>NO SHORTCUTS.</h3>
-      <p>WV Wraps is Barrie's go-to for vinyl wraps, ceramic tint, and paint protection film. Every install is done with precision, premium materials, and attention to detail that shows in the finished product.</p>
-      <p>Whether it's a full colour change, a nano ceramic tint job, or PPF to protect your investment — we treat every vehicle like it's our own.</p>
+      <p>WV Wraps is Barrie's go-to for vinyl wraps, ceramic tint, and paint protection film. Every install is done with precision, premium materials, and attention to detail.</p>
+      <p>Whether it's a full colour change, nano ceramic tint, or PPF — we treat every vehicle like it's our own.</p>
       <div class="about-badges">
         <div class="about-badge">Barrie, ON</div>
         <div class="about-badge">Premium Materials Only</div>
@@ -254,9 +324,65 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
   </div>
 </section>
 
-<div class="final-cta" id="contact">
+<!-- QUOTE FORM -->
+<div class="quote-section" id="quote">
+  <div class="quote-inner">
+    <p class="s-eyebrow" style="text-align:center">Free Quote</p>
+    <h2 class="s-title" style="text-align:center">GET YOUR QUOTE</h2>
+    <p class="s-desc" style="text-align:center;margin-left:auto;margin-right:auto">Tell us about your vehicle and what you're looking for. We'll get back to you within 24 hours.</p>
+    <form class="quote-form" id="quoteForm">
+      <div class="form-row">
+        <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
+        <div class="form-group"><label>Phone or Email</label><input type="text" name="contact" placeholder="How should we reach you?" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Vehicle Make</label>
+          <select name="make" id="carMake" required>
+            <option value="" disabled selected>Select make</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Vehicle Model</label>
+          <select name="model" id="carModel" required>
+            <option value="" disabled selected>Select make first</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Year</label>
+          <select name="year" id="carYear">
+            <option value="" disabled selected>Select year</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select name="service" required>
+            <option value="" disabled selected>Select service</option>
+            <option>Full Colour Change Wrap</option>
+            <option>Nano Ceramic Tint</option>
+            <option>Regular Dye Tint</option>
+            <option>Paint Protection Film (PPF)</option>
+            <option>Carbon Fibre Accents</option>
+            <option>2 Front Windows Tint</option>
+            <option>Other / Multiple Services</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label>Additional Details</label>
+        <textarea name="details" placeholder="Colour preference, specific panels, any questions..."></textarea>
+      </div>
+      <button type="submit" class="btn-gold form-submit" style="width:100%;text-align:center;padding:1rem">SUBMIT QUOTE REQUEST</button>
+    </form>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
   <h2>READY TO <span style="color:var(--gold)">TRANSFORM</span><br>YOUR RIDE?</h2>
-  <p>DM us on Instagram or send a message for a free quote.</p>
+  <p>DM us on Instagram or fill out the quote form above.</p>
   <a href="https://instagram.com/wv_wraps" target="_blank" class="btn-gold">DM on Instagram</a>
   <br>
   <a href="https://instagram.com/wv_wraps" target="_blank" class="cta-ig">@wv_wraps</a>
@@ -267,5 +393,99 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;justi
   <span class="footer-right">© 2026 WV Wraps · Barrie, ON · Built by <a href="https://hadithadev.ca" target="_blank">HadiThaDev</a></span>
 </footer>
 
+<script>
+// ---- SKID MARK CURSOR TRAIL ----
+let lastTrailTime = 0;
+document.addEventListener('mousemove', e => {
+  const now = Date.now();
+  if (now - lastTrailTime < 40) return;
+  lastTrailTime = now;
+  const t = document.createElement('div');
+  t.className = 'skid-trail';
+  t.style.left = e.clientX + 'px';
+  t.style.top = e.clientY + 'px';
+  // Random rotation for natural skid feel
+  const angle = Math.atan2(e.movementY || 0, e.movementX || 0) * (180 / Math.PI);
+  t.style.transform = `translate(-50%,-50%) rotate(${angle}deg)`;
+  t.style.opacity = '.35';
+  t.style.width = (15 + Math.random() * 20) + 'px';
+  document.body.appendChild(t);
+  // Fade out
+  requestAnimationFrame(() => {
+    t.style.transition = 'opacity .8s ease';
+    t.style.opacity = '0';
+  });
+  setTimeout(() => t.remove(), 900);
+});
+
+// ---- CAR MAKE/MODEL DROPDOWNS ----
+const cars = {
+  'Acura':['ILX','Integra','MDX','RDX','TLX','NSX'],
+  'Audi':['A3','A4','A5','A6','A7','A8','Q3','Q5','Q7','Q8','RS3','RS5','RS6','RS7','e-tron','TT','R8'],
+  'BMW':['2 Series','3 Series','4 Series','5 Series','7 Series','8 Series','X1','X3','X4','X5','X6','X7','M2','M3','M4','M5','M8','i4','iX'],
+  'Chevrolet':['Camaro','Corvette','Cruze','Equinox','Malibu','Silverado','Tahoe','Traverse','Blazer','Colorado','Trax'],
+  'Chrysler':['300','Pacifica'],
+  'Dodge':['Charger','Challenger','Durango','Hornet','Ram 1500','Ram 2500'],
+  'Ford':['Bronco','Edge','Escape','Explorer','F-150','F-250','Maverick','Mustang','Ranger','Expedition'],
+  'Genesis':['G70','G80','G90','GV70','GV80'],
+  'GMC':['Acadia','Canyon','Sierra','Terrain','Yukon'],
+  'Honda':['Accord','Civic','CR-V','HR-V','Odyssey','Passport','Pilot','Ridgeline','Civic Type R'],
+  'Hyundai':['Elantra','IONIQ 5','IONIQ 6','Kona','Palisade','Santa Fe','Sonata','Tucson','Veloster N'],
+  'Infiniti':['Q50','Q60','QX50','QX55','QX60','QX80'],
+  'Jeep':['Cherokee','Compass','Gladiator','Grand Cherokee','Wrangler'],
+  'Kia':['Forte','K5','Seltos','Sorento','Sportage','Stinger','Telluride','EV6','EV9'],
+  'Lamborghini':['Huracán','Urus','Revuelto'],
+  'Lexus':['ES','IS','GS','LC','LS','NX','RX','GX','LX','UX','RC'],
+  'Mazda':['CX-5','CX-30','CX-50','CX-90','Mazda3','MX-5 Miata'],
+  'Mercedes-Benz':['A-Class','C-Class','E-Class','S-Class','CLA','CLS','GLA','GLB','GLC','GLE','GLS','AMG GT','G-Class','EQS','EQE'],
+  'Mitsubishi':['Eclipse Cross','Outlander','RVR'],
+  'Nissan':['Altima','Frontier','Kicks','Maxima','Murano','Pathfinder','Rogue','Sentra','Versa','Z','GT-R'],
+  'Porsche':['911','Cayenne','Cayman','Macan','Panamera','Taycan','718 Boxster'],
+  'Subaru':['BRZ','Crosstrek','Forester','Impreza','Legacy','Outback','WRX'],
+  'Tesla':['Model 3','Model S','Model X','Model Y','Cybertruck'],
+  'Toyota':['4Runner','Camry','Corolla','GR86','GR Supra','Highlander','RAV4','Tacoma','Tundra','Venza','Prius'],
+  'Volkswagen':['Atlas','Golf','Golf R','GTI','ID.4','Jetta','Taos','Tiguan','Arteon'],
+  'Volvo':['C40','S60','S90','V60','XC40','XC60','XC90'],
+  'Other':['Other — specify in details']
+};
+
+const makeEl = document.getElementById('carMake');
+const modelEl = document.getElementById('carModel');
+const yearEl = document.getElementById('carYear');
+
+// Populate makes
+Object.keys(cars).forEach(make => {
+  const opt = document.createElement('option');
+  opt.value = make; opt.textContent = make;
+  makeEl.appendChild(opt);
+});
+
+// Populate years (2026 down to 2000)
+for (let y = 2026; y >= 2000; y--) {
+  const opt = document.createElement('option');
+  opt.value = y; opt.textContent = y;
+  yearEl.appendChild(opt);
+}
+
+// Filter models by make
+makeEl.addEventListener('change', () => {
+  modelEl.innerHTML = '<option value="" disabled selected>Select model</option>';
+  const models = cars[makeEl.value] || [];
+  models.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    modelEl.appendChild(opt);
+  });
+});
+
+// Form submit (placeholder — hook up to Web3Forms or email later)
+document.getElementById('quoteForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'SENT ✓';
+  btn.style.background = '#2ecc71';
+  setTimeout(() => { btn.textContent = 'SUBMIT QUOTE REQUEST'; btn.style.background = ''; }, 3000);
+});
+</script>
 </body>
 </html>
