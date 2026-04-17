@@ -30,7 +30,8 @@ HOT — NO WEBSITE AT ALL (18 shops)
 19. Arthur BarberShop — NO SITE
 
 UNIVERSAL CALL SCRIPT (personalize with name):
-"Hey [Shop Name] — I tried looking you up online and there's nothing — no website, just a Google listing. Every barber around you has at least something online. A clean site with your services, pricing, gallery of your work, and a booking link would help new customers find you and book before they even walk in. I build websites for local businesses — check out hadithadev.ca"
+"Hey [Shop Name] — I tried looking you up online and there's nothing — no website, just a Google listing. Every barber around you has at least something online. A clean site with your services, pricing, pictures of your work, and a booking link would help new customers find you and book before they even walk in. I build websites for local businesses — check out hadithadev.ca"
+
 
 
 =================================================================
