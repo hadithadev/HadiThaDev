@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>705 UNDERGROUND — Barrie Car Scene</title>
+<meta name="description" content="705 Underground — Barrie's underground car meet collective. Meets, cruises, community. Location drops week of. Strictly park & chill." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='62' font-family='Arial Black' font-size='38' fill='%23dc2626' text-anchor='middle' font-weight='900'%3E705%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Bebas+Neue&family=Permanent+Marker&display=swap" rel="stylesheet" />
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow Condensed', 'Oswald', sans-serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  :root {
+    --red: #dc2626;
+    --red-dark: #991b1b;
+    --red-950: #450a0a;
+  }
+
+  .font-display { font-family: 'Bebas Neue', 'Oswald', sans-serif; letter-spacing: 0.02em; }
+  .font-marker { font-family: 'Permanent Marker', cursive; }
+  .font-stencil { font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em; }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea { font-family: inherit; }
+
+  /* ─── Grain overlay ─── */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.7 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.15;
+    mix-blend-mode: overlay;
+  }
+
+  .diag-stripes {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(220, 38, 38, 0.08) 20px,
+      rgba(220, 38, 38, 0.08) 21px
+    );
+  }
+
+  /* ─── Animations ─── */
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    8% { opacity: 0.85; }
+    9% { opacity: 1; }
+    35% { opacity: 1; }
+    36% { opacity: 0.7; }
+    37% { opacity: 1; }
+  }
+  .flicker { animation: flicker 4s infinite; }
+
+  @keyframes slide-in {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  .slide-in { animation: slide-in 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+
+  @keyframes ticker-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .ticker { animation: ticker-slide 40s linear infinite; display: flex; white-space: nowrap; }
+
+  /* ─── Shared ─── */
+  .brush-underline { position: relative; display: inline-block; }
+  .brush-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 6px;
+    background: var(--red);
+    transform: skewX(-12deg);
+    clip-path: polygon(0 30%, 100% 0, 98% 100%, 2% 70%);
+  }
+
+  .red-glow {
+    box-shadow: 0 0 40px rgba(220, 38, 38, 0.4), inset 0 0 20px rgba(220, 38, 38, 0.1);
+  }
+
+  .hover-skew { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; }
+  .hover-skew:hover { transform: skewX(-4deg); }
+
+  .custom-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.15);
+    color: white;
+    padding: 12px 4px;
+    width: 100%;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: border-color 0.3s;
+    outline: none;
+    font-size: 14px;
+  }
+  .custom-input:focus { border-color: var(--red); }
+  .custom-input::placeholder { color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+  textarea.custom-input { resize: none; }
+
+  .label-tiny {
+    display: block;
+    font-size: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Layout utilities ─── */
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 40;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(127, 29, 29, 0.3);
+  }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo-dot {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: #000;
+    border: 2px solid var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Permanent Marker', cursive;
+    color: var(--red);
+    font-size: 11px;
+  }
+  .logo-text-main { font-size: 20px; letter-spacing: 0.04em; }
+  .logo-text-sub { font-size: 10px; color: var(--red); letter-spacing: 0.3em; }
+  .nav-links { display: none; gap: 32px; font-size: 14px; font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em; }
+  .nav-links a { transition: color 0.2s; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta {
+    background: var(--red);
+    padding: 8px 16px;
+    font-size: 12px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transition: background 0.2s;
+    display: none;
+  }
+  .nav-cta:hover { background: #b91c1c; }
+
+  @media (min-width: 768px) { .nav-links { display: flex; } }
+  @media (min-width: 640px) { .nav-cta { display: inline-block; } }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    padding-top: 96px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg-gradient {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #000 0%, #000 50%, rgba(69, 10, 10, 0.4) 100%);
+  }
+  .hero-bg-705 {
+    position: absolute;
+    top: 25%;
+    left: -80px;
+    font-size: 20rem;
+    color: rgba(127, 29, 29, 0.1);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+  .hero-bg-ug {
+    position: absolute;
+    bottom: 40px;
+    right: -40px;
+    font-size: 14rem;
+    color: rgba(127, 29, 29, 0.1);
+    line-height: 1;
+    transform: rotate(-8deg);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .ticker-wrap {
+    border-top: 1px solid rgba(127, 29, 29, 0.5);
+    border-bottom: 1px solid rgba(127, 29, 29, 0.5);
+    padding: 8px 0;
+    margin-bottom: 48px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.4);
+  }
+  .ticker-item {
+    display: flex;
+    gap: 32px;
+    padding-right: 32px;
+    font-size: 14px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--red);
+  }
+  .ticker-item .sep { color: rgba(255,255,255,0.3); }
+
+  .hero-inner { position: relative; max-width: 1280px; margin: 0 auto; padding: 80px 24px; width: 100%; }
+  .hero-grid {
+    display: grid;
+    gap: 48px;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .hero-grid { grid-template-columns: 3fr 2fr; }
+  }
+
+  .hero-tag { font-family: 'Permanent Marker', cursive; color: var(--red); font-size: 18px; margin-bottom: 16px; }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    line-height: 0.85;
+    margin-bottom: 24px;
+  }
+  .hero-title .italic {
+    color: var(--red);
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(2.5rem, 7vw, 7rem);
+    font-style: italic;
+  }
+  .hero-copy {
+    color: rgba(255,255,255,0.7);
+    font-size: 18px;
+    max-width: 576px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .cta-group { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .cta-primary {
+    background: var(--red);
+    padding: 16px 32px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cta-primary:hover { background: #b91c1c; }
+  .cta-stat { font-size: 12px; font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); }
+  .cta-stat .num { color: var(--red); font-size: 16px; display: block; }
+
+  /* ─── Meet card ─── */
+  .meet-card-wrap { position: relative; }
+  .meet-card-glow {
+    position: absolute;
+    inset: -8px;
+    background: var(--red);
+    opacity: 0.2;
+    filter: blur(40px);
+  }
+  .meet-card {
+    position: relative;
+    border: 2px solid var(--red);
+    background: #000;
+    padding: 32px;
+    box-shadow: 0 0 40px rgba(220, 38, 38, 0.4), inset 0 0 20px rgba(220, 38, 38, 0.1);
+  }
+  .meet-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(127, 29, 29, 0.5);
+  }
+  .meet-card-header .tag { font-family: 'Permanent Marker', cursive; color: var(--red); font-size: 14px; }
+  .meet-card-header .title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; }
+  .meet-card-header .status-label { font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); text-align: right; }
+  .meet-card-header .status-row { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+  .status-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; }
+  .status-text { font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em; color: var(--red); font-size: 14px; }
+
+  .countdown-label { font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700; color: rgba(255,255,255,0.5); margin-bottom: 12px; letter-spacing: 0.3em; }
+  .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 24px; }
+  .countdown-cell {
+    background: rgba(69, 10, 10, 0.3);
+    border: 1px solid rgba(127, 29, 29, 0.5);
+    padding: 12px;
+    text-align: center;
+  }
+  .countdown-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 1; }
+  .countdown-unit { font-size: 9px; font-family: 'Oswald', sans-serif; font-weight: 700; color: var(--red); margin-top: 4px; letter-spacing: 0.1em; }
+
+  .meet-info-row { display: flex; justify-content: space-between; align-items: center; font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.1em; font-size: 14px; padding: 6px 0; }
+  .meet-info-row .k { color: rgba(255,255,255,0.5); }
+  .meet-info-row .v-red { color: var(--red); }
+
+  .meet-rules { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(127, 29, 29, 0.5); }
+  .meet-rules-label { font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700; color: rgba(255,255,255,0.4); margin-bottom: 8px; letter-spacing: 0.1em; }
+  .meet-rules ul { list-style: none; }
+  .meet-rules li { font-size: 14px; padding: 2px 0; display: flex; gap: 8px; letter-spacing: 0.08em; }
+  .meet-rules li .x { color: var(--red); }
+
+  /* ─── SECTION shared ─── */
+  section { position: relative; }
+  .section-label { font-family: 'Permanent Marker', cursive; color: var(--red); font-size: 18px; margin-bottom: 8px; }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 0.9;
+  }
+  .section-title .red { color: var(--red); }
+  .section-pad { padding: 128px 0; border-top: 1px solid rgba(127, 29, 29, 0.3); }
+
+  /* ─── RSVP ─── */
+  .rsvp-gradient-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 128px;
+    background: linear-gradient(to bottom, rgba(69,10,10,0.2), transparent);
+    pointer-events: none;
+  }
+  .rsvp-grid { display: grid; gap: 64px; align-items: flex-start; }
+  @media (min-width: 1024px) { .rsvp-grid { grid-template-columns: 1fr 1fr; } }
+
+  .rsvp-copy { color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1.6; margin: 24px 0 32px; max-width: 448px; }
+  .rsvp-stat {
+    border-left: 2px solid var(--red);
+    padding-left: 24px;
+  }
+  .rsvp-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 60px; color: var(--red); line-height: 1; }
+  .rsvp-stat-label { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; letter-spacing: 0.1em; }
+  .rsvp-stat-sub { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 12px; color: rgba(255,255,255,0.6); max-width: 320px; margin-top: 16px; letter-spacing: 0.05em; line-height: 1.5; }
+
+  .rsvp-form-wrap { position: relative; }
+  .rsvp-form-deco {
+    position: absolute;
+    top: -16px; left: -16px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    color: rgba(127, 29, 29, 0.2);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+  .rsvp-form {
+    position: relative;
+    border: 2px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    padding: 32px;
+  }
+  .form-label-top { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 12px; color: var(--red); margin-bottom: 24px; letter-spacing: 0.3em; }
+
+  .form-fields > div { margin-bottom: 24px; }
+  .count-btn-row { display: flex; gap: 8px; margin-top: 8px; }
+  .count-btn {
+    flex: 1;
+    padding: 12px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.2s;
+  }
+  .count-btn:hover { border-color: var(--red); }
+  .count-btn.active { background: var(--red); border-color: var(--red); }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--red);
+    padding: 16px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: #b91c1c; }
+  .form-footnote { text-align: center; font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700; color: rgba(255,255,255,0.3); margin-top: 16px; letter-spacing: 0.1em; }
+
+  .success {
+    padding: 80px 0;
+    text-align: center;
+  }
+  .success-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--red); margin-bottom: 12px; }
+  .success-sub { font-family: 'Oswald', sans-serif; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; }
+
+  /* ─── GARAGE ─── */
+  .garage-section {
+    background: linear-gradient(to bottom, #000, rgba(69, 10, 10, 0.05), #000);
+  }
+  .garage-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .garage-header-copy { color: rgba(255,255,255,0.7); margin-top: 16px; max-width: 512px; line-height: 1.5; }
+  .garage-add-btn {
+    background: var(--red);
+    padding: 12px 24px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    font-size: 14px;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+  .garage-add-btn:hover { background: #b91c1c; }
+
+  .garage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  @media (min-width: 768px) { .garage-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .garage-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .garage-card {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #18181b;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: border-color 0.3s;
+  }
+  .garage-card:hover { border-color: var(--red); }
+  .garage-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s;
+  }
+  .garage-card:hover img { transform: scale(1.1); }
+  .garage-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, #000, rgba(0,0,0,0.4), transparent);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  .garage-card:hover .garage-card-overlay { opacity: 1; }
+  .garage-card-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px;
+  }
+  .garage-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; line-height: 1.1; }
+  .garage-card-model { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--red); line-height: 1.1; }
+  .garage-card-ig { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 8px; letter-spacing: 0.1em; }
+  .garage-card-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--red);
+    color: #fff;
+    font-size: 9px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    padding: 4px 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .garage-form-wrap {
+    border: 2px solid rgba(127, 29, 29, 0.5);
+    background: rgba(0,0,0,0.6);
+    padding: 32px;
+    position: relative;
+  }
+  @media (min-width: 768px) { .garage-form-wrap { padding: 48px; } }
+  .form-tag {
+    position: absolute;
+    top: -16px; left: 32px;
+    background: #000;
+    padding: 0 16px;
+    font-family: 'Permanent Marker', cursive;
+    color: var(--red);
+    font-size: 18px;
+  }
+  .garage-form-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; margin-bottom: 32px; }
+  .garage-form-grid { display: grid; gap: 32px; margin-bottom: 32px; }
+  @media (min-width: 768px) { .garage-form-grid { grid-template-columns: 1fr 1fr; } }
+
+  .upload-btn {
+    width: 100%;
+    border: 2px dashed rgba(255,255,255,0.2);
+    transition: all 0.2s;
+    padding: 16px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .upload-btn:hover {
+    border-color: var(--red);
+    background: rgba(69, 10, 10, 0.2);
+    color: #fff;
+  }
+  .upload-btn svg { transition: color 0.2s; }
+  .upload-btn:hover svg { color: var(--red); }
+  .upload-hint { font-size: 9px; font-family: 'Oswald', sans-serif; font-weight: 700; color: rgba(255,255,255,0.3); margin-top: 8px; letter-spacing: 0.1em; }
+
+  .garage-submit-row {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .garage-submit-note { font-size: 10px; font-family: 'Oswald', sans-serif; font-weight: 700; color: rgba(255,255,255,0.3); max-width: 320px; letter-spacing: 0.1em; line-height: 1.5; }
+  .garage-submit-btn {
+    background: var(--red);
+    padding: 16px 32px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    transition: background 0.2s;
+  }
+  .garage-submit-btn:hover { background: #b91c1c; }
+
+  /* ─── SPONSORS ─── */
+  .sponsors-header { text-align: center; margin-bottom: 64px; }
+  .sponsors-header p { color: rgba(255,255,255,0.7); margin-top: 24px; max-width: 672px; margin-left: auto; margin-right: auto; }
+
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 80px;
+  }
+  @media (min-width: 768px) { .sponsors-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .sponsor-card {
+    position: relative;
+    aspect-ratio: 1;
+    border: 2px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.4);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+  .sponsor-card:hover { border-color: var(--red); }
+  .sponsor-card.cta {
+    border-color: var(--red);
+    background: rgba(69, 10, 10, 0.2);
+  }
+  .sponsor-card.cta:hover { background: var(--red); }
+  .sponsor-card.cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(220, 38, 38, 0.08) 20px, rgba(220, 38, 38, 0.08) 21px);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .sponsor-tag { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 0.3em; color: var(--red); position: relative; }
+  .sponsor-card.cta .sponsor-tag { color: #fff; }
+  .sponsor-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1.1; position: relative; }
+  @media (min-width: 768px) { .sponsor-name { font-size: 30px; } }
+  .sponsor-sub { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.2em; position: relative; }
+  .sponsor-card.cta .sponsor-sub { color: rgba(255,255,255,0.8); }
+  .sponsor-arrow { display: inline-block; margin-left: 4px; transition: transform 0.3s; }
+  .sponsor-card.cta:hover .sponsor-arrow { transform: translateX(4px); }
+
+  /* ─── Pitch ─── */
+  .pitch-wrap { max-width: 768px; margin: 0 auto; }
+  .pitch-intro { text-align: center; margin-bottom: 40px; }
+  .pitch-intro p { color: rgba(255,255,255,0.7); line-height: 1.6; max-width: 672px; margin: 0 auto 24px; }
+  .pitch-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .pitch-chip {
+    border: 1px solid rgba(127, 29, 29, 0.6);
+    color: var(--red);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 6px 12px;
+  }
+
+  .pitch-form-wrap {
+    border: 2px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.6);
+    padding: 32px;
+    position: relative;
+  }
+  @media (min-width: 768px) { .pitch-form-wrap { padding: 48px; } }
+  .pitch-form-grid { display: grid; gap: 24px; margin-bottom: 24px; }
+  @media (min-width: 768px) { .pitch-form-grid { grid-template-columns: 1fr 1fr; } }
+  .pitch-form-field { margin-bottom: 24px; }
+  .pitch-submit-btn {
+    width: 100%;
+    background: var(--red);
+    padding: 16px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    transition: background 0.2s;
+  }
+  .pitch-submit-btn:hover { background: #b91c1c; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    border-top: 2px solid var(--red);
+    background: #000;
+    padding: 80px 0 32px;
+  }
+  .footer-logo { text-align: center; margin-bottom: 48px; }
+  .footer-705 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(6rem, 20vw, 16rem);
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    color: var(--red);
+  }
+  .footer-underground {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(2rem, 6vw, 4rem);
+    margin-top: -32px;
+  }
+  .footer-loc { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.4em; color: rgba(255,255,255,0.4); margin-top: 16px; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 12px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.2em;
+  }
+  .footer-bottom .links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-bottom a:hover { color: var(--red); }
+  .footer-bottom .sep { color: rgba(255,255,255,0.2); }
+
+  /* ─── Reduced motion ─── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    .ticker { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo-wrap">
+      <div class="logo-dot">705</div>
+      <div>
+        <div class="font-display logo-text-main">705 UNDERGROUND</div>
+        <div class="font-stencil logo-text-sub">BARRIE • ONTARIO</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#meet">NEXT MEET</a>
+      <a href="#rsvp">RSVP</a>
+      <a href="#garage">THE GARAGE</a>
+      <a href="#sponsors">SPONSORS</a>
+    </div>
+    <a href="https://instagram.com/705undergroundmeets" target="_blank" rel="noopener" class="nav-cta hover-skew">@705UNDERGROUND</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section id="meet" class="hero diag-stripes">
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-bg-705 font-display">705</div>
+  <div class="hero-bg-ug font-marker">UG</div>
+
+  <div class="hero-inner">
+    <div class="ticker-wrap">
+      <div class="ticker" id="ticker">
+        <!-- Ticker items injected by JS (doubled for seamless loop) -->
+      </div>
+    </div>
+
+    <div class="hero-grid">
+      <!-- Left -->
+      <div class="slide-in">
+        <div class="hero-tag">// NEXT DROP</div>
+        <h1 class="hero-title">
+          POP-UP<br/>
+          <span class="brush-underline">MEET</span><br/>
+          <span class="italic">tonight.</span>
+        </h1>
+        <p class="hero-copy">
+          Location drops day of. Park n chill, strictly low-key — no revving, no 2-stepping, respect the lot. All builds welcome. Pull up, park up, turn up.
+        </p>
+        <div class="cta-group">
+          <a href="#rsvp" class="cta-primary hover-skew">
+            <span>LOCK IN YOUR SPOT</span>
+            <span>→</span>
+          </a>
+          <div class="cta-stat">
+            <span class="num" id="hero-rsvp-count">47</span>
+            BUILDS CONFIRMED
+          </div>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="meet-card-wrap">
+        <div class="meet-card-glow"></div>
+        <div class="meet-card">
+          <div class="meet-card-header">
+            <div>
+              <div class="tag">LOCATION DROP</div>
+              <div class="title font-display">THIS WEEK</div>
+            </div>
+            <div>
+              <div class="status-label">STATUS</div>
+              <div class="status-row">
+                <div class="status-dot flicker"></div>
+                <span class="status-text">LIVE</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="countdown-label font-stencil">TIME TIL LOCATION DROPS</div>
+            <div class="countdown-grid">
+              <div class="countdown-cell">
+                <div class="countdown-num" id="cd-days">00</div>
+                <div class="countdown-unit">DAYS</div>
+              </div>
+              <div class="countdown-cell">
+                <div class="countdown-num" id="cd-hours">00</div>
+                <div class="countdown-unit">HRS</div>
+              </div>
+              <div class="countdown-cell">
+                <div class="countdown-num" id="cd-min">00</div>
+                <div class="countdown-unit">MIN</div>
+              </div>
+              <div class="countdown-cell">
+                <div class="countdown-num" id="cd-sec">00</div>
+                <div class="countdown-unit">SEC</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="meet-info-row"><span class="k">WHEN</span><span>WEDNESDAY • 7PM — LATE</span></div>
+            <div class="meet-info-row"><span class="k">WHERE</span><span class="v-red">DROPS ON IG</span></div>
+            <div class="meet-info-row"><span class="k">ENTRY</span><span>FREE — RSVP ONLY</span></div>
+            <div class="meet-info-row"><span class="k">VIBE</span><span>LOWKEY / PARK N CHILL</span></div>
+          </div>
+
+          <div class="meet-rules">
+            <div class="meet-rules-label">THE RULES</div>
+            <ul class="font-stencil">
+              <li><span class="x">×</span> KEEP IT LOWKEY</li>
+              <li><span class="x">×</span> NO BURNOUTS</li>
+              <li><span class="x">×</span> NO 2-STEPPING</li>
+              <li><span class="x">×</span> RESPECT THE LOT</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ RSVP ═══════════════════════ -->
+<section id="rsvp" class="section-pad">
+  <div class="rsvp-gradient-top"></div>
+  <div class="container">
+    <div class="rsvp-grid">
+      <div>
+        <div class="section-label">// LOCK IN</div>
+        <h2 class="section-title">RSVP<br/><span class="red">OR MISS OUT.</span></h2>
+        <p class="rsvp-copy">
+          We track numbers so the lot doesn't get ambushed. Drop your info, get the location first, keep this scene tight.
+        </p>
+        <div class="rsvp-stat">
+          <div class="rsvp-stat-num" id="rsvp-stat-num">47</div>
+          <div class="rsvp-stat-label">BUILDS LOCKED IN THIS MEET</div>
+          <div class="rsvp-stat-sub">AVG MEET = 60-90 CARS. RSVPs CLOSE 1HR BEFORE LOCATION DROP.</div>
+        </div>
+      </div>
+
+      <div class="rsvp-form-wrap">
+        <div class="rsvp-form-deco">//</div>
+        <div class="rsvp-form">
+          <div id="rsvp-content">
+            <div class="form-label-top">FILL IT OUT — IT TAKES 10 SECONDS</div>
+            <form class="form-fields" id="rsvp-form" onsubmit="return handleRsvp(event)">
+              <div>
+                <label class="label-tiny">YOUR NAME</label>
+                <input type="text" class="custom-input" placeholder="FIRST NAME" id="rsvp-name" required />
+              </div>
+              <div>
+                <label class="label-tiny">INSTAGRAM @</label>
+                <input type="text" class="custom-input" placeholder="@YOURHANDLE" id="rsvp-ig" />
+              </div>
+              <div>
+                <label class="label-tiny">YOUR BUILD</label>
+                <input type="text" class="custom-input" placeholder="06 WRX STI / STOCK / ETC" id="rsvp-car" required />
+              </div>
+              <div>
+                <label class="label-tiny">ROLLING WITH</label>
+                <div class="count-btn-row" id="count-btn-row">
+                  <button type="button" class="count-btn active" data-count="1">1</button>
+                  <button type="button" class="count-btn" data-count="2">2</button>
+                  <button type="button" class="count-btn" data-count="3">3</button>
+                  <button type="button" class="count-btn" data-count="4">4+</button>
+                </div>
+              </div>
+              <button type="submit" class="submit-btn hover-skew">CONFIRM RSVP →</button>
+              <div class="form-footnote">YOUR INFO = PRIVATE. WE DON'T SHARE.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ GARAGE ═══════════════════════ -->
+<section id="garage" class="section-pad garage-section">
+  <div class="container">
+    <div class="garage-header">
+      <div>
+        <div class="section-label">// THE LINEUP</div>
+        <h2 class="section-title">THE <span class="red">GARAGE</span></h2>
+        <p class="garage-header-copy">
+          What you're pulling up to. Every ride here got dropped by someone who attends. Your build belongs here too.
+        </p>
+      </div>
+      <a href="#submit-build" class="garage-add-btn hover-skew">+ ADD YOUR BUILD</a>
+    </div>
+
+    <div class="garage-grid" id="garage-grid">
+      <!-- Garage cards injected by JS -->
+    </div>
+
+    <div id="submit-build" class="garage-form-wrap">
+      <div class="form-tag">// DROP YOUR RIDE</div>
+      <div id="garage-form-content">
+        <div class="garage-form-title font-display">ADD YOUR BUILD TO THE GARAGE</div>
+        <form class="garage-form-grid" id="garage-form" onsubmit="return handleGarage(event)">
+          <div>
+            <label class="label-tiny">YOUR NAME</label>
+            <input type="text" class="custom-input" placeholder="NAME" id="g-owner" required />
+          </div>
+          <div>
+            <label class="label-tiny">INSTAGRAM @</label>
+            <input type="text" class="custom-input" placeholder="@YOURHANDLE" id="g-ig" />
+          </div>
+          <div>
+            <label class="label-tiny">MAKE</label>
+            <input type="text" class="custom-input" placeholder="SUBARU / HONDA / BMW" id="g-make" required />
+          </div>
+          <div>
+            <label class="label-tiny">MODEL</label>
+            <input type="text" class="custom-input" placeholder="WRX STI / CIVIC / M3" id="g-model" />
+          </div>
+          <div>
+            <label class="label-tiny">YEAR</label>
+            <input type="text" class="custom-input" placeholder="2006" id="g-year" />
+          </div>
+          <div>
+            <label class="label-tiny">BUILD PHOTO</label>
+            <button type="button" class="upload-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <span>UPLOAD PHOTO</span>
+            </button>
+            <div class="upload-hint">JPG / PNG — MAX 10MB</div>
+          </div>
+          <div class="garage-submit-row" style="grid-column: 1 / -1;">
+            <div class="garage-submit-note">WE REVIEW EVERY SUBMISSION BEFORE IT HITS THE GARAGE. KEEP IT CLEAN.</div>
+            <button type="submit" class="garage-submit-btn hover-skew">LOG THE BUILD →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SPONSORS ═══════════════════════ -->
+<section id="sponsors" class="section-pad">
+  <div class="container">
+    <div class="sponsors-header">
+      <div class="section-label">// THE BACKERS</div>
+      <h2 class="section-title">BACKED BY <span class="red">THE REAL ONES</span></h2>
+      <p>Shops and brands that put on for the scene. Tap them for your build.</p>
+    </div>
+
+    <div class="sponsors-grid">
+      <a href="#" class="sponsor-card hover-skew">
+        <div class="sponsor-tag">/// PARTNER</div>
+        <div class="sponsor-name font-display">WV WRAPS</div>
+        <div class="sponsor-sub">VEHICLE WRAPS & PPF</div>
+      </a>
+      <a href="#" class="sponsor-card hover-skew">
+        <div class="sponsor-tag">/// PARTNER</div>
+        <div class="sponsor-name font-display">CTHULHU MEETS</div>
+        <div class="sponsor-sub">EVENT PARTNER</div>
+      </a>
+      <a href="#" class="sponsor-card hover-skew">
+        <div class="sponsor-tag">/// PARTNER</div>
+        <div class="sponsor-name font-display">STATIC DETAILING</div>
+        <div class="sponsor-sub">DETAILING & CERAMIC</div>
+      </a>
+      <a href="#pitch" class="sponsor-card cta hover-skew">
+        <div class="sponsor-tag">/// OPEN SLOT</div>
+        <div class="sponsor-name font-display">PARTNER WITH US<span class="sponsor-arrow">→</span></div>
+        <div class="sponsor-sub">YOUR BRAND HERE</div>
+      </a>
+    </div>
+
+    <div id="pitch" class="pitch-wrap">
+      <div class="pitch-intro">
+        <p>60-90 builds every meet, 100% local Barrie / 705 reach. If your audience is the car scene, we're the direct pipe.</p>
+        <div class="pitch-chips">
+          <span class="pitch-chip">WRAP SHOPS</span>
+          <span class="pitch-chip">DETAILERS</span>
+          <span class="pitch-chip">AUDIO INSTALLERS</span>
+          <span class="pitch-chip">APPAREL BRANDS</span>
+          <span class="pitch-chip">PERFORMANCE SHOPS</span>
+          <span class="pitch-chip">FOOD TRUCKS</span>
+          <span class="pitch-chip">TUNERS</span>
+        </div>
+      </div>
+
+      <div class="pitch-form-wrap">
+        <div class="form-tag">// PITCH YOUR BRAND</div>
+        <div id="pitch-form-content">
+          <form id="pitch-form" onsubmit="return handlePitch(event)">
+            <div class="pitch-form-grid">
+              <div>
+                <label class="label-tiny">BUSINESS NAME</label>
+                <input type="text" class="custom-input" placeholder="YOUR SHOP / BRAND" id="p-biz" required />
+              </div>
+              <div>
+                <label class="label-tiny">YOUR NAME</label>
+                <input type="text" class="custom-input" placeholder="CONTACT NAME" id="p-name" />
+              </div>
+            </div>
+            <div class="pitch-form-field">
+              <label class="label-tiny">EMAIL</label>
+              <input type="email" class="custom-input" placeholder="YOU@BUSINESS.COM" id="p-email" required />
+            </div>
+            <div class="pitch-form-field">
+              <label class="label-tiny">WHAT YOU BRINGING</label>
+              <textarea rows="4" class="custom-input" placeholder="PRODUCT / SERVICE / PARTNERSHIP IDEA" id="p-msg"></textarea>
+            </div>
+            <button type="submit" class="pitch-submit-btn hover-skew">SEND IT →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <div class="footer-705">705</div>
+      <div class="footer-underground">underground</div>
+      <div class="footer-loc">BARRIE • ONTARIO • SINCE 2024</div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 705 UNDERGROUND — ALL BUILDS WELCOME</div>
+      <div class="links">
+        <a href="https://instagram.com/705undergroundmeets" target="_blank" rel="noopener">@705UNDERGROUNDMEETS</a>
+        <span class="sep">|</span>
+        <span>IF YOU KNOW, YOU KNOW.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ─── State ───
+  let rsvpCount = 47;
+  let rollingWith = 1;
+
+  // ─── Ticker ───
+  const tickerItems = [
+    'CARS × PEOPLE × MUSIC × VIBES',
+    'NO REVVING',
+    'NO 2-STEPPING',
+    'RESPECT THE LOT',
+    'ALL BUILDS WELCOME',
+    'IF YOU KNOW YOU KNOW',
+    'GOOD VIBES ONLY'
+  ];
+  function buildTicker() {
+    const ticker = document.getElementById('ticker');
+    let html = '';
+    // Build twice for seamless loop
+    for (let i = 0; i < 2; i++) {
+      html += '<div class="ticker-item">';
+      tickerItems.forEach((t, idx) => {
+        html += `<span>${t}</span>`;
+        if (idx < tickerItems.length - 1) html += '<span class="sep">///</span>';
+        else html += '<span class="sep">///</span>';
+      });
+      html += '</div>';
+    }
+    ticker.innerHTML = html;
+  }
+  buildTicker();
+
+  // ─── Countdown (next Wednesday 7PM) ───
+  function getNextWednesday() {
+    const now = new Date();
+    const next = new Date();
+    const daysUntilWed = (3 - now.getDay() + 7) % 7 || 7;
+    next.setDate(now.getDate() + daysUntilWed);
+    next.setHours(19, 0, 0, 0);
+    if (next < now) next.setDate(next.getDate() + 7);
+    return next;
+  }
+  function updateCountdown() {
+    const next = getNextWednesday();
+    const diff = next - new Date();
+    const d = Math.max(0, Math.floor(diff / 86400000));
+    const h = Math.max(0, Math.floor((diff / 3600000) % 24));
+    const m = Math.max(0, Math.floor((diff / 60000) % 60));
+    const s = Math.max(0, Math.floor((diff / 1000) % 60));
+    document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('cd-min').textContent = String(m).padStart(2, '0');
+    document.getElementById('cd-sec').textContent = String(s).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ─── Garage seed ───
+  const garageSeed = [
+    { id: 1, owner: 'DEMO', ig: '705underground', make: 'SUBARU', model: 'WRX STI', year: '2006', photoUrl: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800' },
+    { id: 2, owner: 'DEMO', ig: '705underground', make: 'NISSAN', model: 'GT-R', year: '2017', photoUrl: 'https://images.unsplash.com/photo-1600661653561-629509216228?w=800' },
+    { id: 3, owner: 'DEMO', ig: '705underground', make: 'HONDA', model: 'CIVIC SI', year: '2019', photoUrl: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800' },
+    { id: 4, owner: 'DEMO', ig: '705underground', make: 'BMW', model: 'M3 E46', year: '2004', photoUrl: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800' }
+  ];
+  function renderGarage() {
+    const grid = document.getElementById('garage-grid');
+    grid.innerHTML = garageSeed.map(car => `
+      <div class="garage-card">
+        <img src="${car.photoUrl}" alt="${car.year} ${car.make} ${car.model}" onerror="this.style.display='none'" />
+        <div class="garage-card-overlay"></div>
+        <div class="garage-card-info">
+          <div class="garage-card-title">${car.year} ${car.make}</div>
+          <div class="garage-card-model">${car.model}</div>
+          <div class="garage-card-ig">@${car.ig || car.owner}</div>
+        </div>
+        <div class="garage-card-badge">#${String(car.id).padStart(3, '0')}</div>
+      </div>
+    `).join('');
+  }
+  renderGarage();
+
+  // ─── Rolling-with button group ───
+  document.querySelectorAll('#count-btn-row .count-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#count-btn-row .count-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      rollingWith = parseInt(btn.dataset.count === '4+' ? '4' : btn.dataset.count);
+    });
+  });
+
+  // ─── RSVP handler ───
+  function handleRsvp(e) {
+    e.preventDefault();
+    const name = document.getElementById('rsvp-name').value.trim();
+    const car = document.getElementById('rsvp-car').value.trim();
+    if (!name || !car) return false;
+
+    rsvpCount += rollingWith;
+    document.getElementById('hero-rsvp-count').textContent = rsvpCount;
+    document.getElementById('rsvp-stat-num').textContent = rsvpCount;
+
+    document.getElementById('rsvp-content').innerHTML = `
+      <div class="success">
+        <div class="success-title">LOCKED IN.</div>
+        <div class="success-sub">LOCATION DROPS TO YOUR IG DMs</div>
+      </div>
+    `;
+    return false;
+  }
+
+  // ─── Garage handler ───
+  function handleGarage(e) {
+    e.preventDefault();
+    const owner = document.getElementById('g-owner').value.trim();
+    const make = document.getElementById('g-make').value.trim();
+    if (!owner || !make) return false;
+
+    document.getElementById('garage-form-content').innerHTML = `
+      <div class="success">
+        <div class="success-title">BUILD LOGGED.</div>
+        <div class="success-sub">YOU'RE IN THE GARAGE.</div>
+      </div>
+    `;
+    return false;
+  }
+
+  // ─── Pitch handler ───
+  function handlePitch(e) {
+    e.preventDefault();
+    const biz = document.getElementById('p-biz').value.trim();
+    const email = document.getElementById('p-email').value.trim();
+    if (!biz || !email) return false;
+
+    document.getElementById('pitch-form-content').innerHTML = `
+      <div class="success">
+        <div class="success-title">MESSAGE SENT.</div>
+        <div class="success-sub">WE'LL HIT YOU BACK WITHIN 48HRS</div>
+      </div>
+    `;
+    return false;
+  }
+</script>
+
+</body>
+</html>
