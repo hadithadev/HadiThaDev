@@ -9,7 +9,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter+Tight:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
   :root {
@@ -345,7 +345,7 @@
       <div>
         <div class="sec-tag mb-3"><span>Services</span></div>
         <h2 class="display text-7xl leading-[0.85] tracking-tight big-title">
-          THE<br>MENU<span style="color:var(--red)">.</span>
+          HOW CAN<br>I HELP<span style="color:var(--red)">.</span>
         </h2>
       </div>
       <div class="text-right text-[10px] text-white/50 uppercase tracking-widest pb-2">
@@ -372,11 +372,8 @@
       <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"></div>
 
       <div class="absolute bottom-5 left-5 right-5">
-        <div class="display text-white text-4xl leading-none tracking-wider mb-1">
-          THE SIGNATURE CEILING
-        </div>
-        <div class="text-white/70 text-[10px] tracking-[0.3em] uppercase">
-          Hexagon LED · Custom Build
+        <div class="display text-white text-4xl leading-[0.95] tracking-wider">
+          BUILT LIKE A LAB<span style="color:var(--red)">.</span><br>RUNS LIKE A STUDIO<span style="color:var(--red)">.</span>
         </div>
       </div>
     </div>
@@ -675,10 +672,10 @@
 <script>
 // ===== DATA =====
 const SERVICES = [
-  { id: 1, name: 'The Signature', sub: 'Haircut', duration: '1 hr', price: 40, desc: 'Full consultation, precision cut, hot towel, styling. The flagship.' },
-  { id: 2, name: 'Cut + Beard', sub: 'Haircut & Beard', duration: '1 hr', price: 45, desc: 'The full service. Haircut paired with a sculpted beard line and detail.' },
-  { id: 3, name: 'Line Up', sub: 'Edge Up', duration: '30 min', price: 20, desc: 'Clean lines. In and out. Keep the shape fresh between cuts.' },
-  { id: 4, name: 'Under 19', sub: 'Haircut (19 & Under)', duration: '1 hr', price: 35, desc: 'Same precision. Same finish. Student rate.' },
+  { id: 1, name: 'The Signature', sub: 'Haircut', duration: '1 hr', price: 40, desc: 'The Signature.' },
+  { id: 2, name: 'Cut + Beard', sub: 'Haircut & Beard', duration: '1 hr', price: 45, desc: "A Man's Choice." },
+  { id: 3, name: 'Line Up', sub: 'Edge Up', duration: '30 min', price: 20, desc: 'Clean Lines. Nothing Else.' },
+  { id: 4, name: 'Under 19', sub: 'Haircut (19 & Under)', duration: '1 hr', price: 35, desc: 'No Discount on the Craft.' },
 ];
 const GALLERY = [
   { h: 'aspect-[3/4]', label: 'SKIN FADE', n: '01', latest: true },
@@ -751,7 +748,7 @@ function setupParallax() {
 function buildServices() {
   const el = document.getElementById('serviceList');
   el.innerHTML = SERVICES.map((s, i) => `
-    <div class="slide-${i % 2 === 0 ? 'l' : 'r'} reveal">
+    <div class="fade-up reveal" style="transition-delay: ${i * 80}ms">
       <div class="svc-card bg-[#0a0a0a] border border-white/10 p-6">
         <div class="flex items-baseline justify-between gap-4 mb-2 relative z-10">
           <h3 class="display text-5xl leading-none tracking-wide">${s.name}</h3>
@@ -760,7 +757,9 @@ function buildServices() {
         <div class="flex items-center gap-3 text-[10px] text-white/50 mb-3 tracking-widest uppercase">
           <span>${s.sub}</span><span class="w-1 h-1 bg-white/30 rounded-full"></span><span>${s.duration}</span>
         </div>
-        <p class="text-sm text-white/70 leading-relaxed pr-12">${s.desc}</p>
+        <p class="text-lg italic text-white/90 leading-tight pr-12" style="font-family: 'Instrument Serif', serif;">
+          <span style="color:var(--red)">—</span> ${s.desc}
+        </p>
         <button onclick="openBookingWithService(${s.id})" class="mt-4 text-[10px] tracking-[0.3em] uppercase text-white flex items-center gap-2 border-b border-white/20 pb-1 hover:border-[#E63946] hover:text-[#E63946] transition">
           Book this cut <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
         </button>
