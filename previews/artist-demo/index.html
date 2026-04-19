@@ -3,145 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA — Artist Demo</title>
+<title>ARTIST — Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#050505;--surface:#0c0c0c;--surface-2:#141414;--border:#1a1a1a;
-  --text:#e8e4df;--text-muted:#5a5550;
-  --accent:#ff4d2e;--accent-2:#ff7e33;--accent-glow:rgba(255,77,46,.15);
+  --bg:#080808;--surface:#111;--surface-2:#191919;--border:#242424;
+  --text:#ede9e3;--text-muted:#777;
+  --accent:#ff4d2e;--accent-2:#ff7e33;--accent-glow:rgba(255,77,46,.12);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;cursor:default}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh}
 ::selection{background:var(--accent);color:var(--bg)}
 
 /* ========== ENTER SCREEN ========== */
 #enterScreen{
   position:fixed;inset:0;z-index:1000;background:var(--bg);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  cursor:pointer;transition:opacity .8s,transform .8s;
+  cursor:pointer;
 }
-#enterScreen.hidden{opacity:0;transform:scale(1.05);pointer-events:none}
+#enterScreen.zooming{cursor:default}
+#enterScreen.hidden{display:none}
 #enterCanvas{position:absolute;inset:0;z-index:0}
-.enter-content{position:relative;z-index:1;text-align:center}
+
+.enter-top{position:relative;z-index:2;text-align:center;margin-bottom:3rem}
 .enter-artist{
-  font-size:clamp(5rem,15vw,12rem);font-weight:800;letter-spacing:8px;
+  font-size:clamp(4rem,14vw,10rem);font-weight:800;letter-spacing:8px;
   line-height:.85;color:var(--text);
-  text-shadow:0 0 80px rgba(255,77,46,.15),0 0 160px rgba(255,77,46,.05);
+  text-shadow:0 0 60px rgba(255,77,46,.12);
   animation:enterPulse 3s ease infinite;
 }
-@keyframes enterPulse{0%,100%{opacity:.9}50%{opacity:1}}
+@keyframes enterPulse{0%,100%{opacity:.85}50%{opacity:1}}
 .enter-sub{
-  font-family:'Space Mono',monospace;font-size:.7rem;color:var(--text-muted);
+  font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text-muted);
   letter-spacing:6px;text-transform:uppercase;margin-top:1.5rem;
   animation:enterBlink 2s ease infinite;
 }
-@keyframes enterBlink{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes enterBlink{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* Studio top-down view */
+.studio-wrap{
+  position:relative;z-index:2;width:340px;height:240px;margin:0 auto;
+  transition:transform 1.5s cubic-bezier(.4,0,.2,1),opacity 1s;
+}
+#enterScreen.zooming .studio-wrap{
+  transform:scale(8) translateY(-20%);opacity:0;
+}
+#enterScreen.zooming .enter-top{
+  transition:opacity .5s;opacity:0;
+}
+.studio-svg{width:100%;height:100%;filter:drop-shadow(0 0 30px rgba(255,77,46,.08))}
+
+/* Rings */
 .enter-ring{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:300px;height:300px;border-radius:50%;
-  border:1px solid rgba(255,77,46,.1);
-  animation:ringExpand 4s ease infinite;
+  border-radius:50%;border:1px solid rgba(255,77,46,.06);pointer-events:none;
+  animation:ringExpand 5s ease infinite;
 }
-.enter-ring:nth-child(2){animation-delay:1.3s;width:350px;height:350px}
-.enter-ring:nth-child(3){animation-delay:2.6s;width:400px;height:400px}
-@keyframes ringExpand{0%{transform:translate(-50%,-50%) scale(.8);opacity:.3}100%{transform:translate(-50%,-50%) scale(1.3);opacity:0}}
+.enter-ring:nth-child(1){width:500px;height:500px}
+.enter-ring:nth-child(2){width:600px;height:600px;animation-delay:1.7s}
+.enter-ring:nth-child(3){width:700px;height:700px;animation-delay:3.4s}
+@keyframes ringExpand{0%{transform:translate(-50%,-50%) scale(.7);opacity:.2}100%{transform:translate(-50%,-50%) scale(1.2);opacity:0}}
 
 /* ========== MAIN SITE ========== */
-#mainSite{opacity:0;transition:opacity 1s .5s;height:100vh;overflow-y:auto;overflow-x:hidden}
-#mainSite.show{opacity:1}
+#mainSite{opacity:0;pointer-events:none;height:100vh;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
+#mainSite.show{opacity:1;pointer-events:auto}
 body.entered{overflow:auto;height:auto}
 
-/* Grain overlay */
-.grain{position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+.grain{position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Floating particles canvas */
+/* Animated bg particles */
 #bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 /* NAV */
 .site-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
+  position:fixed;top:0;left:0;right:0;z-index:100;height:56px;
   display:flex;justify-content:space-between;align-items:center;
-  padding:0 2.5rem;background:rgba(5,5,5,.7);backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,77,46,.06);
+  padding:0 2.5rem;background:rgba(8,8,8,.75);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,77,46,.05);
 }
-.nav-name{font-weight:800;font-size:1rem;letter-spacing:4px;color:var(--text)}
+.nav-name{font-weight:800;font-size:.95rem;letter-spacing:5px}
 .nav-links{display:flex;gap:2rem}
-.nav-links a{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text-muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
 .nav-links a:hover{color:var(--accent)}
 
-/* HERO */
-.artist-hero{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:6rem 2rem;position:relative;
+/* LINKS SECTION — first thing after hero */
+.links-section{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:6rem 2rem;position:relative;z-index:1;
 }
-.hero-inner{position:relative;z-index:1}
-.hero-label{
-  font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);
-  letter-spacing:6px;text-transform:uppercase;margin-bottom:1.5rem;
-}
-.hero-name{
-  font-size:clamp(4rem,12vw,9rem);font-weight:800;letter-spacing:6px;
-  line-height:.85;margin-bottom:1rem;
-  background:linear-gradient(180deg,var(--text) 40%,var(--text-muted) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-.hero-tagline{
-  font-size:clamp(1rem,2.5vw,1.3rem);color:var(--text-muted);font-weight:400;
-  letter-spacing:2px;margin-bottom:3rem;
-}
-.hero-cta{
-  display:inline-flex;align-items:center;gap:.75rem;
-  background:var(--accent);color:var(--bg);padding:.8rem 2.5rem;
-  border-radius:2px;text-decoration:none;font-weight:700;font-size:.75rem;
-  letter-spacing:3px;text-transform:uppercase;transition:all .2s;
-}
-.hero-cta:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,77,46,.2)}
-.hero-cta .play-icon{font-size:1rem}
-
-/* LATEST RELEASE */
-.release-section{padding:6rem 2.5rem;max-width:900px;margin:0 auto;position:relative;z-index:1}
-.section-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);letter-spacing:5px;text-transform:uppercase;margin-bottom:1rem}
-.release-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:4px;
-  display:grid;grid-template-columns:280px 1fr;overflow:hidden;transition:border-color .3s;
-}
-.release-card:hover{border-color:rgba(255,77,46,.2)}
-.release-art{
-  aspect-ratio:1;background:linear-gradient(135deg,#1a1210,#0d0a08);
-  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
-}
-.release-art::after{
-  content:'▶';position:absolute;font-size:2.5rem;color:rgba(255,77,46,.6);
-  opacity:0;transition:opacity .3s;cursor:pointer;
-}
-.release-card:hover .release-art::after{opacity:1}
-.art-placeholder{font-size:4rem;opacity:.15}
-.release-info{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}
-.release-title{font-size:1.8rem;font-weight:800;letter-spacing:1px;margin-bottom:.25rem}
-.release-type{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.25rem}
-.release-desc{color:var(--text-muted);font-size:.88rem;font-weight:400;line-height:1.7;margin-bottom:2rem}
-.stream-links{display:flex;gap:.6rem;flex-wrap:wrap}
-.stream-btn{
-  padding:.5rem 1.25rem;border-radius:2px;font-size:.65rem;font-weight:600;
-  letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s;
-  font-family:'Space Mono',monospace;
-}
-.stream-btn.spotify{background:#1db954;color:#000}.stream-btn.spotify:hover{background:#1ed760}
-.stream-btn.apple{background:#fc3c44;color:#fff}.stream-btn.apple:hover{background:#ff5c64}
-.stream-btn.soundcloud{background:#ff5500;color:#fff}.stream-btn.soundcloud:hover{background:#ff7733}
-.stream-btn.youtube{background:#fff;color:#000}.stream-btn.youtube:hover{background:#ddd}
-
-/* MUSIC LINKS / LINKTREE REPLACEMENT */
-.links-section{padding:4rem 2.5rem 6rem;max-width:600px;margin:0 auto;position:relative;z-index:1}
+.links-title{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);letter-spacing:5px;text-transform:uppercase;margin-bottom:2.5rem}
+.links-grid{max-width:500px;width:100%}
 .link-item{
   display:flex;align-items:center;gap:1.25rem;
   background:var(--surface);border:1px solid var(--border);border-radius:4px;
-  padding:1.1rem 1.5rem;margin-bottom:.6rem;text-decoration:none;color:var(--text);
+  padding:1rem 1.5rem;margin-bottom:.5rem;text-decoration:none;color:var(--text);
   transition:all .25s;position:relative;overflow:hidden;
 }
 .link-item::before{
@@ -150,77 +109,117 @@ body.entered{overflow:auto;height:auto}
 }
 .link-item:hover::before{transform:scaleY(1)}
 .link-item:hover{border-color:rgba(255,77,46,.2);transform:translateX(4px);background:var(--surface-2)}
-.link-icon{font-size:1.3rem;width:36px;text-align:center;flex-shrink:0}
+.link-icon{width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.link-icon svg{width:22px;height:22px}
 .link-text{flex:1}
 .link-text h4{font-size:.85rem;font-weight:600;letter-spacing:.5px}
-.link-text p{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:1px;margin-top:.15rem}
-.link-arrow{color:var(--text-muted);font-size:.8rem;transition:all .2s}
+.link-text p{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--text-muted);letter-spacing:1px;margin-top:.1rem}
+.link-arrow{color:var(--text-muted);font-size:.75rem;transition:all .2s}
 .link-item:hover .link-arrow{color:var(--accent);transform:translateX(3px)}
 
-/* ABOUT */
-.about-section{padding:6rem 2.5rem;max-width:900px;margin:0 auto;position:relative;z-index:1;border-top:1px solid var(--border)}
-.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:center}
-.about-photo{aspect-ratio:3/4;background:var(--surface);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:.15}
-.about-text h3{font-size:1.8rem;font-weight:800;letter-spacing:1px;margin-bottom:1rem}
-.about-text p{color:var(--text-muted);font-size:.9rem;font-weight:400;line-height:1.8;margin-bottom:1rem}
-.about-stats{display:flex;gap:2.5rem;margin-top:2rem}
-.about-stat .stat-num{font-size:1.8rem;font-weight:800;color:var(--accent)}
-.about-stat .stat-label{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase}
+/* NOW PLAYING / LATEST RELEASE */
+.section-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);letter-spacing:5px;text-transform:uppercase;margin-bottom:1.5rem;text-align:center}
 
-/* CONTACT / BOOKING */
-.contact-section{
-  padding:6rem 2.5rem;max-width:600px;margin:0 auto;text-align:center;
-  position:relative;z-index:1;border-top:1px solid var(--border);
-}
-.contact-section h2{font-size:2.5rem;font-weight:800;letter-spacing:2px;margin-bottom:.5rem}
-.contact-section>p{color:var(--text-muted);font-size:.88rem;margin-bottom:2.5rem}
-.contact-email{
-  font-family:'Space Mono',monospace;font-size:.85rem;color:var(--accent);
-  text-decoration:none;border-bottom:1px dashed rgba(255,77,46,.3);
-  padding-bottom:2px;transition:opacity .2s;
-}
-.contact-email:hover{opacity:.7}
-.contact-socials{display:flex;justify-content:center;gap:1.5rem;margin-top:2rem}
-.contact-socials a{
-  width:42px;height:42px;border-radius:50%;border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;text-decoration:none;
-  font-size:.9rem;transition:all .2s;color:var(--text-muted);
-}
-.contact-socials a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-
-/* FOOTER */
-.site-footer{
-  padding:2rem 2.5rem;text-align:center;border-top:1px solid var(--border);
-  position:relative;z-index:1;
-}
-.site-footer p{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:2px}
-.site-footer a{color:var(--accent);text-decoration:none}
-
-/* NOW PLAYING BAR */
-.now-playing{
-  position:fixed;bottom:0;left:0;right:0;z-index:100;height:50px;
-  background:rgba(5,5,5,.9);backdrop-filter:blur(20px);
-  border-top:1px solid rgba(255,77,46,.08);
+.now-playing-bar{
   display:flex;align-items:center;justify-content:center;gap:1rem;
-  opacity:0;transition:opacity .5s;
+  padding:.75rem 2rem;background:rgba(8,8,8,.9);backdrop-filter:blur(16px);
+  border-top:1px solid rgba(255,77,46,.08);border-bottom:1px solid rgba(255,77,46,.08);
+  position:relative;z-index:10;
+  transition:all .3s;
 }
-.now-playing.show{opacity:1}
-.np-bars{display:flex;align-items:end;gap:2px;height:16px}
-.np-bar{width:3px;background:var(--accent);border-radius:1px;animation:eqBar 1s ease infinite}
-.np-bar:nth-child(1){height:8px;animation-delay:0s}
-.np-bar:nth-child(2){height:14px;animation-delay:.15s}
-.np-bar:nth-child(3){height:6px;animation-delay:.3s}
-.np-bar:nth-child(4){height:12px;animation-delay:.1s}
-.np-bar:nth-child(5){height:10px;animation-delay:.25s}
-@keyframes eqBar{0%,100%{height:4px}50%{height:16px}}
+.now-playing-bar.stuck{
+  position:sticky;top:56px;z-index:90;
+}
+.np-bars{display:flex;align-items:end;gap:2px;height:14px}
+.np-bar{width:3px;background:var(--accent);border-radius:1px;animation:eqBar .8s ease infinite}
+.np-bar:nth-child(1){height:6px;animation-delay:0s}
+.np-bar:nth-child(2){height:12px;animation-delay:.12s}
+.np-bar:nth-child(3){height:5px;animation-delay:.24s}
+.np-bar:nth-child(4){height:10px;animation-delay:.08s}
+.np-bar:nth-child(5){height:8px;animation-delay:.2s}
+@keyframes eqBar{0%,100%{height:3px}50%{height:14px}}
 .np-text{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:1px}
 .np-text span{color:var(--text)}
 
+.release-section{
+  padding:4rem 2rem 6rem;max-width:500px;margin:0 auto;
+  text-align:center;position:relative;z-index:1;
+}
+.release-art{
+  width:280px;height:280px;margin:0 auto 1.5rem;
+  background:linear-gradient(135deg,#1a1210,#0d0a08);
+  border:1px solid var(--border);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;transition:transform .3s;
+}
+.release-art:hover{transform:scale(1.02)}
+.release-art .art-inner{font-size:3rem;opacity:.12}
+.release-title{font-size:1.6rem;font-weight:800;letter-spacing:2px;margin-bottom:.25rem}
+.release-date{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:2px}
+
+/* ABOUT + BOOKING */
+.about-section{
+  padding:6rem 2.5rem;max-width:900px;margin:0 auto;
+  position:relative;z-index:1;border-top:1px solid var(--border);
+}
+.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:center}
+.about-photo{
+  aspect-ratio:3/4;background:var(--surface);border:1px solid var(--border);
+  border-radius:4px;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.about-photo-placeholder{font-size:3rem;opacity:.1}
+.about-text h3{font-size:1.8rem;font-weight:800;letter-spacing:1px;margin-bottom:1rem}
+.about-text p{color:var(--text-muted);font-size:.9rem;font-weight:400;line-height:1.8;margin-bottom:1rem}
+.about-stats{display:flex;gap:2.5rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border)}
+.about-stat .stat-num{font-size:1.8rem;font-weight:800;color:var(--accent)}
+.about-stat .stat-label{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase}
+
+.booking-section{
+  padding:5rem 2.5rem;max-width:600px;margin:0 auto;text-align:center;
+  position:relative;z-index:1;border-top:1px solid var(--border);
+}
+.booking-section h2{font-size:2.2rem;font-weight:800;letter-spacing:3px;margin-bottom:.5rem}
+.booking-section>p{color:var(--text-muted);font-size:.85rem;margin-bottom:2rem}
+.booking-email{
+  font-family:'Space Mono',monospace;font-size:.82rem;color:var(--accent);
+  text-decoration:none;border-bottom:1px dashed rgba(255,77,46,.3);
+  padding-bottom:2px;transition:opacity .2s;
+}
+.booking-email:hover{opacity:.7}
+.booking-socials{display:flex;justify-content:center;gap:1.25rem;margin-top:2rem}
+.booking-socials a{
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;text-decoration:none;
+  transition:all .2s;
+}
+.booking-socials a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.booking-socials a svg{width:18px;height:18px;fill:var(--text-muted);transition:fill .2s}
+.booking-socials a:hover svg{fill:var(--accent)}
+
+.site-footer{
+  padding:2rem 2.5rem;text-align:center;border-top:1px solid var(--border);
+  position:relative;z-index:1;padding-bottom:4rem;
+}
+.site-footer p{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--text-muted);letter-spacing:2px}
+.site-footer a{color:var(--accent);text-decoration:none}
+
+/* Audio button */
+.audio-toggle{
+  position:fixed;bottom:1.25rem;right:1.25rem;z-index:200;
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  background:var(--surface);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;
+}
+.audio-toggle:hover{border-color:var(--accent)}
+.audio-toggle svg{width:16px;height:16px;fill:var(--text-muted)}
+.audio-toggle.playing svg{fill:var(--accent)}
+
 @media(max-width:768px){
   .site-nav{padding:0 1.25rem}.nav-links{display:none}
-  .release-card{grid-template-columns:1fr}.release-art{max-height:250px}
   .about-grid{grid-template-columns:1fr}
-  .enter-artist{font-size:clamp(3rem,20vw,6rem)}
+  .studio-wrap{width:260px;height:185px}
+  .enter-artist{letter-spacing:4px}
 }
 </style>
 </head>
@@ -232,9 +231,52 @@ body.entered{overflow:auto;height:auto}
   <div class="enter-ring"></div>
   <div class="enter-ring"></div>
   <div class="enter-ring"></div>
-  <div class="enter-content">
-    <div class="enter-artist">NOVA</div>
-    <div class="enter-sub">Click anywhere to enter</div>
+  
+  <div class="enter-top">
+    <div class="enter-artist">ARTIST</div>
+    <div class="enter-sub">Click to enter</div>
+  </div>
+  
+  <!-- Studio top-down SVG -->
+  <div class="studio-wrap">
+    <svg class="studio-svg" viewBox="0 0 340 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Room outline -->
+      <rect x="10" y="10" width="320" height="220" rx="4" stroke="#2a2a2a" stroke-width="1.5" fill="#0c0c0c"/>
+      <!-- Desk -->
+      <rect x="100" y="60" width="140" height="50" rx="3" stroke="#333" stroke-width="1" fill="#111"/>
+      <!-- Monitor screens -->
+      <rect x="115" y="65" width="45" height="28" rx="2" stroke="#444" stroke-width=".8" fill="#0a0a0a"/>
+      <rect x="170" y="65" width="45" height="28" rx="2" stroke="#444" stroke-width=".8" fill="#0a0a0a"/>
+      <!-- Screen glow -->
+      <rect x="117" y="67" width="41" height="24" rx="1" fill="#111" opacity=".8"/>
+      <rect x="172" y="67" width="41" height="24" rx="1" fill="#111" opacity=".8"/>
+      <!-- Waveform on screen -->
+      <polyline points="120,79 125,74 130,82 135,76 140,80 145,73 150,79 155,77" stroke="#ff4d2e" stroke-width=".8" fill="none" opacity=".5"/>
+      <polyline points="175,79 180,76 185,82 190,74 195,80 200,77 205,73 210,79" stroke="#ff7e33" stroke-width=".8" fill="none" opacity=".5"/>
+      <!-- Keyboard/controller -->
+      <rect x="120" y="97" width="100" height="10" rx="2" stroke="#333" stroke-width=".8" fill="#0e0e0e"/>
+      <!-- Keys on controller -->
+      <rect x="124" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="131" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="138" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="145" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="152" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="159" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="166" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="173" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="180" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="187" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="194" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="201" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/><rect x="208" y="99" width="5" height="6" rx=".5" fill="#1a1a1a"/>
+      <!-- Chair -->
+      <ellipse cx="170" cy="140" rx="22" ry="14" stroke="#2a2a2a" stroke-width="1" fill="#0e0e0e"/>
+      <!-- Speakers L/R -->
+      <rect x="60" y="55" width="25" height="40" rx="3" stroke="#333" stroke-width="1" fill="#0e0e0e"/>
+      <rect x="255" y="55" width="25" height="40" rx="3" stroke="#333" stroke-width="1" fill="#0e0e0e"/>
+      <circle cx="72" cy="68" r="5" stroke="#444" stroke-width=".5" fill="#111"/>
+      <circle cx="72" cy="82" r="7" stroke="#444" stroke-width=".5" fill="#111"/>
+      <circle cx="267" cy="68" r="5" stroke="#444" stroke-width=".5" fill="#111"/>
+      <circle cx="267" cy="82" r="7" stroke="#444" stroke-width=".5" fill="#111"/>
+      <!-- Mic -->
+      <line x1="50" y1="130" x2="50" y2="160" stroke="#333" stroke-width="1"/>
+      <circle cx="50" cy="125" r="6" stroke="#444" stroke-width=".8" fill="#111"/>
+      <!-- Couch -->
+      <rect x="30" y="190" width="80" height="25" rx="4" stroke="#2a2a2a" stroke-width="1" fill="#0e0e0e"/>
+      <!-- Rug -->
+      <ellipse cx="170" cy="180" rx="50" ry="20" stroke="#1e1e1e" stroke-width=".8" fill="none" stroke-dasharray="3,3"/>
+      <!-- Accent light glow -->
+      <circle cx="170" cy="80" r="60" fill="url(#studioGlow)" opacity=".3"/>
+      <defs><radialGradient id="studioGlow"><stop offset="0%" stop-color="#ff4d2e" stop-opacity=".15"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+    </svg>
   </div>
 </div>
 
@@ -244,243 +286,195 @@ body.entered{overflow:auto;height:auto}
 <canvas id="bgCanvas"></canvas>
 
 <nav class="site-nav">
-  <span class="nav-name">NOVA</span>
+  <span class="nav-name">ARTIST</span>
   <div class="nav-links">
-    <a href="#music">Music</a>
     <a href="#links">Links</a>
+    <a href="#release">Music</a>
     <a href="#about">About</a>
-    <a href="#contact">Booking</a>
+    <a href="#booking">Booking</a>
   </div>
 </nav>
 
-<section class="artist-hero">
-  <div class="hero-inner">
-    <p class="hero-label">New single out now</p>
-    <h1 class="hero-name">NOVA</h1>
-    <p class="hero-tagline">Toronto / Alternative R&B / Trap Soul</p>
-    <a href="#music" class="hero-cta"><span class="play-icon">▶</span> Listen Now</a>
-  </div>
-</section>
-
-<section class="release-section" id="music">
-  <p class="section-label">Latest Release</p>
-  <div class="release-card">
-    <div class="release-art"><span class="art-placeholder">🎵</span></div>
-    <div class="release-info">
-      <p class="release-type">Single · 2026</p>
-      <h2 class="release-title">MIDNIGHT DRIVE</h2>
-      <p class="release-desc">The latest single from NOVA. A late-night R&B track about chasing something you can't name. Produced by [Producer]. Mixed by [Engineer].</p>
-      <div class="stream-links">
-        <a href="#" class="stream-btn spotify">Spotify</a>
-        <a href="#" class="stream-btn apple">Apple Music</a>
-        <a href="#" class="stream-btn soundcloud">SoundCloud</a>
-        <a href="#" class="stream-btn youtube">YouTube</a>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- LINKS — first section -->
 <section class="links-section" id="links">
-  <p class="section-label">All Links</p>
-  
-  <a href="#" class="link-item">
-    <span class="link-icon">🟢</span>
-    <div class="link-text"><h4>Spotify</h4><p>Stream all tracks</p></div>
-    <span class="link-arrow">→</span>
-  </a>
-  <a href="#" class="link-item">
-    <span class="link-icon">🔴</span>
-    <div class="link-text"><h4>Apple Music</h4><p>Listen on Apple</p></div>
-    <span class="link-arrow">→</span>
-  </a>
-  <a href="#" class="link-item">
-    <span class="link-icon">🟠</span>
-    <div class="link-text"><h4>SoundCloud</h4><p>Unreleased & exclusives</p></div>
-    <span class="link-arrow">→</span>
-  </a>
-  <a href="#" class="link-item">
-    <span class="link-icon">⬜</span>
-    <div class="link-text"><h4>YouTube</h4><p>Music videos & visuals</p></div>
-    <span class="link-arrow">→</span>
-  </a>
-  <a href="#" class="link-item">
-    <span class="link-icon">📸</span>
-    <div class="link-text"><h4>Instagram</h4><p>@nova</p></div>
-    <span class="link-arrow">→</span>
-  </a>
-  <a href="#" class="link-item">
-    <span class="link-icon">🐦</span>
-    <div class="link-text"><h4>Twitter / X</h4><p>@nova</p></div>
-    <span class="link-arrow">→</span>
-  </a>
-  <a href="#" class="link-item">
-    <span class="link-icon">🎵</span>
-    <div class="link-text"><h4>TikTok</h4><p>@nova</p></div>
-    <span class="link-arrow">→</span>
-  </a>
-  <a href="#" class="link-item">
-    <span class="link-icon">🛒</span>
-    <div class="link-text"><h4>Merch Store</h4><p>Official merchandise</p></div>
-    <span class="link-arrow">→</span>
-  </a>
+  <p class="links-title">All Links</p>
+  <div class="links-grid">
+    <a href="#" class="link-item">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="#1db954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></div>
+      <div class="link-text"><h4>Spotify</h4><p>Stream all tracks</p></div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="#fc3c44"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043A5.022 5.022 0 0019.5.205C18.79.067 18.07.017 17.35.006c-.12-.002-.24 0-.36 0H7.01c-.12 0-.24-.002-.36 0C5.93.017 5.21.067 4.5.205A5.022 5.022 0 002.426.891C1.308 1.624.563 2.624.246 3.934a9.23 9.23 0 00-.24 2.19C.002 6.244 0 6.364 0 6.484v11.032c0 .12.002.24.006.36a9.23 9.23 0 00.24 2.19c.317 1.31 1.062 2.31 2.18 3.043A5.022 5.022 0 004.5 23.795c.71.138 1.43.188 2.15.199.12.002.24 0 .36 0h9.98c.12 0 .24.002.36 0 .72-.011 1.44-.061 2.15-.199a5.022 5.022 0 002.074-.686c1.118-.733 1.863-1.733 2.18-3.043a9.23 9.23 0 00.24-2.19c.004-.12.006-.24.006-.36V6.484c0-.12-.002-.24-.006-.36zM17.9 10.5c-.14.14-.33.21-.52.21a.73.73 0 01-.52-.21 5.337 5.337 0 00-3.79-1.57 5.337 5.337 0 00-3.79 1.57.74.74 0 01-1.04 0 .74.74 0 010-1.04 6.817 6.817 0 014.83-2 6.817 6.817 0 014.83 2 .74.74 0 010 1.04zm1.8-1.79a.73.73 0 01-.52.21.73.73 0 01-.52-.21 8.337 8.337 0 00-5.91-2.45 8.337 8.337 0 00-5.91 2.45.74.74 0 01-1.04 0 .74.74 0 010-1.04A9.817 9.817 0 0112.75 5a9.817 9.817 0 016.95 2.67.74.74 0 010 1.04zm-3.6 3.58a.73.73 0 01-.52.21.73.73 0 01-.52-.21 2.337 2.337 0 00-1.66-.69 2.337 2.337 0 00-1.66.69.74.74 0 01-1.04 0 .74.74 0 010-1.04 3.817 3.817 0 012.7-1.12 3.817 3.817 0 012.7 1.12.74.74 0 010 1.04zM12.75 14a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/></svg></div>
+      <div class="link-text"><h4>Apple Music</h4><p>Listen on Apple</p></div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="#ff5500"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.01-.057-.05-.1-.1-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.172 1.282c.013.06.045.094.09.094.042 0 .078-.038.09-.094l.208-1.282-.208-1.332c-.012-.057-.048-.094-.09-.094m1.83-1.229c-.06 0-.109.048-.121.109l-.209 2.555.209 2.46c.012.06.061.109.121.109.059 0 .108-.049.121-.109l.237-2.46-.237-2.555c-.013-.061-.062-.109-.121-.109m.674-.543c-.074 0-.129.059-.137.129l-.2 3.098.2 2.933c.008.07.063.129.137.129.074 0 .129-.059.137-.129l.227-2.933-.227-3.098c-.008-.07-.063-.129-.137-.129m.727-.476c-.074 0-.137.064-.144.139l-.188 3.574.188 3.19c.007.074.07.139.144.139s.137-.065.144-.139l.217-3.19-.217-3.574c-.008-.075-.07-.139-.144-.139m.747-.32c-.09 0-.158.07-.166.156l-.178 3.894.178 3.339c.008.086.076.156.166.156.088 0 .156-.07.164-.156l.2-3.339-.2-3.894c-.008-.086-.076-.156-.164-.156m.768-.259c-.098 0-.176.08-.182.176l-.17 4.153.17 3.438c.006.098.084.176.182.176.096 0 .176-.078.182-.176l.19-3.438-.19-4.153c-.006-.096-.086-.176-.182-.176m1.504-1.124c-.113 0-.205.09-.213.203l-.151 5.376.151 3.618c.008.113.1.203.213.203.113 0 .205-.09.213-.203l.17-3.618-.17-5.376c-.008-.113-.1-.203-.213-.203m.762-.192c-.121 0-.221.1-.229.221l-.139 5.568.139 3.655c.008.121.108.221.229.221.121 0 .221-.1.229-.221l.158-3.655-.158-5.568c-.008-.121-.108-.221-.229-.221M8.81 8.131c-.14 0-.248.108-.256.248l-.129 6.1.129 3.696c.008.14.116.248.256.248.14 0 .248-.108.256-.248l.145-3.696-.145-6.1c-.008-.14-.116-.248-.256-.248m2.333-.676c-.17 0-.289.12-.295.29l-.097 6.734.097 3.724c.006.17.125.29.295.29.168 0 .287-.12.295-.29l.11-3.724-.11-6.734c-.008-.17-.127-.29-.295-.29m.766-.158c-.176 0-.303.127-.311.303l-.087 6.892.087 3.724c.008.176.135.303.311.303.176 0 .303-.127.311-.303l.098-3.724-.098-6.892c-.008-.176-.135-.303-.311-.303m1.062.124c-.082 0-.161.032-.217.09a.31.31 0 00-.094.22l-.076 6.658.076 3.708c.004.086.035.166.094.22.056.058.135.09.217.09.08 0 .16-.032.217-.09a.31.31 0 00.094-.22l.084-3.708-.084-6.658a.31.31 0 00-.094-.22.302.302 0 00-.217-.09m.959-.394c-.193 0-.35.157-.356.35L13.5 14.479l.074 3.694c.006.193.163.35.356.35.191 0 .35-.157.356-.35l.082-3.694-.082-7.002c-.006-.193-.165-.35-.356-.35m2.639 2.193a.437.437 0 00-.195-.044.437.437 0 00-.195.044.44.44 0 00-.24.396l-.055 4.85.055 3.65a.44.44 0 00.24.396c.06.03.125.044.195.044a.437.437 0 00.195-.044.44.44 0 00.24-.396l.06-3.65-.06-4.85a.44.44 0 00-.24-.396m.96-.457a.492.492 0 00-.48.48l-.044 5.307.044 3.61a.492.492 0 00.48.48.492.492 0 00.48-.48l.048-3.61-.048-5.307a.492.492 0 00-.48-.48m.958-.145a.534.534 0 00-.527.527l-.034 5.452.034 3.572a.534.534 0 00.527.527.534.534 0 00.527-.527l.037-3.572-.037-5.452a.534.534 0 00-.527-.527m.96.037a.575.575 0 00-.573.573l-.024 5.415.024 3.541a.575.575 0 00.573.573.575.575 0 00.573-.573l.027-3.541-.027-5.415a.575.575 0 00-.573-.573m.957-.291a.617.617 0 00-.62.617l-.013 5.706.013 3.494a.617.617 0 00.62.617.617.617 0 00.62-.617l.014-3.494-.014-5.706a.617.617 0 00-.62-.617M24 12.479l-.003-3.39a.656.656 0 00-.662-.656.656.656 0 00-.662.656l-.003 3.39.003 3.449a.656.656 0 00.662.656.656.656 0 00.662-.656l.003-3.449z"/></svg></div>
+      <div class="link-text"><h4>SoundCloud</h4><p>Unreleased & exclusives</p></div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
+      <div class="link-text"><h4>YouTube</h4><p>Music videos & visuals</p></div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="#e4405f"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+      <div class="link-text"><h4>Instagram</h4><p>@artist</p></div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+      <div class="link-text"><h4>X / Twitter</h4><p>@artist</p></div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></div>
+      <div class="link-text"><h4>TikTok</h4><p>@artist</p></div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
 </section>
 
+<!-- NOW PLAYING — sticks to top when scrolling to release -->
+<div class="now-playing-bar stuck" id="nowPlayingBar">
+  <div class="np-bars"><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div></div>
+  <div class="np-text">Playing Now — <span>Artist · Track Name</span></div>
+</div>
+
+<!-- LATEST RELEASE -->
+<section class="release-section" id="release">
+  <div class="release-art"><span class="art-inner">🎵</span></div>
+  <h2 class="release-title">TRACK NAME</h2>
+  <p class="release-date">March 2026 · Single</p>
+</section>
+
+<!-- ABOUT -->
 <section class="about-section" id="about">
   <p class="section-label">About</p>
   <div class="about-grid">
-    <div class="about-photo">📷</div>
+    <div class="about-photo"><span class="about-photo-placeholder">📷</span></div>
     <div class="about-text">
       <h3>THE ARTIST</h3>
       <p>Your bio goes here. Where you're from, what your sound is, who you've worked with, what drives you. This is where fans and industry connect with you beyond the music.</p>
-      <p>Keep it real, keep it you. Two paragraphs max.</p>
+      <p>Keep it real. Two paragraphs. Let the music speak for the rest.</p>
       <div class="about-stats">
         <div class="about-stat"><div class="stat-num">50K+</div><div class="stat-label">Monthly listeners</div></div>
-        <div class="about-stat"><div class="stat-num">12</div><div class="stat-label">Tracks released</div></div>
-        <div class="about-stat"><div class="stat-num">3</div><div class="stat-label">Music videos</div></div>
+        <div class="about-stat"><div class="stat-num">12</div><div class="stat-label">Tracks</div></div>
+        <div class="about-stat"><div class="stat-num">3</div><div class="stat-label">Videos</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="contact-section" id="contact">
+<!-- BOOKING -->
+<section class="booking-section" id="booking">
   <p class="section-label">Booking & Press</p>
   <h2>LET'S WORK</h2>
   <p>For bookings, features, press inquiries, and business.</p>
-  <a href="mailto:booking@nova.com" class="contact-email">booking@nova.com</a>
-  <div class="contact-socials">
-    <a href="#">📸</a>
-    <a href="#">🐦</a>
-    <a href="#">🎵</a>
-    <a href="#">💬</a>
+  <a href="mailto:booking@artist.com" class="booking-email">booking@artist.com</a>
+  <div class="booking-socials">
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
   </div>
 </section>
 
 <footer class="site-footer">
-  <p>© 2026 NOVA · Built by <a href="https://hadithadev.ca" target="_blank">HadiThaDev</a></p>
+  <p>© 2026 ARTIST · Built by <a href="https://hadithadev.ca" target="_blank">HadiThaDev</a></p>
 </footer>
-
-<!-- NOW PLAYING BAR -->
-<div class="now-playing" id="nowPlaying">
-  <div class="np-bars"><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div></div>
-  <div class="np-text">Now Playing — <span>NOVA · Midnight Drive</span></div>
 </div>
+
+<!-- AUDIO TOGGLE -->
+<div class="audio-toggle" id="audioToggle" style="display:none">
+  <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
 </div>
 
 <script>
-// ========== ENTER SCREEN PARTICLE CANVAS ==========
+// ========== ENTER CANVAS PARTICLES ==========
 const ec = document.getElementById('enterCanvas');
 const ectx = ec.getContext('2d');
-let particles = [];
+let pts = [];
 
-function resizeEnterCanvas(){
-  ec.width = window.innerWidth;
-  ec.height = window.innerHeight;
-}
-resizeEnterCanvas();
-window.addEventListener('resize', resizeEnterCanvas);
+function resizeEC(){ec.width=innerWidth;ec.height=innerHeight}
+resizeEC(); addEventListener('resize',resizeEC);
 
-// Create particles
-for(let i = 0; i < 80; i++){
-  particles.push({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    vx: (Math.random() - .5) * .5,
-    vy: (Math.random() - .5) * .5,
-    size: Math.random() * 2 + .5,
-    alpha: Math.random() * .3 + .05,
-  });
+for(let i=0;i<100;i++){
+  pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+    vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,
+    size:Math.random()*2+.5,alpha:Math.random()*.25+.05});
 }
 
-function animateEnterParticles(){
-  if(document.getElementById('enterScreen').classList.contains('hidden')) return;
-  ectx.clearRect(0, 0, ec.width, ec.height);
-  particles.forEach(p => {
-    p.x += p.vx; p.y += p.vy;
-    if(p.x < 0) p.x = ec.width;
-    if(p.x > ec.width) p.x = 0;
-    if(p.y < 0) p.y = ec.height;
-    if(p.y > ec.height) p.y = 0;
-    ectx.beginPath();
-    ectx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ectx.fillStyle = `rgba(255, 77, 46, ${p.alpha})`;
-    ectx.fill();
+function animEC(){
+  if(document.getElementById('enterScreen').classList.contains('hidden'))return;
+  ectx.clearRect(0,0,ec.width,ec.height);
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=ec.width;if(p.x>ec.width)p.x=0;
+    if(p.y<0)p.y=ec.height;if(p.y>ec.height)p.y=0;
+    ectx.beginPath();ectx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ectx.fillStyle=`rgba(255,77,46,${p.alpha})`;ectx.fill();
   });
-  // Draw connections
-  for(let i = 0; i < particles.length; i++){
-    for(let j = i + 1; j < particles.length; j++){
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if(dist < 120){
-        ectx.beginPath();
-        ectx.moveTo(particles[i].x, particles[i].y);
-        ectx.lineTo(particles[j].x, particles[j].y);
-        ectx.strokeStyle = `rgba(255, 77, 46, ${.06 * (1 - dist/120)})`;
-        ectx.lineWidth = .5;
-        ectx.stroke();
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100){
+        ectx.beginPath();ectx.moveTo(pts[i].x,pts[i].y);ectx.lineTo(pts[j].x,pts[j].y);
+        ectx.strokeStyle=`rgba(255,77,46,${.08*(1-d/100)})`;ectx.lineWidth=.5;ectx.stroke();
       }
     }
   }
-  requestAnimationFrame(animateEnterParticles);
+  requestAnimationFrame(animEC);
 }
-animateEnterParticles();
+animEC();
 
-// ========== CLICK TO ENTER ==========
-document.getElementById('enterScreen').addEventListener('click', () => {
-  document.getElementById('enterScreen').classList.add('hidden');
-  document.getElementById('mainSite').classList.add('show');
-  document.body.classList.add('entered');
+// ========== CLICK TO ENTER — STUDIO ZOOM ==========
+document.getElementById('enterScreen').addEventListener('click',()=>{
+  const es=document.getElementById('enterScreen');
+  if(es.classList.contains('zooming'))return;
+  es.classList.add('zooming');
   
-  // Show now playing bar
-  setTimeout(() => {
-    document.getElementById('nowPlaying').classList.add('show');
-  }, 1500);
-  
-  // Start background particles
-  initBgCanvas();
+  // After zoom animation, transition to main site
+  setTimeout(()=>{
+    es.classList.add('hidden');
+    document.getElementById('mainSite').classList.add('show');
+    document.body.classList.add('entered');
+    document.getElementById('audioToggle').style.display='flex';
+    initBg();
+  },1600);
 });
 
-// ========== BACKGROUND FLOATING PARTICLES ==========
-const bgc = document.getElementById('bgCanvas');
-const bgctx = bgc.getContext('2d');
-let bgParticles = [];
-
-function initBgCanvas(){
-  bgc.width = window.innerWidth;
-  bgc.height = window.innerHeight * 5; // tall for scrolling
-  
-  for(let i = 0; i < 50; i++){
-    bgParticles.push({
-      x: Math.random() * bgc.width,
-      y: Math.random() * bgc.height,
-      size: Math.random() * 1.5 + .3,
-      alpha: Math.random() * .15 + .03,
-      speed: Math.random() * .3 + .1,
-    });
+// ========== BG PARTICLES ==========
+const bgc=document.getElementById('bgCanvas');
+const bgx=bgc.getContext('2d');
+let bgp=[];
+function initBg(){
+  bgc.width=innerWidth;bgc.height=innerHeight;
+  for(let i=0;i<60;i++){
+    bgp.push({x:Math.random()*bgc.width,y:Math.random()*bgc.height,
+      size:Math.random()*1.5+.3,alpha:Math.random()*.12+.02,
+      speed:Math.random()*.4+.1,drift:(Math.random()-.5)*.2});
   }
-  animateBg();
+  animBg();
 }
-
-function animateBg(){
-  bgctx.clearRect(0, 0, bgc.width, bgc.height);
-  bgParticles.forEach(p => {
-    p.y -= p.speed;
-    if(p.y < 0) p.y = bgc.height;
-    bgctx.beginPath();
-    bgctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    bgctx.fillStyle = `rgba(255, 77, 46, ${p.alpha})`;
-    bgctx.fill();
+function animBg(){
+  bgx.clearRect(0,0,bgc.width,bgc.height);
+  bgp.forEach(p=>{
+    p.y-=p.speed;p.x+=p.drift;
+    if(p.y<0){p.y=bgc.height;p.x=Math.random()*bgc.width}
+    bgx.beginPath();bgx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    bgx.fillStyle=`rgba(255,77,46,${p.alpha})`;bgx.fill();
   });
-  requestAnimationFrame(animateBg);
+  requestAnimationFrame(animBg);
 }
+addEventListener('resize',()=>{if(bgc.width){bgc.width=innerWidth;bgc.height=innerHeight}});
 
-window.addEventListener('resize', () => {
-  resizeEnterCanvas();
-  if(bgc.width){
-    bgc.width = window.innerWidth;
-    bgc.height = window.innerHeight * 5;
-  }
-});
+// ========== NOW PLAYING STICKY BEHAVIOR ==========
+const npBar=document.getElementById('nowPlayingBar');
+const mainSite=document.getElementById('mainSite');
+// The bar is already sticky via CSS position:sticky;top:56px
 </script>
 </body>
 </html>
