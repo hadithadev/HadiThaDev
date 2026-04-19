@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA — Artist Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;--surface:#0c0c0c;--surface-2:#141414;--border:#1a1a1a;
+  --text:#e8e4df;--text-muted:#5a5550;
+  --accent:#ff4d2e;--accent-2:#ff7e33;--accent-glow:rgba(255,77,46,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;cursor:default}
+::selection{background:var(--accent);color:var(--bg)}
+
+/* ========== ENTER SCREEN ========== */
+#enterScreen{
+  position:fixed;inset:0;z-index:1000;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:opacity .8s,transform .8s;
+}
+#enterScreen.hidden{opacity:0;transform:scale(1.05);pointer-events:none}
+#enterCanvas{position:absolute;inset:0;z-index:0}
+.enter-content{position:relative;z-index:1;text-align:center}
+.enter-artist{
+  font-size:clamp(5rem,15vw,12rem);font-weight:800;letter-spacing:8px;
+  line-height:.85;color:var(--text);
+  text-shadow:0 0 80px rgba(255,77,46,.15),0 0 160px rgba(255,77,46,.05);
+  animation:enterPulse 3s ease infinite;
+}
+@keyframes enterPulse{0%,100%{opacity:.9}50%{opacity:1}}
+.enter-sub{
+  font-family:'Space Mono',monospace;font-size:.7rem;color:var(--text-muted);
+  letter-spacing:6px;text-transform:uppercase;margin-top:1.5rem;
+  animation:enterBlink 2s ease infinite;
+}
+@keyframes enterBlink{0%,100%{opacity:.4}50%{opacity:1}}
+.enter-ring{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:300px;height:300px;border-radius:50%;
+  border:1px solid rgba(255,77,46,.1);
+  animation:ringExpand 4s ease infinite;
+}
+.enter-ring:nth-child(2){animation-delay:1.3s;width:350px;height:350px}
+.enter-ring:nth-child(3){animation-delay:2.6s;width:400px;height:400px}
+@keyframes ringExpand{0%{transform:translate(-50%,-50%) scale(.8);opacity:.3}100%{transform:translate(-50%,-50%) scale(1.3);opacity:0}}
+
+/* ========== MAIN SITE ========== */
+#mainSite{opacity:0;transition:opacity 1s .5s;height:100vh;overflow-y:auto;overflow-x:hidden}
+#mainSite.show{opacity:1}
+body.entered{overflow:auto;height:auto}
+
+/* Grain overlay */
+.grain{position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Floating particles canvas */
+#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* NAV */
+.site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:60px;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 2.5rem;background:rgba(5,5,5,.7);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,77,46,.06);
+}
+.nav-name{font-weight:800;font-size:1rem;letter-spacing:4px;color:var(--text)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text-muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+
+/* HERO */
+.artist-hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:6rem 2rem;position:relative;
+}
+.hero-inner{position:relative;z-index:1}
+.hero-label{
+  font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);
+  letter-spacing:6px;text-transform:uppercase;margin-bottom:1.5rem;
+}
+.hero-name{
+  font-size:clamp(4rem,12vw,9rem);font-weight:800;letter-spacing:6px;
+  line-height:.85;margin-bottom:1rem;
+  background:linear-gradient(180deg,var(--text) 40%,var(--text-muted) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-tagline{
+  font-size:clamp(1rem,2.5vw,1.3rem);color:var(--text-muted);font-weight:400;
+  letter-spacing:2px;margin-bottom:3rem;
+}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:.75rem;
+  background:var(--accent);color:var(--bg);padding:.8rem 2.5rem;
+  border-radius:2px;text-decoration:none;font-weight:700;font-size:.75rem;
+  letter-spacing:3px;text-transform:uppercase;transition:all .2s;
+}
+.hero-cta:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,77,46,.2)}
+.hero-cta .play-icon{font-size:1rem}
+
+/* LATEST RELEASE */
+.release-section{padding:6rem 2.5rem;max-width:900px;margin:0 auto;position:relative;z-index:1}
+.section-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);letter-spacing:5px;text-transform:uppercase;margin-bottom:1rem}
+.release-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  display:grid;grid-template-columns:280px 1fr;overflow:hidden;transition:border-color .3s;
+}
+.release-card:hover{border-color:rgba(255,77,46,.2)}
+.release-art{
+  aspect-ratio:1;background:linear-gradient(135deg,#1a1210,#0d0a08);
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.release-art::after{
+  content:'▶';position:absolute;font-size:2.5rem;color:rgba(255,77,46,.6);
+  opacity:0;transition:opacity .3s;cursor:pointer;
+}
+.release-card:hover .release-art::after{opacity:1}
+.art-placeholder{font-size:4rem;opacity:.15}
+.release-info{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}
+.release-title{font-size:1.8rem;font-weight:800;letter-spacing:1px;margin-bottom:.25rem}
+.release-type{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.25rem}
+.release-desc{color:var(--text-muted);font-size:.88rem;font-weight:400;line-height:1.7;margin-bottom:2rem}
+.stream-links{display:flex;gap:.6rem;flex-wrap:wrap}
+.stream-btn{
+  padding:.5rem 1.25rem;border-radius:2px;font-size:.65rem;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:all .2s;
+  font-family:'Space Mono',monospace;
+}
+.stream-btn.spotify{background:#1db954;color:#000}.stream-btn.spotify:hover{background:#1ed760}
+.stream-btn.apple{background:#fc3c44;color:#fff}.stream-btn.apple:hover{background:#ff5c64}
+.stream-btn.soundcloud{background:#ff5500;color:#fff}.stream-btn.soundcloud:hover{background:#ff7733}
+.stream-btn.youtube{background:#fff;color:#000}.stream-btn.youtube:hover{background:#ddd}
+
+/* MUSIC LINKS / LINKTREE REPLACEMENT */
+.links-section{padding:4rem 2.5rem 6rem;max-width:600px;margin:0 auto;position:relative;z-index:1}
+.link-item{
+  display:flex;align-items:center;gap:1.25rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;
+  padding:1.1rem 1.5rem;margin-bottom:.6rem;text-decoration:none;color:var(--text);
+  transition:all .25s;position:relative;overflow:hidden;
+}
+.link-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--accent);transform:scaleY(0);transition:transform .3s;
+}
+.link-item:hover::before{transform:scaleY(1)}
+.link-item:hover{border-color:rgba(255,77,46,.2);transform:translateX(4px);background:var(--surface-2)}
+.link-icon{font-size:1.3rem;width:36px;text-align:center;flex-shrink:0}
+.link-text{flex:1}
+.link-text h4{font-size:.85rem;font-weight:600;letter-spacing:.5px}
+.link-text p{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:1px;margin-top:.15rem}
+.link-arrow{color:var(--text-muted);font-size:.8rem;transition:all .2s}
+.link-item:hover .link-arrow{color:var(--accent);transform:translateX(3px)}
+
+/* ABOUT */
+.about-section{padding:6rem 2.5rem;max-width:900px;margin:0 auto;position:relative;z-index:1;border-top:1px solid var(--border)}
+.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:center}
+.about-photo{aspect-ratio:3/4;background:var(--surface);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:.15}
+.about-text h3{font-size:1.8rem;font-weight:800;letter-spacing:1px;margin-bottom:1rem}
+.about-text p{color:var(--text-muted);font-size:.9rem;font-weight:400;line-height:1.8;margin-bottom:1rem}
+.about-stats{display:flex;gap:2.5rem;margin-top:2rem}
+.about-stat .stat-num{font-size:1.8rem;font-weight:800;color:var(--accent)}
+.about-stat .stat-label{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase}
+
+/* CONTACT / BOOKING */
+.contact-section{
+  padding:6rem 2.5rem;max-width:600px;margin:0 auto;text-align:center;
+  position:relative;z-index:1;border-top:1px solid var(--border);
+}
+.contact-section h2{font-size:2.5rem;font-weight:800;letter-spacing:2px;margin-bottom:.5rem}
+.contact-section>p{color:var(--text-muted);font-size:.88rem;margin-bottom:2.5rem}
+.contact-email{
+  font-family:'Space Mono',monospace;font-size:.85rem;color:var(--accent);
+  text-decoration:none;border-bottom:1px dashed rgba(255,77,46,.3);
+  padding-bottom:2px;transition:opacity .2s;
+}
+.contact-email:hover{opacity:.7}
+.contact-socials{display:flex;justify-content:center;gap:1.5rem;margin-top:2rem}
+.contact-socials a{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;text-decoration:none;
+  font-size:.9rem;transition:all .2s;color:var(--text-muted);
+}
+.contact-socials a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+/* FOOTER */
+.site-footer{
+  padding:2rem 2.5rem;text-align:center;border-top:1px solid var(--border);
+  position:relative;z-index:1;
+}
+.site-footer p{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:2px}
+.site-footer a{color:var(--accent);text-decoration:none}
+
+/* NOW PLAYING BAR */
+.now-playing{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;height:50px;
+  background:rgba(5,5,5,.9);backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,77,46,.08);
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+  opacity:0;transition:opacity .5s;
+}
+.now-playing.show{opacity:1}
+.np-bars{display:flex;align-items:end;gap:2px;height:16px}
+.np-bar{width:3px;background:var(--accent);border-radius:1px;animation:eqBar 1s ease infinite}
+.np-bar:nth-child(1){height:8px;animation-delay:0s}
+.np-bar:nth-child(2){height:14px;animation-delay:.15s}
+.np-bar:nth-child(3){height:6px;animation-delay:.3s}
+.np-bar:nth-child(4){height:12px;animation-delay:.1s}
+.np-bar:nth-child(5){height:10px;animation-delay:.25s}
+@keyframes eqBar{0%,100%{height:4px}50%{height:16px}}
+.np-text{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:1px}
+.np-text span{color:var(--text)}
+
+@media(max-width:768px){
+  .site-nav{padding:0 1.25rem}.nav-links{display:none}
+  .release-card{grid-template-columns:1fr}.release-art{max-height:250px}
+  .about-grid{grid-template-columns:1fr}
+  .enter-artist{font-size:clamp(3rem,20vw,6rem)}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== ENTER SCREEN ========== -->
+<div id="enterScreen">
+  <canvas id="enterCanvas"></canvas>
+  <div class="enter-ring"></div>
+  <div class="enter-ring"></div>
+  <div class="enter-ring"></div>
+  <div class="enter-content">
+    <div class="enter-artist">NOVA</div>
+    <div class="enter-sub">Click anywhere to enter</div>
+  </div>
+</div>
+
+<!-- ========== MAIN SITE ========== -->
+<div id="mainSite">
+<div class="grain"></div>
+<canvas id="bgCanvas"></canvas>
+
+<nav class="site-nav">
+  <span class="nav-name">NOVA</span>
+  <div class="nav-links">
+    <a href="#music">Music</a>
+    <a href="#links">Links</a>
+    <a href="#about">About</a>
+    <a href="#contact">Booking</a>
+  </div>
+</nav>
+
+<section class="artist-hero">
+  <div class="hero-inner">
+    <p class="hero-label">New single out now</p>
+    <h1 class="hero-name">NOVA</h1>
+    <p class="hero-tagline">Toronto / Alternative R&B / Trap Soul</p>
+    <a href="#music" class="hero-cta"><span class="play-icon">▶</span> Listen Now</a>
+  </div>
+</section>
+
+<section class="release-section" id="music">
+  <p class="section-label">Latest Release</p>
+  <div class="release-card">
+    <div class="release-art"><span class="art-placeholder">🎵</span></div>
+    <div class="release-info">
+      <p class="release-type">Single · 2026</p>
+      <h2 class="release-title">MIDNIGHT DRIVE</h2>
+      <p class="release-desc">The latest single from NOVA. A late-night R&B track about chasing something you can't name. Produced by [Producer]. Mixed by [Engineer].</p>
+      <div class="stream-links">
+        <a href="#" class="stream-btn spotify">Spotify</a>
+        <a href="#" class="stream-btn apple">Apple Music</a>
+        <a href="#" class="stream-btn soundcloud">SoundCloud</a>
+        <a href="#" class="stream-btn youtube">YouTube</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="links-section" id="links">
+  <p class="section-label">All Links</p>
+  
+  <a href="#" class="link-item">
+    <span class="link-icon">🟢</span>
+    <div class="link-text"><h4>Spotify</h4><p>Stream all tracks</p></div>
+    <span class="link-arrow">→</span>
+  </a>
+  <a href="#" class="link-item">
+    <span class="link-icon">🔴</span>
+    <div class="link-text"><h4>Apple Music</h4><p>Listen on Apple</p></div>
+    <span class="link-arrow">→</span>
+  </a>
+  <a href="#" class="link-item">
+    <span class="link-icon">🟠</span>
+    <div class="link-text"><h4>SoundCloud</h4><p>Unreleased & exclusives</p></div>
+    <span class="link-arrow">→</span>
+  </a>
+  <a href="#" class="link-item">
+    <span class="link-icon">⬜</span>
+    <div class="link-text"><h4>YouTube</h4><p>Music videos & visuals</p></div>
+    <span class="link-arrow">→</span>
+  </a>
+  <a href="#" class="link-item">
+    <span class="link-icon">📸</span>
+    <div class="link-text"><h4>Instagram</h4><p>@nova</p></div>
+    <span class="link-arrow">→</span>
+  </a>
+  <a href="#" class="link-item">
+    <span class="link-icon">🐦</span>
+    <div class="link-text"><h4>Twitter / X</h4><p>@nova</p></div>
+    <span class="link-arrow">→</span>
+  </a>
+  <a href="#" class="link-item">
+    <span class="link-icon">🎵</span>
+    <div class="link-text"><h4>TikTok</h4><p>@nova</p></div>
+    <span class="link-arrow">→</span>
+  </a>
+  <a href="#" class="link-item">
+    <span class="link-icon">🛒</span>
+    <div class="link-text"><h4>Merch Store</h4><p>Official merchandise</p></div>
+    <span class="link-arrow">→</span>
+  </a>
+</section>
+
+<section class="about-section" id="about">
+  <p class="section-label">About</p>
+  <div class="about-grid">
+    <div class="about-photo">📷</div>
+    <div class="about-text">
+      <h3>THE ARTIST</h3>
+      <p>Your bio goes here. Where you're from, what your sound is, who you've worked with, what drives you. This is where fans and industry connect with you beyond the music.</p>
+      <p>Keep it real, keep it you. Two paragraphs max.</p>
+      <div class="about-stats">
+        <div class="about-stat"><div class="stat-num">50K+</div><div class="stat-label">Monthly listeners</div></div>
+        <div class="about-stat"><div class="stat-num">12</div><div class="stat-label">Tracks released</div></div>
+        <div class="about-stat"><div class="stat-num">3</div><div class="stat-label">Music videos</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <p class="section-label">Booking & Press</p>
+  <h2>LET'S WORK</h2>
+  <p>For bookings, features, press inquiries, and business.</p>
+  <a href="mailto:booking@nova.com" class="contact-email">booking@nova.com</a>
+  <div class="contact-socials">
+    <a href="#">📸</a>
+    <a href="#">🐦</a>
+    <a href="#">🎵</a>
+    <a href="#">💬</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>© 2026 NOVA · Built by <a href="https://hadithadev.ca" target="_blank">HadiThaDev</a></p>
+</footer>
+
+<!-- NOW PLAYING BAR -->
+<div class="now-playing" id="nowPlaying">
+  <div class="np-bars"><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div></div>
+  <div class="np-text">Now Playing — <span>NOVA · Midnight Drive</span></div>
+</div>
+</div>
+
+<script>
+// ========== ENTER SCREEN PARTICLE CANVAS ==========
+const ec = document.getElementById('enterCanvas');
+const ectx = ec.getContext('2d');
+let particles = [];
+
+function resizeEnterCanvas(){
+  ec.width = window.innerWidth;
+  ec.height = window.innerHeight;
+}
+resizeEnterCanvas();
+window.addEventListener('resize', resizeEnterCanvas);
+
+// Create particles
+for(let i = 0; i < 80; i++){
+  particles.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - .5) * .5,
+    vy: (Math.random() - .5) * .5,
+    size: Math.random() * 2 + .5,
+    alpha: Math.random() * .3 + .05,
+  });
+}
+
+function animateEnterParticles(){
+  if(document.getElementById('enterScreen').classList.contains('hidden')) return;
+  ectx.clearRect(0, 0, ec.width, ec.height);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if(p.x < 0) p.x = ec.width;
+    if(p.x > ec.width) p.x = 0;
+    if(p.y < 0) p.y = ec.height;
+    if(p.y > ec.height) p.y = 0;
+    ectx.beginPath();
+    ectx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ectx.fillStyle = `rgba(255, 77, 46, ${p.alpha})`;
+    ectx.fill();
+  });
+  // Draw connections
+  for(let i = 0; i < particles.length; i++){
+    for(let j = i + 1; j < particles.length; j++){
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 120){
+        ectx.beginPath();
+        ectx.moveTo(particles[i].x, particles[i].y);
+        ectx.lineTo(particles[j].x, particles[j].y);
+        ectx.strokeStyle = `rgba(255, 77, 46, ${.06 * (1 - dist/120)})`;
+        ectx.lineWidth = .5;
+        ectx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateEnterParticles);
+}
+animateEnterParticles();
+
+// ========== CLICK TO ENTER ==========
+document.getElementById('enterScreen').addEventListener('click', () => {
+  document.getElementById('enterScreen').classList.add('hidden');
+  document.getElementById('mainSite').classList.add('show');
+  document.body.classList.add('entered');
+  
+  // Show now playing bar
+  setTimeout(() => {
+    document.getElementById('nowPlaying').classList.add('show');
+  }, 1500);
+  
+  // Start background particles
+  initBgCanvas();
+});
+
+// ========== BACKGROUND FLOATING PARTICLES ==========
+const bgc = document.getElementById('bgCanvas');
+const bgctx = bgc.getContext('2d');
+let bgParticles = [];
+
+function initBgCanvas(){
+  bgc.width = window.innerWidth;
+  bgc.height = window.innerHeight * 5; // tall for scrolling
+  
+  for(let i = 0; i < 50; i++){
+    bgParticles.push({
+      x: Math.random() * bgc.width,
+      y: Math.random() * bgc.height,
+      size: Math.random() * 1.5 + .3,
+      alpha: Math.random() * .15 + .03,
+      speed: Math.random() * .3 + .1,
+    });
+  }
+  animateBg();
+}
+
+function animateBg(){
+  bgctx.clearRect(0, 0, bgc.width, bgc.height);
+  bgParticles.forEach(p => {
+    p.y -= p.speed;
+    if(p.y < 0) p.y = bgc.height;
+    bgctx.beginPath();
+    bgctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    bgctx.fillStyle = `rgba(255, 77, 46, ${p.alpha})`;
+    bgctx.fill();
+  });
+  requestAnimationFrame(animateBg);
+}
+
+window.addEventListener('resize', () => {
+  resizeEnterCanvas();
+  if(bgc.width){
+    bgc.width = window.innerWidth;
+    bgc.height = window.innerHeight * 5;
+  }
+});
+</script>
+</body>
+</html>
