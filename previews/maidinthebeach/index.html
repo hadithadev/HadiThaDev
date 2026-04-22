@@ -116,7 +116,7 @@ a{color:inherit;text-decoration:none}
 /* ————— hero ————— */
 .hero{
   position:relative;
-  min-height:100vh;
+  min-height:760px;
   padding:9rem 2rem 6rem;
   display:grid;
   grid-template-columns: 1fr;
@@ -135,11 +135,8 @@ a{color:inherit;text-decoration:none}
   background:radial-gradient(circle at 35% 35%, #F5C97A 0%, #E9B15E 55%, #C68B3C 100%);
   opacity:.9;
   z-index:0;
-  animation:sun-rise 1.8s var(--ease) both;
 }
-@keyframes sun-rise{
-  0%{transform:translateY(80px) scale(.8);opacity:0}
-  100%{transform:translateY(0) scale(1);opacity:.9}
+
 }
 
 .hero-inner{
@@ -153,8 +150,6 @@ a{color:inherit;text-decoration:none}
   letter-spacing:.22em;text-transform:uppercase;
   color:var(--tide);
   margin-bottom:1.6rem;
-  opacity:0;
-  animation:fade-up .9s var(--ease) .2s both;
 }
 .hero-eyebrow::before{
   content:"";width:32px;height:1px;background:var(--tide);display:inline-block;
@@ -167,12 +162,9 @@ a{color:inherit;text-decoration:none}
   letter-spacing:-.03em;
   color:var(--tide-ink);
   max-width:13ch;
-  opacity:0;
-  animation:fade-up 1s var(--ease) .35s both;
 }
 .hero-title em{
   font-style:italic;
-  ;
   color:var(--sun-deep);
   position:relative;
 }
@@ -187,14 +179,10 @@ a{color:inherit;text-decoration:none}
   margin-top:1.8rem;
   color:#3A4A4E;
   line-height:1.65;
-  opacity:0;
-  animation:fade-up 1s var(--ease) .55s both;
 }
 .hero-ctas{
   display:flex;gap:1rem;align-items:center;flex-wrap:wrap;
   margin-top:2.4rem;
-  opacity:0;
-  animation:fade-up 1s var(--ease) .75s both;
 }
 .btn{
   display:inline-flex;align-items:center;gap:.55rem;
@@ -228,8 +216,6 @@ a{color:inherit;text-decoration:none}
   margin-top:4.5rem;
   display:grid;grid-template-columns:repeat(3, auto);
   gap:3.5rem;
-  opacity:0;
-  animation:fade-up 1s var(--ease) 1s both;
 }
 .stat-num{
   font-family:var(--f-display);
@@ -244,9 +230,7 @@ a{color:inherit;text-decoration:none}
   color:var(--tide);margin-top:.5rem;
 }
 
-@keyframes fade-up{
-  from{opacity:0;transform:translateY(24px)}
-  to{opacity:1;transform:translateY(0)}
+
 }
 
 @media(max-width:640px){
@@ -613,9 +597,8 @@ a{color:inherit;text-decoration:none}
 }
 .footer .brand{color:var(--foam)}
 
-/* ————— scroll reveal ————— */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease), transform .8s var(--ease)}
-.reveal.in{opacity:1;transform:translateY(0)}
+/* ————— scroll reveal (disabled for perf) ————— */
+.reveal{opacity:1;transform:none}
 
 /* perf — skip rendering sections off-screen */
 .services, .why, .process, .area, .contact{
@@ -1070,17 +1053,6 @@ a{color:inherit;text-decoration:none}
   const navLinks = document.getElementById('navLinks');
   burger.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-  // reveal on scroll
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.14 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
 </body>
