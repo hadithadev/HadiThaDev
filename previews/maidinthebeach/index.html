@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maid In The Beach — Luxury Coastal Cleaning in Wasaga Beach</title>
+<meta name="description" content="Boutique residential, Airbnb, and cottage cleaning in Wasaga Beach, Stayner, Collingwood & Blue Mountain. Pet-friendly, insured, 15+ years of detail-obsessed work." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  /* coastal-editorial palette — sea glass, sand, sun-washed gold, deep tide */
+  --sand:         #F4EDE1;
+  --sand-deep:   #E8DDC7;
+  --foam:         #FBF8F2;
+  --seaglass:    #BBD4CE;
+  --seaglass-2:  #8FB8B0;
+  --tide:         #2C4A52;
+  --tide-ink:    #15292E;
+  --sun:          #E9B15E;
+  --sun-deep:    #C68B3C;
+  --shell:       #E8C7B4;
+  --ink:         #1A1F22;
+
+  --f-display: "Fraunces", Georgia, serif;
+  --f-body:    "Outfit", system-ui, sans-serif;
+
+  --ease: cubic-bezier(.65,.05,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-body);
+  color:var(--ink);
+  background:var(--foam);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ————— grain overlay for atmosphere ————— */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  pointer-events:none;
+  z-index:9999;
+  mix-blend-mode:multiply;
+  opacity:.55;
+}
+
+/* ————— nav ————— */
+.nav{
+  position:fixed;top:0;left:0;right:0;
+  padding:1.15rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  z-index:50;
+  transition: background .35s var(--ease), backdrop-filter .35s var(--ease), padding .35s var(--ease);
+}
+.nav.scrolled{
+  background:rgba(251,248,242,.85);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  padding:.7rem 2rem;
+  border-bottom:1px solid rgba(44,74,82,.08);
+}
+.brand{
+  font-family:var(--f-display);
+  font-weight:500;
+  font-size:1.35rem;
+  letter-spacing:-.01em;
+  color:var(--tide-ink);
+  display:flex;align-items:center;gap:.55rem;
+}
+.brand-mark{
+  width:32px;height:32px;
+  display:inline-block;
+  position:relative;
+}
+.nav-links{
+  display:flex;gap:2.25rem;align-items:center;
+  font-size:.88rem;font-weight:400;
+  color:var(--tide-ink);
+}
+.nav-links a{position:relative;transition:opacity .2s}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-4px;
+  width:0;height:1px;background:currentColor;
+  transition:width .3s var(--ease);
+}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  background:var(--tide);color:var(--foam);
+  padding:.7rem 1.3rem;
+  border-radius:999px;
+  font-size:.82rem;font-weight:500;
+  letter-spacing:.02em;
+  transition:background .25s, transform .25s var(--ease);
+}
+.nav-cta:hover{background:var(--tide-ink);transform:translateY(-1px)}
+
+.burger{display:none;background:none;border:0;cursor:pointer;padding:.4rem;color:var(--tide-ink)}
+.burger svg{width:24px;height:24px}
+
+@media(max-width:820px){
+  .nav-links{
+    position:fixed;top:0;right:-100%;
+    flex-direction:column;
+    width:80%;max-width:320px;height:100vh;
+    background:var(--foam);
+    padding:5rem 2rem 2rem;
+    gap:1.5rem;
+    transition:right .4s var(--ease);
+    align-items:flex-start;
+    box-shadow:-20px 0 40px rgba(0,0,0,.08);
+  }
+  .nav-links.open{right:0}
+  .nav-links a{font-size:1.1rem}
+  .burger{display:block;z-index:52}
+}
+
+/* ————— hero ————— */
+.hero{
+  position:relative;
+  min-height:100vh;
+  padding:9rem 2rem 6rem;
+  display:grid;
+  grid-template-columns: 1fr;
+  align-items:center;
+  background:
+    radial-gradient(ellipse 70% 55% at 80% 15%, rgba(233,177,94,.22), transparent 60%),
+    radial-gradient(ellipse 85% 65% at 15% 85%, rgba(187,212,206,.55), transparent 60%),
+    linear-gradient(180deg, var(--foam) 0%, var(--sand) 100%);
+  overflow:hidden;
+}
+
+/* sun element — behind everything */
+.sun{
+  position:absolute;
+  top:18%;right:8%;
+  width:min(28vw, 320px);
+  aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #F5C97A 0%, #E9B15E 55%, #C68B3C 100%);
+  filter:blur(.5px);
+  opacity:.9;
+  box-shadow:0 0 120px 20px rgba(233,177,94,.3);
+  z-index:0;
+  animation:sun-rise 1.8s var(--ease) both;
+}
+@keyframes sun-rise{
+  0%{transform:translateY(80px) scale(.8);opacity:0}
+  100%{transform:translateY(0) scale(1);opacity:.9}
+}
+
+.hero-inner{
+  position:relative;z-index:2;
+  max-width:1280px;margin:0 auto;
+  width:100%;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.78rem;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--tide);
+  margin-bottom:1.6rem;
+  opacity:0;
+  animation:fade-up .9s var(--ease) .2s both;
+}
+.hero-eyebrow::before{
+  content:"";width:32px;height:1px;background:var(--tide);display:inline-block;
+}
+.hero-title{
+  font-family:var(--f-display);
+  font-weight:400;
+  font-size:clamp(3rem, 8.5vw, 7.5rem);
+  line-height:.95;
+  letter-spacing:-.03em;
+  color:var(--tide-ink);
+  max-width:13ch;
+  opacity:0;
+  animation:fade-up 1s var(--ease) .35s both;
+}
+.hero-title em{
+  font-style:italic;
+  font-variation-settings:"opsz" 144;
+  color:var(--sun-deep);
+  position:relative;
+}
+.hero-title .amp{
+  font-style:italic;
+  font-weight:300;
+  color:var(--seaglass-2);
+}
+.hero-sub{
+  font-size:clamp(1rem, 1.3vw, 1.15rem);
+  max-width:46ch;
+  margin-top:1.8rem;
+  color:#3A4A4E;
+  line-height:1.65;
+  opacity:0;
+  animation:fade-up 1s var(--ease) .55s both;
+}
+.hero-ctas{
+  display:flex;gap:1rem;align-items:center;flex-wrap:wrap;
+  margin-top:2.4rem;
+  opacity:0;
+  animation:fade-up 1s var(--ease) .75s both;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:1rem 1.8rem;
+  border-radius:999px;
+  font-size:.92rem;font-weight:500;
+  letter-spacing:.01em;
+  transition:transform .3s var(--ease), background .25s, box-shadow .3s;
+  cursor:pointer;border:0;
+  font-family:inherit;
+}
+.btn-primary{
+  background:var(--tide);color:var(--foam);
+  box-shadow:0 10px 30px -8px rgba(44,74,82,.45);
+}
+.btn-primary:hover{
+  background:var(--tide-ink);
+  transform:translateY(-2px);
+  box-shadow:0 18px 40px -10px rgba(44,74,82,.55);
+}
+.btn-ghost{
+  background:transparent;color:var(--tide-ink);
+  border:1px solid rgba(44,74,82,.25);
+}
+.btn-ghost:hover{background:rgba(44,74,82,.06);border-color:var(--tide)}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+
+/* hero stats strip */
+.hero-stats{
+  margin-top:4.5rem;
+  display:grid;grid-template-columns:repeat(3, auto);
+  gap:3.5rem;
+  opacity:0;
+  animation:fade-up 1s var(--ease) 1s both;
+}
+.stat-num{
+  font-family:var(--f-display);
+  font-size:2.25rem;font-weight:400;
+  color:var(--tide-ink);
+  line-height:1;
+  letter-spacing:-.02em;
+}
+.stat-num em{color:var(--sun-deep);font-style:italic}
+.stat-lbl{
+  font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--tide);margin-top:.5rem;
+}
+
+@keyframes fade-up{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:640px){
+  .hero{padding:7rem 1.25rem 4rem}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+  .hero-stats .stat:last-child{grid-column:1/-1}
+  .sun{width:55vw;top:10%;right:-10%}
+}
+
+/* ————— wave divider ————— */
+.wave{display:block;width:100%;height:auto;line-height:0}
+
+/* ————— services ————— */
+.services{
+  background:var(--tide);
+  color:var(--foam);
+  padding:8rem 2rem;
+  position:relative;
+  overflow:hidden;
+}
+.services::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 40% at 90% 10%, rgba(233,177,94,.12), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 5% 90%, rgba(143,184,176,.18), transparent 60%);
+  pointer-events:none;
+}
+.section-wrap{max-width:1280px;margin:0 auto;position:relative}
+.section-head{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:end;
+  margin-bottom:5rem;
+}
+.section-eyebrow{
+  font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--seaglass);
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.section-eyebrow::before{
+  content:"";width:28px;height:1px;background:var(--seaglass);
+}
+.section-title{
+  font-family:var(--f-display);
+  font-weight:400;
+  font-size:clamp(2.25rem, 5vw, 4.25rem);
+  line-height:1.02;
+  letter-spacing:-.02em;
+  margin-top:1.2rem;
+}
+.section-title em{font-style:italic;color:var(--sun);font-variation-settings:"opsz" 144}
+.section-lede{
+  font-size:1.02rem;
+  color:rgba(251,248,242,.75);
+  max-width:42ch;
+  line-height:1.7;
+}
+
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  gap:1.25rem;
+}
+.service-card{
+  background:rgba(251,248,242,.04);
+  border:1px solid rgba(251,248,242,.12);
+  border-radius:22px;
+  padding:2.4rem 2.2rem;
+  transition:transform .5s var(--ease), background .4s, border-color .4s;
+  position:relative;overflow:hidden;
+  min-height:320px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.service-card:hover{
+  background:rgba(251,248,242,.07);
+  border-color:rgba(233,177,94,.4);
+  transform:translateY(-4px);
+}
+.service-card:hover .service-icon{transform:rotate(-6deg) scale(1.05)}
+.service-card:hover .service-num{color:var(--sun)}
+
+/* custom sizing — editorial asymmetry */
+.service-card.s1{grid-column:span 7}
+.service-card.s2{grid-column:span 5}
+.service-card.s3{grid-column:span 5}
+.service-card.s4{grid-column:span 7}
+
+.service-num{
+  font-family:var(--f-display);
+  font-style:italic;font-weight:300;
+  font-size:.95rem;
+  color:rgba(251,248,242,.4);
+  letter-spacing:.1em;
+  transition:color .3s;
+}
+.service-icon{
+  width:56px;height:56px;
+  margin-bottom:1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(233,177,94,.12);
+  border-radius:14px;
+  color:var(--sun);
+  transition:transform .5s var(--ease);
+}
+.service-icon svg{width:28px;height:28px}
+.service-name{
+  font-family:var(--f-display);
+  font-weight:400;
+  font-size:clamp(1.5rem, 2.3vw, 2rem);
+  line-height:1.1;
+  letter-spacing:-.01em;
+  margin-bottom:.8rem;
+}
+.service-desc{
+  font-size:.95rem;
+  color:rgba(251,248,242,.72);
+  line-height:1.65;
+  max-width:38ch;
+}
+
+@media(max-width:900px){
+  .section-head{grid-template-columns:1fr;gap:1.5rem}
+  .service-card.s1,.service-card.s2,.service-card.s3,.service-card.s4{grid-column:span 12}
+  .services{padding:5rem 1.25rem}
+}
+
+/* ————— why us ————— */
+.why{
+  padding:8rem 2rem;
+  background:var(--foam);
+  position:relative;
+  overflow:hidden;
+}
+.why-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6rem;
+  align-items:center;
+  max-width:1280px;margin:0 auto;
+}
+.why-visual{
+  position:relative;
+  aspect-ratio:4/5;
+  border-radius:8px;
+  overflow:hidden;
+  background:linear-gradient(160deg, var(--seaglass) 0%, var(--seaglass-2) 100%);
+}
+.why-visual svg{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+.why-visual::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 20%, rgba(255,255,255,.35), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 30% 90%, rgba(20,40,45,.15), transparent 70%);
+}
+.why-tag{
+  position:absolute;
+  bottom:2rem;left:2rem;right:2rem;
+  background:rgba(251,248,242,.92);
+  backdrop-filter:blur(12px);
+  padding:1.6rem 1.8rem;
+  border-radius:14px;
+  z-index:2;
+  box-shadow:0 20px 40px -12px rgba(0,0,0,.15);
+}
+.why-tag-quote{
+  font-family:var(--f-display);
+  font-style:italic;font-weight:300;
+  font-size:1.1rem;
+  line-height:1.4;
+  color:var(--tide-ink);
+}
+.why-tag-author{
+  font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--tide);margin-top:.8rem;
+}
+
+.why-list{display:flex;flex-direction:column;gap:2.2rem;margin-top:2.5rem}
+.why-item{
+  display:grid;grid-template-columns:auto 1fr;gap:1.5rem;
+  padding-bottom:2.2rem;
+  border-bottom:1px solid rgba(44,74,82,.1);
+}
+.why-item:last-child{border-bottom:0;padding-bottom:0}
+.why-icon{
+  width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--seaglass);color:var(--tide-ink);
+  border-radius:50%;
+  flex-shrink:0;
+}
+.why-icon svg{width:22px;height:22px}
+.why-name{
+  font-family:var(--f-display);
+  font-size:1.35rem;font-weight:500;
+  letter-spacing:-.01em;color:var(--tide-ink);
+  margin-bottom:.4rem;
+}
+.why-desc{font-size:.95rem;color:#4A5558;line-height:1.65;max-width:45ch}
+
+@media(max-width:900px){
+  .why-grid{grid-template-columns:1fr;gap:3rem}
+  .why{padding:5rem 1.25rem}
+  .why-visual{aspect-ratio:3/3;max-height:500px}
+}
+
+/* ————— process ————— */
+.process{
+  background:
+    linear-gradient(180deg, var(--sand) 0%, var(--sand-deep) 100%);
+  padding:8rem 2rem;
+  position:relative;
+}
+.process-steps{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:1.5rem;
+  margin-top:4rem;
+  counter-reset:step;
+}
+.step{
+  position:relative;
+  padding:2.2rem 1.8rem;
+  background:var(--foam);
+  border-radius:16px;
+  border:1px solid rgba(44,74,82,.08);
+  transition:transform .4s var(--ease), box-shadow .4s;
+}
+.step:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px -12px rgba(44,74,82,.15);
+}
+.step-num{
+  font-family:var(--f-display);
+  font-style:italic;
+  font-size:3rem;font-weight:300;
+  color:var(--sun-deep);
+  line-height:1;
+  margin-bottom:1rem;
+  display:block;
+}
+.step-title{
+  font-family:var(--f-display);
+  font-size:1.35rem;font-weight:500;
+  color:var(--tide-ink);
+  margin-bottom:.6rem;
+  letter-spacing:-.01em;
+}
+.step-body{font-size:.92rem;color:#4A5558;line-height:1.6}
+
+@media(max-width:900px){
+  .process-steps{grid-template-columns:1fr 1fr;gap:1rem}
+  .process{padding:5rem 1.25rem}
+}
+@media(max-width:500px){
+  .process-steps{grid-template-columns:1fr}
+}
+
+/* ————— service area ————— */
+.area{
+  padding:8rem 2rem;
+  background:var(--foam);
+  position:relative;
+  overflow:hidden;
+}
+.area-grid{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:center;
+}
+.area-head .section-title{color:var(--tide-ink)}
+.area-head .section-title em{color:var(--sun-deep)}
+.area-head .section-lede{color:#4A5558}
+.area-head .section-eyebrow{color:var(--tide)}
+.area-head .section-eyebrow::before{background:var(--tide)}
+
+.places{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.5rem}
+.place{
+  padding:.7rem 1.3rem;
+  border:1px solid rgba(44,74,82,.2);
+  border-radius:999px;
+  font-size:.88rem;font-weight:500;color:var(--tide-ink);
+  transition:background .25s, border-color .25s, color .25s;
+  cursor:default;
+}
+.place:hover{
+  background:var(--tide);color:var(--foam);
+  border-color:var(--tide);
+}
+
+.map-card{
+  position:relative;
+  aspect-ratio:5/4;
+  background:linear-gradient(160deg, var(--seaglass) 0%, #A8C8C0 60%, var(--seaglass-2) 100%);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 30px 60px -20px rgba(44,74,82,.35);
+}
+.map-card svg{width:100%;height:100%}
+
+@media(max-width:900px){
+  .area-grid{grid-template-columns:1fr;gap:3rem}
+  .area{padding:5rem 1.25rem}
+}
+
+/* ————— contact / CTA ————— */
+.contact{
+  background:var(--tide-ink);
+  color:var(--foam);
+  padding:8rem 2rem;
+  position:relative;
+  overflow:hidden;
+}
+.contact::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 85% 20%, rgba(233,177,94,.18), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 10% 90%, rgba(187,212,206,.12), transparent 60%);
+  pointer-events:none;
+}
+.contact-inner{
+  max-width:1100px;margin:0 auto;position:relative;z-index:2;
+  text-align:center;
+}
+.contact .section-title{font-size:clamp(2.5rem, 7vw, 5.5rem)}
+.contact .section-title em{color:var(--sun)}
+.contact-lede{
+  font-size:1.1rem;color:rgba(251,248,242,.75);
+  max-width:52ch;margin:2rem auto 0;line-height:1.7;
+}
+.contact-methods{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.5rem;max-width:780px;margin:4rem auto 0;
+}
+.contact-card{
+  padding:2.5rem 2rem;
+  border:1px solid rgba(251,248,242,.15);
+  border-radius:20px;
+  background:rgba(251,248,242,.03);
+  transition:background .3s, border-color .3s, transform .3s var(--ease);
+  display:block;
+  text-align:left;
+}
+.contact-card:hover{
+  background:rgba(251,248,242,.07);
+  border-color:var(--sun);
+  transform:translateY(-4px);
+}
+.contact-card-lbl{
+  font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--seaglass);
+}
+.contact-card-val{
+  font-family:var(--f-display);
+  font-size:clamp(1.3rem, 2.5vw, 1.85rem);
+  font-weight:400;
+  letter-spacing:-.01em;
+  margin-top:1rem;
+  word-break:break-word;
+}
+.contact-card-val em{font-style:italic;color:var(--sun)}
+
+@media(max-width:640px){
+  .contact-methods{grid-template-columns:1fr}
+  .contact{padding:5rem 1.25rem}
+}
+
+/* ————— footer ————— */
+.footer{
+  background:var(--tide-ink);
+  color:rgba(251,248,242,.6);
+  padding:3rem 2rem 2.5rem;
+  border-top:1px solid rgba(251,248,242,.08);
+  font-size:.85rem;
+}
+.footer-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:1rem;flex-wrap:wrap;
+}
+.footer .brand{color:var(--foam)}
+
+/* ————— scroll reveal ————— */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease), transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav" id="nav">
+  <a href="#top" class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" fill="none">
+        <path d="M4 22 Q10 14, 16 22 T28 22" stroke="#2C4A52" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M4 26 Q10 19, 16 26 T28 26" stroke="#E9B15E" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".85"/>
+        <circle cx="24" cy="9" r="4" fill="#E9B15E" opacity=".9"/>
+      </svg>
+    </span>
+    Maid In The Beach
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#contact" class="nav-cta">Free Quote</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="8" x2="21" y2="8"/>
+      <line x1="3" y1="16" x2="21" y2="16"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero" id="top">
+  <div class="sun" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Wasaga Beach · Est. on the shoreline</span>
+    <h1 class="hero-title">
+      Sparkling homes,<br/>
+      <em>beach-clean</em> <span class="amp">&amp;</span><br/>
+      quietly luxurious.
+    </h1>
+    <p class="hero-sub">
+      A boutique cleaning service for the homes, cottages, and short-term rentals along Georgian Bay. Pet-friendly. Insured. Detail-obsessed — by a team with 15+ years on the job.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">
+        Book a Free Quote
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="tel:7059947845" class="btn btn-ghost">
+        705.994.7845
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num"><em>15</em>+</div>
+        <div class="stat-lbl">Years of Care</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100<em>%</em></div>
+        <div class="stat-lbl">Insured & Cleared</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4<em>+</em></div>
+        <div class="stat-lbl">Communities Served</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- wave transition hero -> services -->
+<svg class="wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true" style="background:var(--sand)">
+  <path d="M0,60 C240,110 480,10 720,40 C960,70 1200,100 1440,50 L1440,100 L0,100 Z" fill="#2C4A52"/>
+</svg>
+
+<!-- ========== SERVICES ========== -->
+<section class="services" id="services">
+  <div class="section-wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-eyebrow">What we do</span>
+        <h2 class="section-title">Cleaning, done the <em>coastal</em> way.</h2>
+      </div>
+      <p class="section-lede">
+        From the everyday refresh to full cottage turnovers between guests — every service built around care, consistency, and the kind of detail that only comes from loving the work.
+      </p>
+    </div>
+
+    <div class="service-grid">
+
+      <article class="service-card s1 reveal">
+        <div>
+          <span class="service-num">— 01</span>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 11L12 3l9 8v10a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1V11z"/>
+            </svg>
+          </div>
+          <h3 class="service-name">Residential Cleaning</h3>
+          <p class="service-desc">Routine upkeep tailored to how you live. We handle the corners, the baseboards, the overlooked edges — the stuff that makes a home feel exhaled.</p>
+        </div>
+      </article>
+
+      <article class="service-card s2 reveal">
+        <div>
+          <span class="service-num">— 02</span>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/>
+            </svg>
+          </div>
+          <h3 class="service-name">Airbnb &amp; Rentals</h3>
+          <p class="service-desc">Fast, flawless turnovers between guests — linens, essentials, the lot.</p>
+        </div>
+      </article>
+
+      <article class="service-card s3 reveal">
+        <div>
+          <span class="service-num">— 03</span>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 20h18M5 20V12l7-6 7 6v8M10 20v-5h4v5M9 8h6"/>
+            </svg>
+          </div>
+          <h3 class="service-name">Cottage Cleaning</h3>
+          <p class="service-desc">Season-ready, closing-tidy, or anything in-between — for Georgian Bay homes.</p>
+        </div>
+      </article>
+
+      <article class="service-card s4 reveal">
+        <div>
+          <span class="service-num">— 04</span>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4"/>
+            </svg>
+          </div>
+          <h3 class="service-name">Deep Cleans</h3>
+          <p class="service-desc">The once-in-a-season reset — inside appliances, under furniture, and every surface you forgot you had. Built for move-ins, listings, or sheer peace of mind.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHY US ========== -->
+<section class="why" id="why">
+  <div class="why-grid">
+
+    <div class="why-visual reveal" aria-hidden="true">
+      <!-- layered coastal illustration -->
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F5C97A"/>
+            <stop offset="50%" stop-color="#E8C7B4"/>
+            <stop offset="100%" stop-color="#BBD4CE"/>
+          </linearGradient>
+          <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8FB8B0"/>
+            <stop offset="100%" stop-color="#2C4A52"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="260" fill="url(#sky)"/>
+        <circle cx="300" cy="120" r="45" fill="#F5C97A" opacity=".9"/>
+        <rect y="260" width="400" height="240" fill="url(#water)"/>
+        <path d="M0,280 Q100,265 200,280 T400,280 L400,300 L0,300 Z" fill="#F4EDE1" opacity=".4"/>
+        <path d="M0,300 Q100,285 200,300 T400,300 L400,320 L0,320 Z" fill="#FBF8F2" opacity=".3"/>
+        <path d="M0,330 Q100,315 200,330 T400,330 L400,355 L0,355 Z" fill="#FBF8F2" opacity=".25"/>
+        <!-- sailboat -->
+        <g transform="translate(80,200)">
+          <path d="M0,40 L20,10 L20,40 Z" fill="#FBF8F2"/>
+          <path d="M20,15 L40,40 L20,40 Z" fill="#FBF8F2" opacity=".85"/>
+          <path d="M-5,40 Q20,52 45,40 L42,48 L-2,48 Z" fill="#15292E"/>
+        </g>
+      </svg>
+      <div class="why-tag">
+        <div class="why-tag-quote">"Luxury, detail-oriented care — made affordable, and built on how we'd want our own home treated."</div>
+        <div class="why-tag-author">— The Maid In The Beach team</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="section-eyebrow" style="color:var(--tide);">Why choose us</span>
+      <h2 class="section-title" style="color:var(--tide-ink);margin-bottom:1.5rem;">
+        Care that shows up in<br/> the <em style="color:var(--sun-deep);">details</em>.
+      </h2>
+      <p class="section-lede" style="color:#4A5558;">
+        We're not a franchise — we're a small, trained team who know our clients by name. Here's what that means in practice.
+      </p>
+
+      <div class="why-list">
+
+        <div class="why-item">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="why-name">15+ Years of Experience</div>
+            <div class="why-desc">A decade and a half of turning over cottages, refreshing homes, and prepping rentals for the next guest. The muscle memory shows.</div>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L3 7v6c0 5 4 9 9 10 5-1 9-5 9-10V7l-9-5z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="why-name">Fully Insured &amp; Police-Cleared</div>
+            <div class="why-desc">Every team member is insured, professionally trained, and carries a clean police clearance. Your keys are safe with us.</div>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M5 21v-1a7 7 0 0114 0v1"/>
+              <circle cx="18" cy="6" r="1.5" fill="currentColor"/>
+              <circle cx="6" cy="6" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <div>
+            <div class="why-name">Pet-Friendly, Always</div>
+            <div class="why-desc">Products and methods safe around the ones who shed on the couch. No anxious dogs. No compromises.</div>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7h16M4 12h10M4 17h16"/>
+              <circle cx="18" cy="12" r="2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="why-name">Fully Customizable Packages</div>
+            <div class="why-desc">Pricing based on your home's square footage, with every package shaped to your needs and budget. Seniors receive a standing discount.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== PROCESS ========== -->
+<section class="process" id="process">
+  <div class="section-wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-eyebrow" style="color:var(--tide);">How it works</span>
+        <h2 class="section-title" style="color:var(--tide-ink);">Simple, from first call to <em style="color:var(--sun-deep);">spotless</em>.</h2>
+      </div>
+      <p class="section-lede" style="color:#4A5558;">
+        No fine print. No contracts. Just a clean, straightforward way to get your home — or rental — looked after properly.
+      </p>
+    </div>
+
+    <div class="process-steps">
+      <div class="step reveal">
+        <span class="step-num">i.</span>
+        <div class="step-title">Reach Out</div>
+        <p class="step-body">A quick call, text, or email. Tell us about the space, the schedule, the quirks.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">ii.</span>
+        <div class="step-title">Free Quote</div>
+        <p class="step-body">Transparent pricing based on square footage — no surprise add-ons, no pressure.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">iii.</span>
+        <div class="step-title">We Show Up</div>
+        <p class="step-body">Insured, equipped, on time. Pet-friendly products. The team you'll see again next week.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">iv.</span>
+        <div class="step-title">You Exhale</div>
+        <p class="step-body">Walk back in to a house that smells right, looks right, and gives you back your weekend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SERVICE AREA ========== -->
+<section class="area" id="area">
+  <div class="area-grid">
+
+    <div class="area-head reveal">
+      <span class="section-eyebrow">Where we clean</span>
+      <h2 class="section-title">
+        Serving the <em>shoreline</em> <br/>&amp; everything around it.
+      </h2>
+      <p class="section-lede">
+        From Wasaga's beachfront cottages to the quieter homes of Stayner and Elmvale — wherever life brings you between the water and the hills, we can be there.
+      </p>
+
+      <div class="places">
+        <span class="place">Wasaga Beach</span>
+        <span class="place">Stayner</span>
+        <span class="place">Collingwood</span>
+        <span class="place">Blue Mountain</span>
+        <span class="place">Elmvale</span>
+        <span class="place">Angus</span>
+      </div>
+    </div>
+
+    <div class="map-card reveal" aria-hidden="true">
+      <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F4EDE1"/>
+            <stop offset="100%" stop-color="#E8DDC7"/>
+          </linearGradient>
+          <linearGradient id="bay" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#BBD4CE"/>
+            <stop offset="100%" stop-color="#8FB8B0"/>
+          </linearGradient>
+        </defs>
+        <rect width="500" height="400" fill="url(#bay)"/>
+        <!-- abstract land mass suggesting georgian bay shoreline -->
+        <path d="M0,200 Q60,180 110,195 Q170,220 220,205 Q280,185 330,210 Q400,240 500,220 L500,400 L0,400 Z" fill="url(#land)"/>
+        <path d="M0,220 Q60,205 110,215 Q170,240 220,225 Q280,205 330,230 Q400,260 500,240" fill="none" stroke="#FBF8F2" stroke-width="2" opacity=".5"/>
+        <!-- wave lines in the water -->
+        <path d="M20,80 Q60,70 100,80 T180,80" stroke="#FBF8F2" stroke-width="1.5" fill="none" opacity=".45"/>
+        <path d="M250,50 Q290,40 330,50 T410,50" stroke="#FBF8F2" stroke-width="1.5" fill="none" opacity=".45"/>
+        <path d="M100,130 Q140,120 180,130 T260,130" stroke="#FBF8F2" stroke-width="1.5" fill="none" opacity=".4"/>
+        <path d="M320,150 Q360,140 400,150 T480,150" stroke="#FBF8F2" stroke-width="1.5" fill="none" opacity=".4"/>
+
+        <!-- location pins -->
+        <g class="pin" transform="translate(150,235)">
+          <circle r="6" fill="#E9B15E"/>
+          <circle r="14" fill="#E9B15E" opacity=".25"/>
+          <text x="12" y="-8" font-family="Fraunces,serif" font-style="italic" font-size="14" fill="#15292E">Wasaga Beach</text>
+        </g>
+        <g class="pin" transform="translate(75,280)">
+          <circle r="5" fill="#2C4A52"/>
+          <text x="10" y="20" font-family="Fraunces,serif" font-style="italic" font-size="12" fill="#15292E">Stayner</text>
+        </g>
+        <g class="pin" transform="translate(280,245)">
+          <circle r="5" fill="#2C4A52"/>
+          <text x="10" y="-8" font-family="Fraunces,serif" font-style="italic" font-size="12" fill="#15292E">Collingwood</text>
+        </g>
+        <g class="pin" transform="translate(380,230)">
+          <circle r="5" fill="#2C4A52"/>
+          <text x="10" y="-8" font-family="Fraunces,serif" font-style="italic" font-size="12" fill="#15292E">Blue Mountain</text>
+        </g>
+        <g class="pin" transform="translate(210,310)">
+          <circle r="4" fill="#2C4A52" opacity=".75"/>
+          <text x="10" y="5" font-family="Fraunces,serif" font-style="italic" font-size="11" fill="#15292E" opacity=".85">Elmvale</text>
+        </g>
+
+        <!-- subtle compass -->
+        <g transform="translate(450,60)" opacity=".55">
+          <circle r="18" fill="none" stroke="#15292E" stroke-width="1"/>
+          <path d="M0,-14 L3,0 L0,14 L-3,0 Z" fill="#15292E"/>
+          <text y="-22" text-anchor="middle" font-family="Fraunces,serif" font-size="10" fill="#15292E">N</text>
+        </g>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- wave transition area -> contact -->
+<svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" style="background:var(--foam)">
+  <path d="M0,40 C240,80 480,0 720,30 C960,60 1200,80 1440,40 L1440,80 L0,80 Z" fill="#15292E"/>
+</svg>
+
+<!-- ========== CONTACT ========== -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <span class="section-eyebrow" style="color:var(--seaglass);justify-content:center;">Free quote · No pressure</span>
+    <h2 class="section-title reveal" style="margin-top:1rem;">
+      Let's lighten<br/>your <em>load</em>.
+    </h2>
+    <p class="contact-lede reveal">
+      Tell us about your home, your rental, or your cottage — we'll come back with a straightforward, transparent quote. No contracts, no fine print.
+    </p>
+
+    <div class="contact-methods">
+      <a href="tel:7059947845" class="contact-card reveal">
+        <div class="contact-card-lbl">Call or text</div>
+        <div class="contact-card-val">705<em>.</em>994<em>.</em>7845</div>
+      </a>
+      <a href="mailto:Maidinthebeach_@hotmail.com" class="contact-card reveal">
+        <div class="contact-card-lbl">Email us</div>
+        <div class="contact-card-val">Maidinthebeach_<br/>@hotmail.com</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M4 22 Q10 14, 16 22 T28 22" stroke="#FBF8F2" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M4 26 Q10 19, 16 26 T28 26" stroke="#E9B15E" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".85"/>
+          <circle cx="24" cy="9" r="4" fill="#E9B15E" opacity=".9"/>
+        </svg>
+      </span>
+      Maid In The Beach
+    </div>
+    <div>© 2026 Maid In The Beach · Wasaga Beach, ON · Insured &amp; Pet-Friendly</div>
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // mobile menu
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.14 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
